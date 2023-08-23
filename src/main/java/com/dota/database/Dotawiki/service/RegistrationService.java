@@ -1,0 +1,100 @@
+package com.dota.database.Dotawiki.service;
+
+import com.dota.database.Dotawiki.entity.User;
+import com.dota.database.Dotawiki.entity.UserDetails;
+import com.dota.database.Dotawiki.repository.UserDetailsRepository;
+import com.dota.database.Dotawiki.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.util.Date;
+import java.util.UUID;
+
+@Service
+public class RegistrationService {
+
+    private final UserRepository userRepository;
+
+    private final UserDetailsRepository userDetailsRepository;
+
+    private final JavaMailSender mailSender;
+
+    @Autowired
+    public RegistrationService(UserRepository userRepository,
+                               UserDetailsRepository userDetailsRepository,
+                               JavaMailSender mailSender) {
+        this.userRepository = userRepository;
+        this.userDetailsRepository = userDetailsRepository;
+        this.mailSender = mailSender;
+    }
+
+    public void registerUser(User user) throws MessagingException {
+        String token = UUID.randomUUID().toString();
+        createUserAndDetails(user, token);
+
+        String confirmationLink = "http://localhost:8080/activeToken/" + token;
+        String gifLink = "https://media.tenor.com/Oj6i7LwJdlMAAAAC/youre-welcome.gif";
+
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+
+        helper.setTo(user.getEmail());
+        helper.setSubject("Подтверждение регистрации");
+
+        String emailBody = generateEmailBody(user.getName(), confirmationLink, gifLink);
+        helper.setText(emailBody, true);
+
+        mailSender.send(mimeMessage);
+    }
+
+
+    public boolean activateUserByToken(String token) {
+        User user = userRepository.getUserByConfirmationToken(token);
+        if (user != null) {
+            UserDetails userDetails = userDetailsRepository.findByUserId(user.getId());
+            if (userDetails != null) {
+                userDetails.setEnabled(true);
+                userDetails.setActivatedEmail(true);
+                userDetailsRepository.save(userDetails);
+
+                user.setConfirmationToken(null);
+                userRepository.save(user);
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private String generateEmailBody(String userName, String confirmationLink, String gifLink) {
+        String emailBody = "<html><body style=\"font-family: Arial, sans-serif;\">";
+        emailBody += "<div style=\"background-color: #f8f8f8; padding: 20px; text-align: center;\">";
+        emailBody += "<h1 style=\"margin-bottom: 10px;\">Dotabase</h1>";
+        emailBody += "<p style=\"font-size: 18px; margin: 0;\">Welcome, " + userName + "!</p>";
+        emailBody += "<p style=\"font-size: 16px; margin-top: 10px;\">You have just taken your first step towards learning Dota 2. Good job, we are very proud of you.</p>";
+        emailBody += "<img src=\"" + gifLink + "\" style=\"max-width: 100%; margin-top: 20px;\">";
+        emailBody += "<p style=\"font-size: 16px; margin-top: 20px;\">Click the button below to confirm your email address:</p>";
+        emailBody += "<a href=\"" + confirmationLink + "\" style=\"display: inline-block; background-color: #007bff; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; margin-top: 10px;\">CONFIRM EMAIL</a>";
+        emailBody += "</div></body></html>";;
+
+        return emailBody;
+    }
+
+    private void createUserAndDetails(User user, String token) {
+        user.setConfirmationToken(token);
+        user.setCreateDate(new Date());
+        userRepository.save(user);
+
+        UserDetails userDetails = new UserDetails();
+        userDetails.setUserId(user.getId());
+        userDetails.setActivatedEmail(false);
+        userDetailsRepository.save(userDetails);
+    }
+
+
+}
