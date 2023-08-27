@@ -1,20 +1,35 @@
-function closeModal(modalId) {
-    $(modalId).modal('hide');
-}
+console.log("Hello from script.js");
 document.querySelector(".register-button-containerTwo button").addEventListener("click", function () {
     closeModal('#registerModal');
+    closeModal('#resetPasswordModal')
+    $('#loginModal').modal('show');
+});
+
+const resetPasswordLoginButton = document.querySelector('#resetPasswordModal .register-button-containerTwo button');
+
+resetPasswordLoginButton.addEventListener('click', function () {
+    closeModal('#resetPasswordModal');
     $('#loginModal').modal('show');
 });
 
 
+document.querySelector(".forgot-password-button-container button").addEventListener("click", function () {
+    closeModal('#loginModal');
+    $('#resetPasswordModal').modal('show');
+});
+
+function closeModal(modalSelector) {
+    $(modalSelector).modal('hide');
+}
+
 function showNotification(message, type, duration) {
     const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-times-circle';
     const notification = $(`
-        <div class="alert alert-${type} d-flex align-items-center">
-            <i class="fas ${iconClass} mr-2"></i>
-            <span>${message}</span>
-            <div class="progress-bar"></div>
-        </div>`
+<div class="alert alert-${type} d-flex align-items-center">
+    <i class="fas ${iconClass} mr-2"></i>
+    <span>${message}</span>
+    <div class="progress-bar"></div>
+</div>`
     );
 
     $('.notifications').append(notification);
@@ -28,6 +43,7 @@ function showNotification(message, type, duration) {
 }
 
 document.getElementById("loginForm").addEventListener("submit", function (event) {
+
     event.preventDefault();
     event.stopPropagation();
 
@@ -35,8 +51,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         name: document.querySelector('input[name=name]').value,
         password: document.querySelector('input[name=password]').value
     };
-    console.log(formData.name)
-    console.log(formData.password)
+
     $.ajax({
         url: '/authenticate',
         type: 'POST',
@@ -46,8 +61,38 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
             if (response === "success") {
                 showNotification("You are successfully logged!", "success", 3000);
                 setTimeout(function () {
+                    var customLoginButton = document.getElementById('customLoginButton');
+                    var btnIconImg = customLoginButton.querySelector('.btn-icon-img');
+                    btnIconImg.src = 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png';
                     $('#loginModal').modal('hide');
+                    customLoginButton.addEventListener('click', function () {
+                        var nameUser = formData.name;
+                        var welcomeModal = `
+                <div class="modal" id="welcomeModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Добрый день, ${nameUser}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Ваш контент здесь...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+                        $('body').append(welcomeModal);
+
+                        $('#welcomeModal').modal('show');
+                    });
                 }, 500);
+
             } else {
                 showNotification("Invalid username or password", "danger", 3000);
                 setTimeout(function () {
@@ -106,6 +151,39 @@ document.getElementById("registerForm").addEventListener("submit", function (eve
             } else if (response === "Password at least 6 characters") {
                 showError(passwordField, response);
                 showError(confirmPasswordField, response);
+            }
+        },
+        error: function (error) {
+            console.error('Request error:', error);
+        }
+    });
+});
+
+document.getElementById("resetForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const emailField = document.querySelector('input[name=emailReset]');
+    const formData = {
+        email: emailField.value
+    };
+
+    console.log(JSON.stringify(formData));
+
+    $.ajax({
+        url: '/reset',
+        type: 'POST',
+        data: JSON.stringify(formData),
+        contentType: 'application/json',
+        success: function (response) {
+            console.log(response);
+            if (response === "success") {
+                showNotification("Reset successful check your email!", "success", 3000);
+                setTimeout(function () {
+                    $('#registerModal').modal('hide');
+                }, 500);
+            } else if (response === "please enter a valid email address") {
+                showError(emailField, response);
             }
         },
         error: function (error) {
