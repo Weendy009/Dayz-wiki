@@ -1,6 +1,11 @@
 package com.dota.database.Dotawiki.security;
 
+import com.dota.database.Dotawiki.entity.User;
+import com.dota.database.Dotawiki.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,10 +14,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.LocalDateTime;
+
 @Configuration
 @EnableWebSecurity
+@EnableOAuth2Sso
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder passwordEncoder;
 
@@ -27,10 +34,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/authorization", "/register", "/authenticate", "/singup", "/", "/activeToken/**").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/authorization", "/change", "/register", "/authenticate","/reset", "/singup", "/", "/reset/password/**", "/activeToken/**").permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
                 .csrf().disable();
+    }
+
+    @Bean
+    public PrincipalExtractor principalExtractor(UserRepository repository) {
+        return map -> {
+            String idString = (String) map.get("sub");
+            idString = idString.substring(0, idString.length() - 15);
+            Long id = Long.parseLong(idString);
+            User user = repository.findById(id).orElseGet(() -> {
+                User newUser = new User();
+                newUser.setId(id);
+                newUser.setName((String) map.get("name"));
+                newUser.setEmail((String) map.get("email"));
+                newUser.setPassword(null);
+                newUser.setConfirmationToken(null);
+                newUser.setResetToken(null);
+                newUser.setCreateDate(LocalDateTime.now());
+                return newUser;
+            });
+            return repository.save(user);
+        };
     }
 
     @Override

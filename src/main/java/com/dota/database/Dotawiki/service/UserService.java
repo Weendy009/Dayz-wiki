@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -48,6 +50,31 @@ public class UserService {
 
     public User getUserByName(String name) {
         return repository.getUserByName(name);
+    }
+
+    public User getUserByResetToken(String token) {
+        return repository.getUserByResetToken(token);
+    }
+
+    public boolean isValidUserEmail(String email, String password) {
+        if (repository.getUserByEmail(email) == null) {
+            return false;
+        }
+        if (repository.getUserByEmail(email).getId() == null) {
+            return false;
+        }
+        User user = repository.getUserByEmail(email);
+        UserDetails details = userDetailsService.findByUserId(user.getId());
+        String hashedPassword = user.getPassword();
+        return passwordEncoder.matches(password, hashedPassword) && details.isActivatedEmail();
+    }
+
+    public void changePassword(String email, String newPassword) {
+        repository.changePassword(email, passwordEncoder.encode(newPassword));
+    }
+
+    public User getUserByEmail(String email) {
+        return repository.getUserByEmail(email);
     }
 }
 

@@ -1,8 +1,6 @@
 package com.dota.database.Dotawiki.controller;
 
-import com.dota.database.Dotawiki.entity.LoginForm;
-import com.dota.database.Dotawiki.entity.RegistrationRequest;
-import com.dota.database.Dotawiki.entity.User;
+import com.dota.database.Dotawiki.entity.*;
 import com.dota.database.Dotawiki.service.RegistrationService;
 import com.dota.database.Dotawiki.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +32,22 @@ public class UserHandlingController {
         return "home";
     }
 
+    @GetMapping("/login")
+    public String showOauthLogin() {
+        return "counter-pick";
+    }
+
     @PostMapping("/authenticate")
     public ResponseEntity<String> processLogin(@RequestBody LoginForm loginForm) {
         System.out.println(loginForm.getName() + "  |  " + loginForm.getPassword());
-        if (userService.isValidUser(loginForm.getName(), loginForm.getPassword())) {
-            return ResponseEntity.ok("success");
+        if (loginForm.getName().contains("@")) {
+            if (userService.isValidUserEmail(loginForm.getName(), loginForm.getPassword())) {
+                return ResponseEntity.ok("success");
+            }
+        } else {
+            if (userService.isValidUser(loginForm.getName(), loginForm.getPassword())) {
+                return ResponseEntity.ok("success");
+            }
         }
         return ResponseEntity.ok("Invalid username or password");
     }
@@ -74,6 +83,31 @@ public class UserHandlingController {
         }
         return ResponseEntity.ok("This username is already taken");
     }
+
+    @PostMapping("/reset")
+    @ResponseBody
+    public ResponseEntity<String> resetPassword(@RequestBody  ResetPasswordRequest request) throws MessagingException {
+        String email = request.getEmail();
+        System.out.println(email);
+        if (!email.contains("@") || email == null) {
+            return ResponseEntity.ok("please enter a valid email address");
+        }
+        registrationService.resetPassword(email);
+        return ResponseEntity.ok("success");
+
+    }
+
+
+    @PostMapping("/change")
+    public ResponseEntity<String> changePassword(@ModelAttribute PasswordChangeRequest request) {
+        User user = userService.getUserByEmail(request.getEmail());
+        System.out.println(user);
+        user.setResetToken(null);
+        userService.changePassword(user.getEmail() ,request.getConfirmPassword());
+        return ResponseEntity.ok("success");
+    }
+
+
 
 
 }

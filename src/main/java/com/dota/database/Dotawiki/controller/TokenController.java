@@ -1,17 +1,24 @@
 package com.dota.database.Dotawiki.controller;
 
+import com.dota.database.Dotawiki.entity.User;
 import com.dota.database.Dotawiki.service.RegistrationService;
+import com.dota.database.Dotawiki.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class TokenController {
     private final RegistrationService registrationService;
+    private final UserService userService;
 
     @Autowired
-    public TokenController(RegistrationService registrationService) {
+    public TokenController(RegistrationService registrationService, UserService userService) {
+        this.userService = userService;
         this.registrationService = registrationService;
     }
 
@@ -25,6 +32,20 @@ public class TokenController {
             return "activation-failure";
         }
     }
+    @GetMapping("reset/password/{token}")
+    public String resetPasswordUser(Model model, @PathVariable String token, HttpServletRequest request) {
+        User user = userService.getUserByResetToken(token);
+        String email = request.getParameter("email");
+        model.addAttribute("email", email);
+
+        if (user == null) {
+            return "home";
+        }
+
+        return "reset-password";
+    }
+
+
 
 
 }

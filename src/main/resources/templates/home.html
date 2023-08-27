@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:a="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -199,21 +199,21 @@
             right: 20px;
         }
 
-        .error-message {
-            color: #dc3545;
-            font-size: 14px;
-            margin-top: 5px;
+        .google-button {
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            margin-left: 100px;
+            margin-bottom: 100px;
         }
 
-        .error-input {
-            border-color: #dc3545 !important;
+        .google-icon {
+            margin-right: 5px;
         }
 
-        #errorAlert {
-            color: #dc3545;
-            font-size: 14px;
-            margin-top: 10px;
-        }
 
     </style>
 </head>
@@ -226,17 +226,6 @@
         <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
              class="btn-icon-img" alt="Вход">
     </button>
-</div>
-
-<div id="gSignInWrapper">
-    <form method="get" action="/login">
-        <div id="customBtn" class="customGPlusSignIn">
-            <button type="submit" style="background-color: white; border: 2px solid black; border-radius: 10px; display: flex; align-items: center; padding: 5px;">
-                <img src="https://developers-dot-devsite-v2-prod.appspot.com/identity/sign-in/g-normal.png" alt="" style="margin-right: 5px;">
-                Google
-            </button>
-        </div>
-    </form>
 </div>
 
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
@@ -279,6 +268,16 @@
                     </button>
                 </div>
             </form>
+            <div id="gSignInWrapper">
+                <form method="get" action="/login">
+                    <div id="customBtn" class="customGPlusSignIn">
+                        <button type="submit" class="google-button">
+                            <img src="https://developers-dot-devsite-v2-prod.appspot.com/identity/sign-in/g-normal.png" alt="" class="google-icon">
+                            Google
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

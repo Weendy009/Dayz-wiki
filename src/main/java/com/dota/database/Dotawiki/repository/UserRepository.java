@@ -2,7 +2,11 @@ package com.dota.database.Dotawiki.repository;
 
 import com.dota.database.Dotawiki.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User getUserByName(String name);
@@ -12,5 +16,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsUsersByEmail(String email);
 
     User getUserByConfirmationToken(String token);
+
+    User getUserByEmail(String name);
+
+    User getUserByResetToken(String token);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE User u SET u.password = ?2 WHERE u.email = ?1")
+    void changePassword(String email, String newPassword);
 
 }
