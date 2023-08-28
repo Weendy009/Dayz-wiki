@@ -1,17 +1,14 @@
-package com.dota.database.Dotawiki.service;
+package com.dota.database.Dotawiki.service.users;
 
-import com.dota.database.Dotawiki.entity.User;
-import com.dota.database.Dotawiki.entity.UserDetails;
+import com.dota.database.Dotawiki.entity.users.User;
+import com.dota.database.Dotawiki.entity.users.UserDetails;
 import com.dota.database.Dotawiki.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserService {
-
     private final UserRepository repository;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;

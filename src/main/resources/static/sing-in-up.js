@@ -1,4 +1,3 @@
-console.log("Hello from script.js");
 document.querySelector(".register-button-containerTwo button").addEventListener("click", function () {
     closeModal('#registerModal');
     closeModal('#resetPasswordModal')

@@ -1,9 +1,9 @@
 package com.dota.database.Dotawiki.service;
 
 import com.dota.database.Dotawiki.entity.Roles;
-import com.dota.database.Dotawiki.entity.User;
-import com.dota.database.Dotawiki.entity.UserDetails;
-import com.dota.database.Dotawiki.entity.UserRoles;
+import com.dota.database.Dotawiki.entity.users.User;
+import com.dota.database.Dotawiki.entity.users.UserDetails;
+import com.dota.database.Dotawiki.entity.users.UserRoles;
 import com.dota.database.Dotawiki.repository.RolesRepository;
 import com.dota.database.Dotawiki.repository.UserDetailsRepository;
 import com.dota.database.Dotawiki.repository.UserRepository;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 @Service

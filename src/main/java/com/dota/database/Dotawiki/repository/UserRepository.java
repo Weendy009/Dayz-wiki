@@ -1,12 +1,11 @@
 package com.dota.database.Dotawiki.repository;
 
-import com.dota.database.Dotawiki.entity.User;
+import com.dota.database.Dotawiki.entity.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User getUserByName(String name);

@@ -1,5 +1,6 @@
-package com.dota.database.Dotawiki.entity;
+package com.dota.database.Dotawiki.entity.users;
 
+import com.dota.database.Dotawiki.entity.Roles;
 import lombok.Data;
 
 import javax.persistence.*;

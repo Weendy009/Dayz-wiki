@@ -1,8 +1,8 @@
 package com.dota.database.Dotawiki.controller;
 
-import com.dota.database.Dotawiki.entity.User;
+import com.dota.database.Dotawiki.entity.users.User;
 import com.dota.database.Dotawiki.service.RegistrationService;
-import com.dota.database.Dotawiki.service.UserService;
+import com.dota.database.Dotawiki.service.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

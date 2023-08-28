@@ -1,6 +1,6 @@
 package com.dota.database.Dotawiki.repository;
 
-import com.dota.database.Dotawiki.entity.UserRoles;
+import com.dota.database.Dotawiki.entity.users.UserRoles;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.dota.database.Dotawiki.entity;
+package com.dota.database.Dotawiki.entity.users;
 
 import lombok.Data;
 

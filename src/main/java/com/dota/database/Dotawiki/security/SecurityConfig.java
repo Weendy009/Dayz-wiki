@@ -1,6 +1,9 @@
 package com.dota.database.Dotawiki.security;
 
-import com.dota.database.Dotawiki.entity.User;
+
+import com.dota.database.Dotawiki.entity.users.User;
+import com.dota.database.Dotawiki.entity.users.UserOauth;
+import com.dota.database.Dotawiki.repository.UserOauthRepository;
 import com.dota.database.Dotawiki.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
@@ -42,22 +45,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PrincipalExtractor principalExtractor(UserRepository repository) {
+    public PrincipalExtractor principalExtractor(UserOauthRepository repository) {
         return map -> {
             String idString = (String) map.get("sub");
-            idString = idString.substring(0, idString.length() - 15);
-            Long id = Long.parseLong(idString);
-            User user = repository.findById(id).orElseGet(() -> {
-                User newUser = new User();
-                newUser.setId(id);
+            UserOauth user = repository.findById(idString).orElseGet(() -> {
+                UserOauth newUser = new UserOauth();
+                newUser.setId(idString);
                 newUser.setName((String) map.get("name"));
                 newUser.setEmail((String) map.get("email"));
-                newUser.setPassword(null);
-                newUser.setConfirmationToken(null);
-                newUser.setResetToken(null);
-                newUser.setCreateDate(LocalDateTime.now());
                 return newUser;
             });
+            user.setLastActive(LocalDateTime.now());
             return repository.save(user);
         };
     }

@@ -1,8 +1,12 @@
 package com.dota.database.Dotawiki.controller;
 
-import com.dota.database.Dotawiki.entity.*;
+import com.dota.database.Dotawiki.entity.controllerRequests.LoginForm;
+import com.dota.database.Dotawiki.entity.controllerRequests.PasswordChangeRequest;
+import com.dota.database.Dotawiki.entity.controllerRequests.RegistrationRequest;
+import com.dota.database.Dotawiki.entity.controllerRequests.ResetPasswordRequest;
+import com.dota.database.Dotawiki.entity.users.User;
 import com.dota.database.Dotawiki.service.RegistrationService;
-import com.dota.database.Dotawiki.service.UserService;
+import com.dota.database.Dotawiki.service.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -86,7 +90,7 @@ public class UserHandlingController {
 
     @PostMapping("/reset")
     @ResponseBody
-    public ResponseEntity<String> resetPassword(@RequestBody  ResetPasswordRequest request) throws MessagingException {
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) throws MessagingException {
         String email = request.getEmail();
         System.out.println(email);
         if (!email.contains("@") || email == null) {
