@@ -30,10 +30,6 @@ public class UserHandlingController {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
-    @GetMapping("/delefo")
-    public String showDelefo(){
-        return "delefo";
-    }
 
     @GetMapping("/")
     public String showHomePage() {

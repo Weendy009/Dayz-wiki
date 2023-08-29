@@ -3,94 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vertical Navigation</title>
+    <title>Dayz-wiki знания для всех</title>
+    <link rel="icon" type="image/png"
+          href="https://icons-for-free.com/iconfiles/png/512/dota2+game+inkcontober+juggernaut+mask+icon-1320183879752698440.png"
+          sizes="64x64"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/static/css/home.css?v=1.0">
 </head>
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-    }
 
-    .navigation {
-        background-color: #333;
-        color: white;
-        width: 200px;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 20px;
-    }
-
-    .logo img {
-        width: 60px;
-        height: 60px;
-        margin-bottom: 20px;
-    }
-
-    .nav-links {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .nav-link {
-        text-decoration: none;
-        color: white;
-    }
-
-    .social-links {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        margin-top: auto;
-    }
-
-    .social-link {
-        text-decoration: none;
-        color: white;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .social-icon {
-        width: 40px;
-        height: 40px;
-    }
-
-    .more-button {
-        background-color: #555;
-        border: none;
-        color: white;
-        padding: 20px 40px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .more-button:hover {
-        background-color: #777;
-    }
-
-</style>
 <body>
-<div class="navigation">
+<div class="notifications position-fixed top-0 end-0 p-3"></div>
+<div class="navigation-container">
     <div class="logo">
-        <img src="https://icons-for-free.com/iconfiles/png/512/dota2+game+inkcontober+juggernaut+mask+icon-1320183879752698440.png" alt="Logo">
+        <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/website-logo.png" alt="Logo">
     </div>
 
     <div class="social-links">
         <a href="#" class="social-link">
-            <img src="https://e7.pngegg.com/pngimages/921/388/png-clipart-instagram-computer-icons-logo-instagram-text-logo.png" alt="Social 1" class="social-icon">
+            <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/discord-logo.png" alt="Social 1" class="social-icon">
         </a>
         <a href="#" class="social-link">
-            <img src="https://e7.pngegg.com/pngimages/408/238/png-clipart-pink-and-blue-illustration-discord-computer-icons-logo-user-internet-bot-discord-icon-purple-angle.png" alt="Social 2" class="social-icon">
+            <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/instagram-logo.png" alt="Social 2" class="social-icon">
         </a>
     </div>
-    <button class="more-button">Ещё</button>
+
+    <div class="container mt-5">
+        <button id="customLoginButton" type="button" class="btn btn-black btn-square" data-toggle="modal"
+                data-target="#loginModal">
+            <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
+                 class="btn-icon-img" alt="Вход">
+        </button>
+    </div>
 </div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SING IN</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="loginForm" method="post" action="/authenticate">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>
+                            <input type="text" class="form-control" name="name" placeholder="Enter login or email"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="password" class="form-control" name="password" placeholder="Enter password"
+                                   size="40">
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group login-button-container">
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </div>
+                <div class="form-group register-button-container">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#registerModal">
+                        Register
+                    </button>
+                </div>
+                <div class="form-group forgot-password-button-container">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal"
+                            data-target="#resetPasswordModal">
+                        Forgot password?
+                    </button>
+                </div>
+            </form>
+            <div id="gSignInWrapper">
+                <form method="get" action="/login">
+                    <div id="customBtn" class="customGPlusSignIn">
+                        <button type="submit" class="google-button">
+                            <img src="https://developers-dot-devsite-v2-prod.appspot.com/identity/sign-in/g-normal.png" alt="" class="google-icon">
+                            Google
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SING UP</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="registerForm" method="post" action="/register">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>
+                            <input type="text" class="form-control" name="nameRegister" placeholder="Enter username"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="email" class="form-control" name="email" placeholder="Enter email" size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="password" class="form-control" name="passwordRegister"
+                                   placeholder="Enter password"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="password" class="form-control" name="confirmPassword"
+                                   placeholder="Confirm password"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary-register btn-block">Register</button>
+                    </div>
+                    <div class="form-group register-button-containerTwo">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#loginModal">
+                            Login
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="resetPasswordModal" tabindex="-1" role="dialog" aria-labelledby="resetPasswordModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">PASSWORD RECOVERY</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="resetForm" method="post" action="/reset">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>
+                            <input type="text" class="form-control" name="emailReset"
+                                   placeholder="Enter email"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary-register btn-block">Reset</button>
+                    </div>
+                    <div class="form-group register-button-containerTwo">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#loginModal">
+                            Login
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/static/js/sing-in-up.js"></script>
 </body>
 </html>

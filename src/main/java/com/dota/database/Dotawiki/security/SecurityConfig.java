@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/authorization", "/delefo", "/change", "/register", "/authenticate","/reset", "/singup", "/", "/reset/password/**", "/activeToken/**").permitAll()
+                .antMatchers("/authorization", "/change", "/register", "/authenticate","/reset", "/singup", "/", "/reset/password/**", "/activeToken/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
