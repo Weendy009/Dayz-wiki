@@ -30,6 +30,10 @@ public class UserHandlingController {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
+    @GetMapping("/delefo")
+    public String showDelefo(){
+        return "delefo";
+    }
 
     @GetMapping("/")
     public String showHomePage() {
@@ -38,7 +42,7 @@ public class UserHandlingController {
 
     @GetMapping("/login")
     public String showOauthLogin() {
-        return "counter-pick";
+        return "home";
     }
 
     @PostMapping("/authenticate")
