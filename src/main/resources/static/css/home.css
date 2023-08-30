@@ -19,6 +19,10 @@
     background-color: #e6e6e6;
 }
 
+#customLoginButton {
+    margin-top: 20%;
+}
+
 .modal-header {
     background-image: url('https://ixbt.online/gametech/covers/2021/11/30/nova-filepond-721val.jpg?w=948');
     background-size: cover;
