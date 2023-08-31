@@ -20,7 +20,7 @@
 }
 
 #customLoginButton {
-    margin-top: 20%;
+    margin-top: 30%;
 }
 
 .modal-header {
@@ -203,8 +203,12 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #333333;
+    background-image: url('https://ixbt.online/idata/gtnews/2020/05/%5B5ec1b61e90e39%5D/ARiahi84SObKgs3cciKxk4aPnASw1qHfXpoxKYB7.jpeg');
+    background-size: cover; /* чтобы изображение занимало всю доступную область */
+    background-position: center; /* чтобы изображение было выровнено по центру */
+    background-color: rgba(0, 0, 0, 0.5); /* затемнение с помощью полупрозрачного цвета */
 }
+
 
 .navigation-container {
     position: fixed;
