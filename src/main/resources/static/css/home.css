@@ -203,10 +203,11 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-image: url('https://ixbt.online/idata/gtnews/2020/05/%5B5ec1b61e90e39%5D/ARiahi84SObKgs3cciKxk4aPnASw1qHfXpoxKYB7.jpeg');
+    background-image: url('https://mcdn.wallpapersafari.com/medium/48/86/BYSFET.jpg');
     background-size: cover;
     background-position: center;
     background-color: rgba(0, 0, 0, 0.5);
+    background-repeat: no-repeat;
 }
 
 
