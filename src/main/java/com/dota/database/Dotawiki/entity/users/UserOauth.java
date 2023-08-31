@@ -1,7 +1,6 @@
 package com.dota.database.Dotawiki.entity.users;
 
 import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;

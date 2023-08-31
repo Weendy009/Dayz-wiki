@@ -20,7 +20,7 @@
 }
 
 #customLoginButton {
-    margin-top: 10%;
+    margin-top: 20%;
 }
 
 .modal-header {
@@ -203,6 +203,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: #333333;
 }
 
 .navigation-container {

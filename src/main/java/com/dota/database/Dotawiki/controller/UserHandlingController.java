@@ -93,7 +93,7 @@ public class UserHandlingController {
     public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) throws MessagingException {
         String email = request.getEmail();
         System.out.println(email);
-        if (!email.contains("@") || email == null) {
+        if (!email.contains("@")) {
             return ResponseEntity.ok("please enter a valid email address");
         }
         registrationService.resetPassword(email);
