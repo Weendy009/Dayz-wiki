@@ -200,16 +200,27 @@
     margin-right: 5px;
 }
 
-body {
+html, body {
     margin: 0;
+    padding: 0;
+    height: 100%;
     font-family: Arial, sans-serif;
     background-image: url('https://mcdn.wallpapersafari.com/medium/48/86/BYSFET.jpg');
     background-size: cover;
-    background-position: center;
-    background-color: rgba(0, 0, 0, 0.5);
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
 }
 
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
 
 .navigation-container {
     position: fixed;

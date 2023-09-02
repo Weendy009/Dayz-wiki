@@ -14,16 +14,78 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <script src="https://apis.google.com/js/api:client.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@9d33a49863bf8a5d22f9c4608643e8ee0460e0fb/src/main/resources/static/css/home.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@9d33a49863bf8a5d22f9c4608643e8ee0460e0fb/src/main/resources/static/css/menu.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@75796e0398667a47a5ba15c0915f63ce77ef5a38/src/main/resources/static/css/home.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@9d33a49863bf8a5d22f9c4608643e8ee0460e0fb/src/main/resources/static/css/menu.css">
+
+    <style>
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://mcdn.wallpapersafari.com/medium/48/86/BYSFET.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: brightness(50%); /* Затемнение фона */
+            z-index: -1;
+        }
+
+        .centered-grid {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Создаем сетку с 3 столбцами */
+            grid-gap: 10px; /* Отступы между ячейками сетки */
+        }
+
+        .custom-button {
+            background-image: url('https://img.favpng.com/22/3/0/ammunition-box-dayz-45-acp-ammunition-box-png-favpng-Bmj86s6zLwep35f0rarKdZg1L.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 270px;/
+            height: 115px;
+            border: none;
+            color: #000000;
+            font-size: 18px;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        .custom-button span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
 </head>
 <body>
 <div class="notifications position-fixed top-0 end-0 p-3"></div>
 <div class="navigation-container">
     <form method="get" action="/">
         <div class="logo">
-            <button id="customLogoButton" type="submit" class="btn btn-link" data-toggle="modal" data-target="#logoModal">
-                <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/website-logo.png" alt="Logo" class="logo-img">
+            <button id="customLogoButton" type="submit" class="btn btn-link" data-toggle="modal"
+                    data-target="#logoModal">
+                <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/website-logo.png"
+                     alt="Logo" class="logo-img">
             </button>
         </div>
     </form>
@@ -48,6 +110,28 @@
              class="btn-icon-img" alt="Вход">
     </button>
 </div>
+<div class="centered-grid">
+    <!-- Вставьте кнопки внутри ячеек сетки -->
+    <div class="custom-button">
+        <span>Кнопка 1</span>
+    </div>
+    <div class="custom-button">
+        <span>Кнопка 2</span>
+    </div>
+    <div class="custom-button">
+        <span>Кнопка 3</span>
+    </div>
+    <div class="custom-button">
+        <span>Кнопка 4</span>
+    </div>
+    <div class="custom-button">
+        <span>Кнопка 5</span>
+    </div>
+    <div class="custom-button">
+        <span>Кнопка 6</span>
+    </div>
+</div>
+
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
