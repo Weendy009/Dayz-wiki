@@ -235,7 +235,7 @@ body::before {
 }
 
 .custom-button-backpack {
-    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@c857dc230592694dbea9419b45d4e1027ade6ba2/src/main/resources/img/backpack-logo.png');
+    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@4bfb2a64bc240d335c18d9a7351ab3f50cfd85cc/src/main/resources/img/backpack-logo.png');
     background-size: cover;
     background-repeat: no-repeat;
     width: 270px;
@@ -260,7 +260,7 @@ body::before {
 }
 
 .custom-button-car {
-    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@c857dc230592694dbea9419b45d4e1027ade6ba2/src/main/resources/img/car-logo.png');
+    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@4bfb2a64bc240d335c18d9a7351ab3f50cfd85cc/src/main/resources/img/car-logo.png');
     background-size: cover;
     background-repeat: no-repeat;
     width: 270px;
@@ -273,7 +273,7 @@ body::before {
 }
 
 .custom-button-gun {
-    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@c857dc230592694dbea9419b45d4e1027ade6ba2/src/main/resources/img/gun-logo.png');
+    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@4bfb2a64bc240d335c18d9a7351ab3f50cfd85cc/src/main/resources/img/gun-logo.png');
     background-size: cover;
     background-repeat: no-repeat;
     width: 270px;
