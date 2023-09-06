@@ -1,0 +1,84 @@
+.menu-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 1.5%;
+    left: 2%;
+    width: 100%;
+    height: 100%;
+}
+
+.modal.active {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    opacity: 1;
+}
+
+.modal-content-two {
+    background-color: #555555;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 850px;
+    width: 90%;
+    height: 600px;
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content-two {
+    transform: translateY(0);
+}
+
+.menu-button:hover .icon {
+    transform: rotate(45deg) scale(1.2);
+}
+
+.icon {
+    font-size: 50px;
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+}
+
+.menu-button:hover .icon {
+    transform: rotate(45deg);
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.header {
+    text-align: center;
+}
+
+.header img {
+    width: 50px;
+}
+
+.header h2 {
+    margin-top: 10px;
+}
+
+.sections {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.section {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}

@@ -15,10 +15,11 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <script src="https://apis.google.com/js/api:client.js"></script>
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@f0ef9286b32f3258437f07dfbf4974b026243a80/src/main/resources/static/css/home.css">
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@a069ad10fd66085fe3a58653a369b6ba7e066202/src/main/resources/static/css/home.css">
     <link rel="stylesheet" type="text/css"
           href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@9a718e0391687d8f3fc32bd47778c0fd2be3336f/src/main/resources/static/css/menu.css">
-    
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@9a718e0391687d8f3fc32bd47778c0fd2be3336f/src/main/resources/static/css/menu.css">
 </head>
 <body>
 <div class="notifications position-fixed top-0 end-0 p-3"></div>
@@ -33,6 +34,9 @@
         </div>
     </form>
     <hr>
+    <button id="toggleButton" class="menu-button">
+        <div class="icon" id="icon">&#8801;</div>
+    </button>
     <div class="social-links">
         <a href="https://www.instagram.com/dayz.game/" class="social-link">
             <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/instagram-logo.png"
@@ -61,6 +65,21 @@
     <button class="custom-button-cartridges" type="submit"></button>
     <button class="custom-button-cloth" type="submit"></button>
     <button class="custom-button-food" type="submit"></button>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content-two">
+        <span class="close">×</span>
+        <div class="header">
+            <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/website-logo.png" alt="Логотип DAYZ">
+            <h2>Онлайн справочник по Dayz</h2>
+        </div>
+        <div class="sections">
+            <div class="section">Раздел 1</div>
+            <div class="section">Раздел 2</div>
+            <div class="section">Раздел 3</div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
@@ -200,5 +219,6 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/static/js/sing-in-up.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/static/js/button-menu.js"></script>
 </body>
 </html>
