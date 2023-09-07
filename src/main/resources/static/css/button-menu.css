@@ -76,17 +76,17 @@
     flex-direction: column;
     border-spacing: 0 10px;
     height: 80%;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 .row {
-    border-radius: 30px;
+    border-radius: 10px;
     display: flex;
     height: 75%;
 }
 
 .cell {
-    border-radius: 30px;
+    border-radius: 10px;
     height: 93%;
     flex: 1;
     padding: 1%;
