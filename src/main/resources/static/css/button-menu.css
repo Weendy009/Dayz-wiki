@@ -64,21 +64,61 @@
 }
 
 .header img {
-    width: 50px;
+    width: 10%;
 }
 
-.header h2 {
+.header p {
     margin-top: 10px;
 }
 
-.sections {
-    margin-top: 20px;
+.table {
     display: flex;
     flex-direction: column;
+    border-spacing: 0 10px;
+    height: 80%;
+    border-radius: 30px;
 }
 
-.section {
-    padding: 10px;
+.row {
+    border-radius: 30px;
+    display: flex;
+    height: 75%;
+}
+
+.cell {
+    border-radius: 30px;
+    height: 93%;
+    flex: 1;
+    padding: 1%;
     border: 1px solid #ccc;
-    margin-bottom: 10px;
+    text-align: center;
+}
+
+#hr1 {
+    text-align: center;
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: white;
+}
+#hr2 {
+    text-align: center;
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: white;
+}
+#hr3 {
+    text-align: center;
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: white;
+}
+#hr4 {
+    text-align: center;
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: white;
 }
