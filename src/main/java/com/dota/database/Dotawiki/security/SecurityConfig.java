@@ -1,10 +1,8 @@
 package com.dota.database.Dotawiki.security;
 
 
-import com.dota.database.Dotawiki.entity.users.User;
 import com.dota.database.Dotawiki.entity.users.UserOauth;
 import com.dota.database.Dotawiki.repository.UserOauthRepository;
-import com.dota.database.Dotawiki.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;

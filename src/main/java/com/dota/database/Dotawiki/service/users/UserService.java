@@ -49,10 +49,6 @@ public class UserService {
         return repository.getUserByName(name);
     }
 
-    public User getUserByResetToken(String token) {
-        return repository.getUserByResetToken(token);
-    }
-
     public boolean isValidUserEmail(String email, String password) {
         if (repository.getUserByEmail(email) == null) {
             return false;
@@ -72,6 +68,10 @@ public class UserService {
 
     public User getUserByEmail(String email) {
         return repository.getUserByEmail(email);
+    }
+
+    public User getUserById(Long id) {
+        return repository.findById(id).get();
     }
 }
 

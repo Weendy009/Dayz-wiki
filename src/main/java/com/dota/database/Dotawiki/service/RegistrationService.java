@@ -1,6 +1,6 @@
 package com.dota.database.Dotawiki.service;
 
-import com.dota.database.Dotawiki.entity.Roles;
+import com.dota.database.Dotawiki.entity.users.Roles;
 import com.dota.database.Dotawiki.entity.users.User;
 import com.dota.database.Dotawiki.entity.users.UserDetails;
 import com.dota.database.Dotawiki.entity.users.UserRoles;
@@ -79,25 +79,18 @@ public class RegistrationService {
 
 
     public boolean activateUserByToken(String token) {
-        User user = userRepository.getUserByConfirmationToken(token);
-        if (user != null) {
-            UserDetails userDetails = userDetailsRepository.findByUserId(user.getId());
-            if (userDetails != null) {
+        UserDetails userDetails = userDetailsRepository.getUserDetailsByConfirmationToken(token);
+        if (userDetails != null) {
                 userDetails.setEnabled(true);
                 userDetails.setActivatedEmail(true);
+                userDetails.setConfirmationToken(null);
                 userDetailsRepository.save(userDetails);
 
-                user.setConfirmationToken(null);
-                userRepository.save(user);
-
-                System.out.println(user);
-                System.out.println(user.getId());
                 UserRoles roles = new UserRoles();
-                roles.setUserId(user.getId());
+                roles.setUserId(userDetails.getUserId());
                 roles.setName(Roles.USER);
                 rolesRepository.save(roles);
                 return true;
-            }
         }
 
         return false;
@@ -132,20 +125,19 @@ public class RegistrationService {
     }
 
     private void resetPassword(User user, String resetToken) {
-        user.setResetToken(resetToken);
-        userRepository.save(user);
-    }
-
-    private void createUserAndDetails(User user, String token) {
-        user.setConfirmationToken(token);
-        user.setCreateDate(LocalDateTime.now());
-        userRepository.save(user);
-
-        UserDetails userDetails = new UserDetails();
-        userDetails.setUserId(user.getId());
-        userDetails.setActivatedEmail(false);
+        UserDetails userDetails = userDetailsRepository.findByUserId(user.getId());
+        userDetails.setResetToken(resetToken);
         userDetailsRepository.save(userDetails);
     }
 
+    private void createUserAndDetails(User user, String token) {
+        userRepository.save(user);
+        UserDetails userDetails = new UserDetails();
+        userDetails.setUserId(user.getId());
+        userDetails.setActivatedEmail(false);
+        userDetails.setConfirmationToken(token);
+        userDetails.setCreateDate(LocalDateTime.now());
+        userDetailsRepository.save(userDetails);
+    }
 
 }

@@ -1,7 +1,7 @@
 package com.dota.database.Dotawiki.controller;
 
-import com.dota.database.Dotawiki.entity.users.User;
 import com.dota.database.Dotawiki.service.RegistrationService;
+import com.dota.database.Dotawiki.service.users.UserDetailsService;
 import com.dota.database.Dotawiki.service.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class TokenController {
     private final RegistrationService registrationService;
-    private final UserService userService;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public TokenController(RegistrationService registrationService, UserService userService) {
-        this.userService = userService;
+    public TokenController(RegistrationService registrationService, UserDetailsService userDetailsService) {
         this.registrationService = registrationService;
+        this.userDetailsService = userDetailsService;
     }
 
     @GetMapping("/activeToken/{token}")
@@ -34,15 +34,15 @@ public class TokenController {
     }
     @GetMapping("reset/password/{token}")
     public String resetPasswordUser(Model model, @PathVariable String token, HttpServletRequest request) {
-        User user = userService.getUserByResetToken(token);
-        String email = request.getParameter("email");
-        model.addAttribute("email", email);
+        if (userDetailsService.getUserDetailsByResetToken(token) != null) {
+            String email = request.getParameter("email");
+            model.addAttribute("email", email);
 
-        if (user == null) {
+            return "reset-password";
+        } else {
             return "home";
         }
 
-        return "reset-password";
     }
 
 

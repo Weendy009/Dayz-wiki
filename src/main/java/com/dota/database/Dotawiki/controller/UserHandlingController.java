@@ -5,7 +5,9 @@ import com.dota.database.Dotawiki.entity.controllerRequests.PasswordChangeReques
 import com.dota.database.Dotawiki.entity.controllerRequests.RegistrationRequest;
 import com.dota.database.Dotawiki.entity.controllerRequests.ResetPasswordRequest;
 import com.dota.database.Dotawiki.entity.users.User;
+import com.dota.database.Dotawiki.entity.users.UserDetails;
 import com.dota.database.Dotawiki.service.RegistrationService;
+import com.dota.database.Dotawiki.service.users.UserDetailsService;
 import com.dota.database.Dotawiki.service.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.util.Date;
 import java.util.Objects;
 
 @Controller
@@ -21,14 +24,17 @@ public class UserHandlingController {
     private final RegistrationService registrationService;
     private final UserService userService;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
     public UserHandlingController(UserService userService,
                                   BCryptPasswordEncoder passwordEncoder,
-                                  RegistrationService registrationService) {
+                                  RegistrationService registrationService,
+                                  UserDetailsService userDetailsService) {
         this.registrationService = registrationService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.userDetailsService = userDetailsService;
     }
 
     @GetMapping("/")
@@ -43,13 +49,18 @@ public class UserHandlingController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<String> processLogin(@RequestBody LoginForm loginForm) {
-        System.out.println(loginForm.getName() + "  |  " + loginForm.getPassword());
+        String name = loginForm.getName();
+        String password = loginForm.getPassword();
         if (loginForm.getName().contains("@")) {
-            if (userService.isValidUserEmail(loginForm.getName(), loginForm.getPassword())) {
+            if (userService.isValidUserEmail(name, password)) {
+                User user = userService.getUserByName(name);
+                UserDetails userDetails = userDetailsService.findByUserId(user.getId());
+                userDetails.setLastActive(new Date());
+                userDetailsService.save(userDetails);
                 return ResponseEntity.ok("success");
             }
         } else {
-            if (userService.isValidUser(loginForm.getName(), loginForm.getPassword())) {
+            if (userService.isValidUser(name, password)) {
                 return ResponseEntity.ok("success");
             }
         }
@@ -105,8 +116,8 @@ public class UserHandlingController {
     @PostMapping("/change")
     public ResponseEntity<String> changePassword(@ModelAttribute PasswordChangeRequest request) {
         User user = userService.getUserByEmail(request.getEmail());
-        System.out.println(user);
-        user.setResetToken(null);
+        UserDetails userDetails = userDetailsService.findByUserId(user.getId());
+        userDetails.setResetToken(null);
         userService.changePassword(user.getEmail() ,request.getConfirmPassword());
         return ResponseEntity.ok("success");
     }

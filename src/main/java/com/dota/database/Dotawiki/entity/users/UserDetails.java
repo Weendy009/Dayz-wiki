@@ -3,6 +3,7 @@ package com.dota.database.Dotawiki.entity.users;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -25,5 +26,11 @@ public class UserDetails {
 
     @Column(name = "activated_email")
     private boolean activatedEmail;
+
+    private LocalDateTime createDate;
+
+    private String confirmationToken;
+
+    private String resetToken;
 
 }

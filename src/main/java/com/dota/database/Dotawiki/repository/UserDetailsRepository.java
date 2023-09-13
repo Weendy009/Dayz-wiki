@@ -6,4 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserDetailsRepository extends JpaRepository<UserDetails, Long> {
     UserDetails findByUserId(Long userId);
 
+    UserDetails getUserDetailsByResetToken(String token);
+
+    UserDetails getUserDetailsByConfirmationToken(String token);
 }

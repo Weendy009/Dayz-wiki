@@ -3,7 +3,6 @@ package com.dota.database.Dotawiki.entity.users;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -22,12 +21,5 @@ public class User {
 
     @Column(name = "email")
     private String email;
-
-    @Column(name = "create_date")
-    private LocalDateTime createDate;
-
-    private String confirmationToken;
-
-    private String resetToken;
 
 }
