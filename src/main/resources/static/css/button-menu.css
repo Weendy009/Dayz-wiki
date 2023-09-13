@@ -23,7 +23,7 @@
 
 .modal-content-two {
     background-color: #555555;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #888;
     width: 1100px;
     height: 850px;
@@ -66,9 +66,6 @@
     align-items: center;
 }
 
-.header img {
-    width: 10%;
-}
 
 .header p {
     margin-top: 10px;
