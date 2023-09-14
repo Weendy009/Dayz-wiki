@@ -20,10 +20,10 @@
 }
 
 hr {
-    height: 2px;
+    height: 1px;
     width: 90%;
-    background-color: black; /* Задаем черный цвет фона линии */
-    margin: 20px 0; /* Добавляем отступы сверху и снизу (по вашему выбору) */
+    background-color: black;
+    margin: 20px 0;
 }
 #customLoginButton {
     margin-top: 2%;
@@ -225,7 +225,7 @@ body::before {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    filter: brightness(50%); /* Затемнение фона */
+    filter: brightness(50%);
     z-index: -1;
 }
 
@@ -236,8 +236,8 @@ body::before {
     transform: translate(-50%, -50%);
     text-align: center;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Создаем сетку с 3 столбцами */
-    grid-gap: 10px; /* Отступы между ячейками сетки */
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
 }
 
 .custom-button-backpack {
