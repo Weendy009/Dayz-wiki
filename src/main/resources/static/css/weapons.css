@@ -1,0 +1,93 @@
+.grid-weapons-1 {
+    position: absolute;
+    transition: top 0.2s;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.grid-weapons-2 {
+    position: absolute;
+    transition: top 0.2s;
+    left: 50%;
+    top: 52%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.grid-weapons-1 button {
+    background-color: rgba(255, 255, 255, 0.7);
+    user-select: none;
+    -webkit-user-select: none;
+    font-size: 12px;
+    text-align: left;
+    border-radius: 5px;
+    width: 170px;
+    height: 67px;
+}
+
+
+.grid-weapons-2 button {
+    background-color: rgba(255, 255, 255, 0.7);
+    user-select: none;
+    -webkit-user-select: none;
+    font-size: 12px;
+    text-align: left;
+    border-radius: 5px;
+    width: 170px;
+    height: 67px;
+}
+
+#close-combat {
+    margin-top: 0.5%;
+    text-align: center;
+    padding: 0.3%;
+    background-color: #333333;
+    width: 50%;
+    background-color: rgba(128, 128, 128, 0.2);
+    margin-left: auto;
+    margin-right: auto;
+    color: #FFFFFF;
+}
+
+#pistols {
+    margin-top: 16.5%;
+    text-align: center;
+    padding: 0.3%;
+    background-color: #333333;
+    width: 50%;
+    background-color: rgba(128, 128, 128, 0.2);
+    margin-left: auto;
+    margin-right: auto;
+    color: #FFFFFF;
+}
+
+.link-items {
+    text-align: left;
+}
+
+.grid-weapons-1 button:hover {
+    transform: scale(1.05);
+}
+
+.grid-weapons-1 button:active {
+    transform: scale(0.95);
+}
+
+.grid-weapons-2 button:hover {
+    transform: scale(1.05);
+}
+
+.grid-weapons-2 button:active {
+    transform: scale(0.95);
+}
