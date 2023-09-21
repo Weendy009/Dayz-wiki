@@ -9,6 +9,28 @@
     pointer-events: none;
 }
 
+#customLoginButton {
+    margin-top: 2%;
+}
+
+.modal-header {
+    background-image: url('https://ixbt.online/gametech/covers/2021/11/30/nova-filepond-721val.jpg?w=948');
+    background-size: cover;
+    background-position: top center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    color: white;
+    font-size: 36px;
+    margin: 0;
+    padding: 50px 0 50px;
+    border: none;
+    box-shadow: none;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    height: 160px;
+}
 
 .modal-title {
     text-align: center;
@@ -26,7 +48,7 @@
 .modal-body {
     background-color: rgba(255, 255, 255, 0.0);
     flex-grow: 1;
-    padding: 10px 0;
+    padding: 20px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,8 +72,9 @@
 }
 
 .form-group {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border-radius: 20px;
+
 }
 
 .form-control {
@@ -189,6 +212,21 @@ html, body {
     position: relative;
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6a0627430cbd3cf2e1460f5926d7970afcce3586/src/main/resources/img/desktop-1920x1080.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    filter: brightness(50%);
+    z-index: -1;
+}
+
 .centered-grid {
     position: absolute;
     top: 50%;
@@ -226,6 +264,7 @@ html, body {
     transition: transform 0.2s ease;
     border-radius: 10px;
 }
+
 .custom-button-car {
     background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@4bfb2a64bc240d335c18d9a7351ab3f50cfd85cc/src/main/resources/img/car-logo.png');
     background-size: cover;
@@ -239,6 +278,7 @@ html, body {
     position: relative;
     border-radius: 10px;
 }
+
 .custom-button-gun {
     background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@4bfb2a64bc240d335c18d9a7351ab3f50cfd85cc/src/main/resources/img/gun-logo.png');
     background-size: cover;
@@ -252,6 +292,7 @@ html, body {
     position: relative;
     border-radius: 10px;
 }
+
 .custom-button-food {
     background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@c857dc230592694dbea9419b45d4e1027ade6ba2/src/main/resources/img/food-logo.png');
     background-size: cover;
@@ -265,6 +306,7 @@ html, body {
     position: relative;
     border-radius: 10px;
 }
+
 .custom-button-cloth {
     background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@c857dc230592694dbea9419b45d4e1027ade6ba2/src/main/resources/img/cloth-logo.png');
     background-size: cover;
@@ -292,4 +334,71 @@ html, body {
     align-items: center;
     justify-content: space-between;
     padding-top: 20px;
+}
+
+.custom-button-gun:hover {
+    transform: scale(1.05);
+}
+
+.custom-button-gun:active {
+    transform: scale(0.95);
+}
+
+.custom-button-cloth:hover {
+    transform: scale(1.05);
+}
+
+.custom-button-cloth:active {
+    transform: scale(0.95);
+}
+
+.custom-button-food:hover {
+    transform: scale(1.05);
+}
+
+.custom-button-food:active {
+    transform: scale(0.95);
+}
+
+.custom-button-car:hover {
+    transform: scale(1.05);
+}
+
+.custom-button-car:active {
+    transform: scale(0.95);
+}
+
+.custom-button-cartridges:hover {
+    transform: scale(1.05);
+}
+
+.custom-button-cartridges:active {
+    transform: scale(0.95);
+}
+
+.custom-button-backpack:hover {
+    transform: scale(1.05);
+}
+
+.custom-button-backpack:active {
+    transform: scale(0.95);
+}
+
+.logo img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 1100px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
 }

@@ -4,7 +4,7 @@ const icon = document.getElementById("icon");
 let isOpen = false;
 
 function updateModalSize() {
-    const modalContent = document.querySelector(".modal-menu");
+    const modalContent = document.querySelector(".modal-content-two");
     const newWidth = window.innerWidth * 0.23;
     const newHeight = window.innerHeight * 0.22;
     const leftOffset = 70;
