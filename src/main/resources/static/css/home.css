@@ -9,21 +9,6 @@
     pointer-events: none;
 }
 
-.modal-content {
-    width: 800px;
-    height: 450px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    color: black;
-    font-size: 22px;
-    margin: 0;
-    border: none;
-    box-shadow: none;
-    border-radius: 22px;
-    background-color: #e6e6e6;
-}
-
 #customLoginButton {
     margin-top: 2%;
 }
@@ -61,7 +46,7 @@
 }
 
 .modal-body {
-    background-color: #e6e6e6;
+    background-color: rgba(255, 255, 255, 0.0);
     flex-grow: 1;
     padding: 20px 0;
     display: flex;
@@ -70,6 +55,20 @@
     border: none;
     box-shadow: none;
     border-radius: 20px;
+}
+.modal-content {
+    width: 800px;
+    height: 450px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-size: 22px;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    border-radius: 22px;
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 .form-group {

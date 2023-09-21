@@ -15,11 +15,12 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <script src="https://apis.google.com/js/api:client.js"></script>
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@98cec362b4257d01f5879a8cdf1a4af1d549738c/src/main/resources/static/css/home.css">
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b0f1963791d417dd704c59660d3e2cd6d8da4c57/src/main/resources/static/css/home.css">
     <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@98cec362b4257d01f5879a8cdf1a4af1d549738c/src/main/resources/static/css/menu.css">
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b0f1963791d417dd704c59660d3e2cd6d8da4c57/src/main/resources/static/css/menu.css">
     <link rel="stylesheet" type="text/css"
           href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@98cec362b4257d01f5879a8cdf1a4af1d549738c/src/main/resources/static/css/button-menu.css">
+
 </head>
 <body>
 <div class="notifications position-fixed top-0 end-0 p-3"></div>
@@ -69,7 +70,6 @@
 
 <div id="myModal" class="modal">
     <div class="modal-content-two">
-        <span class="close">×</span>
         <div class="header">
             <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/website-logo.png" alt="Логотип DAYZ">
             <p>Онлайн справочник по Dayz<p>
@@ -109,9 +109,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">SING IN</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <form id="loginForm" method="post" action="/authenticate">
                 <div class="modal-body">
@@ -157,16 +154,12 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">SING UP</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <form id="registerForm" method="post" action="/register">
                 <div class="modal-body">
@@ -214,9 +207,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">PASSWORD RECOVERY</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <form id="resetForm" method="post" action="/reset">
                 <div class="modal-body">
@@ -240,6 +230,7 @@
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/static/js/sing-in-up.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@ed4542ac7f9c26b89db11608bbb020ea4a8f6c4f/src/main/resources/static/js/button-menu.js"></script>
 </body>

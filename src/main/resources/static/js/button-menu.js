@@ -1,6 +1,3 @@
-var toggleButton = document.getElementById("toggleButton");
-var modal = document.getElementById("myModal");
-var closeBtn = document.querySelector(".close");
 const icon = document.getElementById("icon");
 let isOpen = false;
 
@@ -29,12 +26,6 @@ toggleButton.addEventListener("click", () => {
     } else {
         icon.style.transform = "none";
     }
-});
-
-closeBtn.addEventListener("click", function() {
-    modal.classList.remove("active");
-    isOpen = false;
-    icon.style.transform = "none";
 });
 
 modal.addEventListener("click", function(event) {
