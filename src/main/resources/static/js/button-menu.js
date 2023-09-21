@@ -1,3 +1,5 @@
+const toggleButton = document.getElementById("toggleButton");
+const modal = document.getElementById("myModal");
 const icon = document.getElementById("icon");
 let isOpen = false;
 
