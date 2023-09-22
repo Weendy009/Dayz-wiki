@@ -2,8 +2,8 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
+    user-select: none;
 }
-
 
 .modal {
     display: none;
@@ -129,3 +129,8 @@
     height: 1px;
     background-color: white;
 }
+
+.social-icon:hover {transform: scale(1.05);}
+.social-icon:active {transform: scale(0.95);}
+.btn-icon-img:hover {transform: scale(1.05);}
+.btn-icon-img:active {transform: scale(0.95);}
