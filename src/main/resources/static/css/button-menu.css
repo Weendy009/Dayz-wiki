@@ -68,12 +68,15 @@
 
 .header p {
     margin-top: 10px;
+    margin-left: 30px;
+    color: #cccccc;
 }
 
 .header img {
-    width: 7%;
+    margin-bottom: 10px;
+    width: 8%;
+    height: 8%;
 }
-
 
 .cell {
     border-radius: 10px;
@@ -128,6 +131,16 @@
     border: none;
     height: 1px;
     background-color: white;
+}
+
+a:link {
+    color: #f4f4f4;
+}
+a:visited {
+    color: #f4f4f4;
+}
+.cell p {
+    color: #f4f4f4;
 }
 
 .social-icon:hover {transform: scale(1.05);}
