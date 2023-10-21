@@ -12,11 +12,17 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
+import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
 
 import java.time.LocalDateTime;
 
+
+@EnableJdbcHttpSession
 @Configuration
 @EnableWebSecurity
 @EnableOAuth2Sso
@@ -34,12 +40,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/authorization","/adviсe_equipment", "/backpacks", "/armors", "/weapons", "/change", "/register", "/authenticate","/reset", "/singup", "/", "/reset/password/**", "/activeToken/**").permitAll()
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/authorization", "/api/weapons/filter", "/adviсe_equipment", "/backpacks", "/armors", "/weapons", "/change",
+                        "/register", "/authenticate", "/reset", "/singup", "/", "/reset/password/**", "/activeToken/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .csrf().disable();
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .failureForwardUrl("/")
+                .permitAll()
+                .and()
+                .sessionManagement()
+                .maximumSessions(3)
+                .maxSessionsPreventsLogin(true)
+                .and()
+                .sessionAuthenticationErrorUrl("/login")
+                .sessionFixation().migrateSession()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
     }
 
     @Bean
@@ -62,4 +81,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
+
+    @Bean
+    public ConcurrentSessionControlAuthenticationStrategy concurrentSessionStrategy(SessionRegistry sessionRegistry) {
+        ConcurrentSessionControlAuthenticationStrategy strategy = new ConcurrentSessionControlAuthenticationStrategy(sessionRegistry);
+        strategy.setMaximumSessions(3);
+        strategy.setExceptionIfMaximumExceeded(true);
+        return strategy;
+    }
+
 }

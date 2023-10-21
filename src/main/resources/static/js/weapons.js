@@ -33,11 +33,13 @@ function updateWeaponMode() {
 prevButton.addEventListener('click', () => {
     currentModeIndex = (currentModeIndex - 1 + weaponModes.length) % weaponModes.length;
     updateWeaponMode();
+    showSortingMenu();
 });
 
 nextButton.addEventListener('click', () => {
     currentModeIndex = (currentModeIndex + 1) % weaponModes.length;
     updateWeaponMode();
+    showSortingMenu();
 });
 
 updateWeaponMode();

@@ -15,83 +15,182 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <script src="https://apis.google.com/js/api:client.js"></script>
     <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/css/weapons.css">
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/weapons.css">
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/css/home.css">
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/home.css">
     <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/css/menu.css">
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/menu.css">
     <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/css/button-menu.css">
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/button-menu.css">
+
+    <style>
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .column {
+            flex: 33.33%;
+            padding: 3px;
+            text-align: center;
+        }
+
+        .weapon-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        #next-button {
+            user-select: none;
+            -webkit-user-select: none;
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            margin-left: 20%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #sorting-button {
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            margin-left: 20%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .sorting-menu {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            color: #333;
+            width: 500px;
+            height: 300px;
+            top: calc(100% + 15%);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .tier {
+            color: #f4f4f4;
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .weight {
+            color: #f4f4f4;
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #sorting-button:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        #sorting-button:active {
+            transform: scale(0.95);
+        }
+
+        input[type="checkbox"] {
+            transform: scale(1.5);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 90%;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 1;
+            background: transparent;
+            border: none;
+            color: white;
+        }
+
+    </style>
+
 </head>
 <body>
-
 <div class="weapon-selection">
     <div class="button-bar">
         <button id="prev-button">◄</button>
+        <button id="sorting-button">≡</button>
         <button id="next-button">►</button>
+        <div id="sorting-menu" class="sorting-menu" style="display: none;">
+            <div class="tier">
+                <h5>Tier None <input type="checkbox" id="tierCheckbox-1" name="tier" value="1"></h5>
+                <h5>Tier 1 <input type="checkbox" id="tierCheckbox-2" name="tier" value="1"></h5>
+                <h5>Tier 2 <input type="checkbox" id="tierCheckbox-3" name="tier" value="2"></h5>
+                <h5>Tier 3 <input type="checkbox" id="tierCheckbox-4" name="tier" value="3"></h5>
+                <h5>Tier 4 <input type="checkbox" id="tierCheckbox-5" name="tier" value="4"></h5>
+            </div>
+            <div class="weight">
+                <h5> 0kg < 2kg <input id="weightCheckbox-1" type="checkbox" name="tier" value="0-2"></h5>
+                <h5> 2kg < 5kg <input id="weightCheckbox-2" type="checkbox" name="tier" value="2-5"></h5>
+                <h5> 5kg < 10kg <input id="weightCheckbox-3" type="checkbox" name="tier" value="5-10"></h5>
+                <h5> 10kg < ∞kg <input id="weightCheckbox-4" type="checkbox" name="tier" value="10-∞"></h5>
+            </div>
+            <button id="close-button" class="close-button">×</button>
+        </div>
     </div>
+    <h1 id="weapon-name">Холодное оружие</h1>
     <div class="weapon-info">
-        <h1 id="weapon-name">Ближний бой</h1>
         <div id="melee-buttons">
-            <button class="weapon-type-button"><div class="link-items">Мачете</div><div class="link-items">1х4 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Топор пожарного</div><div class="link-items">2x7 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Гаечный ключ</div><div class="link-items">1х2 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Самодельное копьё</div><div class="link-items">1х9 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Серп</div><div class="link-items">3x2 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Пила</div><div class="link-items">5x2 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Самодельные ножи</div><div class="link-items">1х6 c.</div></button> <!---->
-            <button class="weapon-type-button"><div class="link-items">Отбив. молоток</div><div class="link-items">2x3 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Тесак</div><div class="link-items">2x3 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Штык-нож М4 и АК</div><div class="link-items">1х6 c.</div></button> <!---->
-            <button class="weapon-type-button"><div class="link-items">Штык-нож СКС и МОСИНА</div><div class="link-items">1х6 c.</div></button> <!---->
-            <button class="weapon-type-button"><div class="link-items">Вилы</div><div class="link-items">2x8 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Мотыга</div><div class="link-items">2x7 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Рыцарский меч</div><div class="link-items">2x8 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Кирка</div><div class="link-items">3x6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Kukri</div><div class="link-items">1x4 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Fange</div><div class="link-items">1x4 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Нож для стейка</div><div class="link-items">1x2 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Кухонный нож</div><div class="link-items">1x3 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Булава</div><div class="link-items">2x4 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Охотничий нож</div><div class="link-items">1x3 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Боевой нож</div><div class="link-items">1x3 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Лопата</div><div class="link-items">2x8 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Кувалда</div><div class="link-items">2x6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Разводной ключ</div><div class="link-items">1x5 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Труба</div><div class="link-items">1x5 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Лом</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Метла</div><div class="link-items">2x8 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Бейсбольная бита</div><div class="link-items">1x7 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Молоток</div><div class="link-items">2x3 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Слесарная ножовка</div><div class="link-items">2x4 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Монтировка</div><div class="link-items">1x4 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Отвёртка</div><div class="link-items">1x3 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Кастет</div><div class="link-items">1x2 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Ножовка</div><div class="link-items">5x2 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Заостренная палка</div><div class="link-items">1x8 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Топорик</div><div class="link-items">2x4 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Колун</div><div class="link-items">2x6 c.</div></button>
+            <div class="row">
+                <div th:each="steelArm : ${steelArms}" class="column">
+                    <button class="weapon-type-button">
+                        <div class="link-items" th:text="${steelArm.name}"></div>
+                        <div class="link-items"
+                             th:text="${steelArm.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + steelArm.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
         </div>
         <div id="ranged-buttons" style="display: none;">
-            <button class="weapon-type-button"><div class="link-items">P1</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">ИЖ-70</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">FX-45</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">CR-75</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">MLOCK-91</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">KOLT 1911</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">MK II</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Signal Pistol</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Revolver</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Deagle</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Deagle Gold</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Longhorn</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">Derringer</div><div class="link-items">1х6 c.</div></button>
+            <div class="row">
+                <div th:each="pistol : ${pistols}" class="column">
+                    <button class="weapon-type-button">
+                        <div class="link-items" th:text="${pistol.name}"></div>
+                        <div class="link-items"
+                             th:text="${pistol.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + pistol.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
         </div>
         <div id="pp-buttons" style="display: none;">
-            <button class="weapon-type-button"><div class="link-items">BIZON</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">CR-61 Skorpion</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">SG5-K</div><div class="link-items">1х6 c.</div></button>
-            <button class="weapon-type-button"><div class="link-items">USG-45</div><div class="link-items">1х6 c.</div></button>
+            <div class="row">
+                <div th:each="submachineGun : ${submachineGuns}" class="column">
+                    <button class="weapon-type-button">
+                        <div class="link-items" th:text="${submachineGun.name}"></div>
+                        <div class="link-items"
+                             th:text="${submachineGun.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + submachineGun.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -133,10 +232,8 @@
              class="btn-icon-img" alt="Вход">
     </button>
 </div>
-
 <div id="myModal" class="modal">
     <div class="modal-content-two">
-        <span class="close">×</span>
         <div class="header">
             <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/website-logo.png"
                  alt="Логотип DAYZ">
@@ -145,27 +242,27 @@
         </div>
         <div class="table">
             <div class="row">
-                <div class="cell">Медицина
+                <div class="cell"><p>Медицина</p>
                     <hr id="hr1">
                     <p>Медикаменты</p>
                     <p>Заболевания</p>
                     <p>Советы</p>
                 </div>
-                <div class="cell">Снаряжение
+                <div class="cell"><p>Снаряжение</p>
                     <hr id="hr2">
                     <p><a href="/armors">Броня</a></p>
                     <p><a href="/weapons">Оружия</a></p>
                     <p><a href="/backpacks">Рюкзаки</a></p>
                     <p><a href="/advice_equipment">Советы</a></p>
                 </div>
-                <div class="cell">Разное
+                <div class="cell"><p>Разное</p>
                     <hr id="hr4">
                     <p>Машины</p>
                     <p>Палатки</p>
                     <p>Предметы</p>
                     <p>Гранаты</p>
                 </div>
-                <div class="cell">Мир игры
+                <div class="cell"><p>Мир игры</p>
                     <hr id="hr3">
                     <p>История создания</p>
                     <p>Локации</p>
@@ -175,7 +272,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -303,7 +399,114 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const buttonSort = document.getElementById('sorting-button');
+    const menu = document.getElementById('sorting-menu');
+    const closeButton = document.getElementById('close-button');
+    const row = document.querySelector('.row');
+    function updateFilters() {
+        const weightFilters = {
+            'melee-buttons': {},
+            'ranged-buttons': {},
+            'pp-buttons': {}
+        };
+        const tierFilters = {
+            'melee-buttons': {},
+            'ranged-buttons': {},
+            'pp-buttons': {}
+        };
 
+        for (const key in weightFilters) {
+            weightFilters[key] = {
+                'weightCheckbox-1': document.getElementById(key + '-1').checked,
+                'weightCheckbox-2': document.getElementById(key + '-2').checked,
+                'weightCheckbox-3': document.getElementById(key + '-3').checked,
+                'weightCheckbox-4': document.getElementById(key + '-4').checked,
+            };
+        }
+
+        for (const key in tierFilters) {
+            tierFilters[key] = {
+                'tierCheckbox-1': document.getElementById(key + '-1').checked,
+                'tierCheckbox-2': document.getElementById(key + '-2').checked,
+                'tierCheckbox-3': document.getElementById(key + '-3').checked,
+                'tierCheckbox-4': document.getElementById(key + '-4').checked,
+                'tierCheckbox-5': document.getElementById(key + '-5').checked,
+            };
+        }
+
+        const requestData = {
+            weightFilters,
+            tierFilters,
+            weaponCategory: currentModeIndex
+        };
+
+        fetch('/api/weapons/filter', {
+            method: 'POST',
+            body: JSON.stringify(requestData),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                row.innerHTML = '';
+                data.forEach((steelArm) => {
+                    const column = document.createElement('div');
+                    column.className = 'column';
+
+                    const button = document.createElement('button');
+                    button.className = 'weapon-type-button';
+
+                    const linkItems1 = document.createElement('div');
+                    linkItems1.className = 'link-items';
+                    linkItems1.textContent = steelArm.name;
+
+                    const linkItems2 = document.createElement('div');
+                    linkItems2.className = 'link-items';
+                    linkItems2.innerHTML = `${steelArm.size} s. &nbsp;&nbsp;&nbsp;&nbsp; ${steelArm.weight} kg.`;
+
+                    button.appendChild(linkItems1);
+                    button.appendChild(linkItems2);
+                    column.appendChild(button);
+                    row.appendChild(column);
+                })
+                    .catch((error) => {
+                        console.error('Ошибка при запросе данных с сервера:', error);
+                    });
+            })
+    }
+
+    document.getElementById('weightCheckbox-1').addEventListener('change', updateFilters);
+    document.getElementById('weightCheckbox-2').addEventListener('change', updateFilters);
+    document.getElementById('weightCheckbox-3').addEventListener('change', updateFilters);
+    document.getElementById('weightCheckbox-4').addEventListener('change', updateFilters);
+
+    document.getElementById('tierCheckbox-1').addEventListener('change', updateFilters);
+    document.getElementById('tierCheckbox-2').addEventListener('change', updateFilters);
+    document.getElementById('tierCheckbox-3').addEventListener('change', updateFilters);
+    document.getElementById('tierCheckbox-4').addEventListener('change', updateFilters);
+    document.getElementById('tierCheckbox-5').addEventListener('change', updateFilters);
+
+
+    buttonSort.onclick = function () {
+        showSortingMenu();
+    };
+
+    closeButton.addEventListener('click', function () {
+        menu.style.display = 'none';
+    });
+
+    function showSortingMenu() {
+        const rect = buttonSort.getBoundingClientRect();
+        const offset = 25;
+        menu.style.top = (rect.bottom + offset) + 'px';
+        menu.style.left = '50%';
+        menu.style.display = 'block';
+    }
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/weapons.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/sing-in-up.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>

@@ -1,3 +1,96 @@
+let username = sessionStorage.getItem("username");
+const handleAuthorizedUser = () => {
+    const customLoginButton = document.getElementById('customLoginButton');
+    const btnIconImg = customLoginButton.querySelector('.btn-icon-img');
+    btnIconImg.src = 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png';
+
+    customLoginButton.addEventListener('click', function () {
+        const welcomeModal = `
+      <div class="modal" id="welcomeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Добрый день, ${username}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Ваш контент здесь...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+        $('body').append(welcomeModal);
+        $('#welcomeModal').modal('show');
+    });
+};
+
+window.onload = () => {
+    let deserializedObject = JSON.parse(sessionStorage.getItem("isAuthenticated"));
+    console.log(deserializedObject)
+    if (deserializedObject) {
+        handleAuthorizedUser();
+    }
+};
+
+document.getElementById("loginForm").addEventListener("submit", function (event) {
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const formData = {
+        name: document.querySelector('input[name=name]').value,
+        password: document.querySelector('input[name=password]').value
+    };
+
+    let nameUser = document.querySelector('input[name=name]').value;
+    sessionStorage.removeItem("username")
+    sessionStorage.setItem("username", nameUser)
+
+    $.ajax({
+        url: '/authenticate',
+        type: 'POST',
+        data: JSON.stringify(formData),
+        contentType: 'application/json',
+        success: function (response) {
+            if (response === "success") {
+                let isAuthenticated = true;
+                let serializedObject = JSON.stringify(isAuthenticated);
+                sessionStorage.removeItem("isAuthenticated")
+                sessionStorage.setItem("isAuthenticated", serializedObject);
+
+                showNotification("You are successfully logged!", "success", 3000);
+
+                setTimeout(function () {
+                    $('#loginModal').modal('hide');
+                }, 500);
+                handleAuthorizedUser();
+            } else {
+                let isAuthenticated = false;
+                let serializedObject = JSON.stringify(isAuthenticated);
+                sessionStorage.removeItem("isAuthenticated")
+                sessionStorage.setItem("isAuthenticated", serializedObject);
+
+                showNotification("Invalid username or password", "danger", 3000);
+
+                setTimeout(function () {
+                    $('#loginModal').modal('hide');
+                }, 500);
+            }
+        },
+        error: function (error) {
+            console.error('Request error:', error);
+        }
+    });
+
+});
+
+
 document.querySelector(".register-button-containerTwo button").addEventListener("click", function () {
     closeModal('#registerModal');
     closeModal('#resetPasswordModal')
@@ -41,71 +134,6 @@ function showNotification(message, type, duration) {
     });
 }
 
-document.getElementById("loginForm").addEventListener("submit", function (event) {
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    const formData = {
-        name: document.querySelector('input[name=name]').value,
-        password: document.querySelector('input[name=password]').value
-    };
-
-    $.ajax({
-        url: '/authenticate',
-        type: 'POST',
-        data: JSON.stringify(formData),
-        contentType: 'application/json',
-        success: function (response) {
-            if (response === "success") {
-                showNotification("You are successfully logged!", "success", 3000);
-                setTimeout(function () {
-                    var customLoginButton = document.getElementById('customLoginButton');
-                    var btnIconImg = customLoginButton.querySelector('.btn-icon-img');
-                    btnIconImg.src = 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png';
-                    $('#loginModal').modal('hide');
-                    customLoginButton.addEventListener('click', function () {
-                        var nameUser = formData.name;
-                        var welcomeModal = `
-                <div class="modal" id="welcomeModal" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Добрый день, ${nameUser}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Ваш контент здесь...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-                        $('body').append(welcomeModal);
-
-                        $('#welcomeModal').modal('show');
-                    });
-                }, 500);
-
-            } else {
-                showNotification("Invalid username or password", "danger", 3000);
-                setTimeout(function () {
-                    $('#loginModal').modal('hide');
-                }, 500);
-            }
-        },
-
-        error: function (error) {
-            console.error('Request error:', error);
-        }
-    });
-
-});
 document.querySelector(".register-button-container button").addEventListener("click", function () {
     $('#loginModal').modal('hide');
     $('#registerModal').modal('show');

@@ -14,8 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Objects;
 
@@ -42,18 +42,14 @@ public class UserHandlingController {
         return "home";
     }
 
-    @GetMapping("/login")
-    public String showOauthLogin() {
-        return "home";
-    }
-
     @PostMapping("/authenticate")
     public ResponseEntity<String> processLogin(@RequestBody LoginForm loginForm) {
         String name = loginForm.getName();
         String password = loginForm.getPassword();
-        if (loginForm.getName().contains("@")) {
+
+        if (name.contains("@")) {
             if (userService.isValidUserEmail(name, password)) {
-                User user = userService.getUserByName(name);
+                User user = userService.getUserByEmail(name);
                 UserDetails userDetails = userDetailsService.findByUserId(user.getId());
                 userDetails.setLastActive(new Date());
                 userDetailsService.save(userDetails);
@@ -112,17 +108,14 @@ public class UserHandlingController {
 
     }
 
-
     @PostMapping("/change")
     public ResponseEntity<String> changePassword(@ModelAttribute PasswordChangeRequest request) {
         User user = userService.getUserByEmail(request.getEmail());
         UserDetails userDetails = userDetailsService.findByUserId(user.getId());
         userDetails.setResetToken(null);
-        userService.changePassword(user.getEmail() ,request.getConfirmPassword());
+        userService.changePassword(user.getEmail(), request.getConfirmPassword());
         return ResponseEntity.ok("success");
     }
-
-
 
 
 }

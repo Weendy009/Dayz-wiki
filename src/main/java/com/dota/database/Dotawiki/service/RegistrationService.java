@@ -99,9 +99,9 @@ public class RegistrationService {
     private String generatePasswordResetEmail(String userName, String resetLink, String gifLink) {
         String emailBody = "<html><body style=\"font-family: Arial, sans-serif;\">";
         emailBody += "<div style=\"background-color: #f8f8f8; padding: 20px; text-align: center;\">";
-        emailBody += "<h1 style=\"margin-bottom: 10px;\">Dotabase</h1>";
+        emailBody += "<h1 style=\"margin-bottom: 10px;\">Dayz-wiki</h1>";
         emailBody += "<p style=\"font-size: 18px; margin: 0;\">Hello, " + userName + "!</p>";
-        emailBody += "<p style=\"font-size: 16px; margin-top: 10px;\">You've requested a password reset for your Dotabase account.</p>";
+        emailBody += "<p style=\"font-size: 16px; margin-top: 10px;\">You've requested a password reset for your Dayz-wiki account.</p>";
         emailBody += "<img src=\"" + gifLink + "\" style=\"max-width: 100%; margin-top: 20px;\">";
         emailBody += "<p style=\"font-size: 16px; margin-top: 20px;\">Click the button below to reset your password:</p>";
         emailBody += "<a href=\"" + resetLink + "\" style=\"display: inline-block; background-color: #007bff; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; margin-top: 10px;\">RESET PASSWORD</a>";
@@ -113,9 +113,9 @@ public class RegistrationService {
     private String generateEmailBody(String userName, String confirmationLink, String gifLink) {
         String emailBody = "<html><body style=\"font-family: Arial, sans-serif;\">";
         emailBody += "<div style=\"background-color: #f8f8f8; padding: 20px; text-align: center;\">";
-        emailBody += "<h1 style=\"margin-bottom: 10px;\">Dotabase</h1>";
+        emailBody += "<h1 style=\"margin-bottom: 10px;\">Dayz-wiki</h1>";
         emailBody += "<p style=\"font-size: 18px; margin: 0;\">Welcome, " + userName + "!</p>";
-        emailBody += "<p style=\"font-size: 16px; margin-top: 10px;\">You have just taken your first step towards learning Dota 2. Good job, we are very proud of you.</p>";
+        emailBody += "<p style=\"font-size: 16px; margin-top: 10px;\">You have just taken your first step towards learning Dayz. Good job, we are very proud of you.</p>";
         emailBody += "<img src=\"" + gifLink + "\" style=\"max-width: 100%; margin-top: 20px;\">";
         emailBody += "<p style=\"font-size: 16px; margin-top: 20px;\">Click the button below to confirm your email address:</p>";
         emailBody += "<a href=\"" + confirmationLink + "\" style=\"display: inline-block; background-color: #007bff; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; margin-top: 10px;\">CONFIRM EMAIL</a>";
