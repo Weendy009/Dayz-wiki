@@ -28,8 +28,5 @@ public class WeaponService {
         return repository.findByType("submachine guns");
     }
 
-    public List<Weapon> getAllWeapons() {
-        return repository.findAll();
-    }
 
 }
