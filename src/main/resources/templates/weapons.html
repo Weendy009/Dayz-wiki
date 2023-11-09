@@ -401,110 +401,85 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    const buttonSort = document.getElementById('sorting-button');
-    const menu = document.getElementById('sorting-menu');
-    const closeButton = document.getElementById('close-button');
-    const row = document.querySelector('.row');
-    function updateFilters() {
-        const weightFilters = {
-            'melee-buttons': {},
-            'ranged-buttons': {},
-            'pp-buttons': {}
-        };
-        const tierFilters = {
-            'melee-buttons': {},
-            'ranged-buttons': {},
-            'pp-buttons': {}
-        };
+        const buttonSort = document.getElementById('sorting-button');
+        const menu = document.getElementById('sorting-menu');
+        const closeButton = document.getElementById('close-button');
+        const row = document.querySelector('.row');
 
-        for (const key in weightFilters) {
-            weightFilters[key] = {
-                'weightCheckbox-1': document.getElementById(key + '-1').checked,
-                'weightCheckbox-2': document.getElementById(key + '-2').checked,
-                'weightCheckbox-3': document.getElementById(key + '-3').checked,
-                'weightCheckbox-4': document.getElementById(key + '-4').checked,
-            };
+        function updateFilters() {
+            const selectedFilters = [];
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedFilters.push(checkbox.parentNode.textContent);
+                }
+            });
+            sendFiltersToServer(selectedFilters);
         }
 
-        for (const key in tierFilters) {
-            tierFilters[key] = {
-                'tierCheckbox-1': document.getElementById(key + '-1').checked,
-                'tierCheckbox-2': document.getElementById(key + '-2').checked,
-                'tierCheckbox-3': document.getElementById(key + '-3').checked,
-                'tierCheckbox-4': document.getElementById(key + '-4').checked,
-                'tierCheckbox-5': document.getElementById(key + '-5').checked,
+        function sendFiltersToServer(selectedFilters) {
+            const filterRequest = {
+                selectedFilters: selectedFilters,
+                itemCategory: currentModeIndex
             };
-        }
 
-        const requestData = {
-            weightFilters,
-            tierFilters,
-            weaponCategory: currentModeIndex
-        };
+            fetch('/api/weapons/filter', {
+                method: 'POST',
+                body: JSON.stringify(filterRequest),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                    row.innerHTML = ''
+                    data.forEach((steelArm) => {
+                        const column = document.createElement('div');
+                        column.className = 'column';
 
-        fetch('/api/weapons/filter', {
-            method: 'POST',
-            body: JSON.stringify(requestData),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                row.innerHTML = '';
-                data.forEach((steelArm) => {
-                    const column = document.createElement('div');
-                    column.className = 'column';
+                        const button = document.createElement('button');
+                        button.className = 'weapon-type-button';
 
-                    const button = document.createElement('button');
-                    button.className = 'weapon-type-button';
+                        const linkItems1 = document.createElement('div');
+                        linkItems1.className = 'link-items';
+                        linkItems1.textContent = steelArm.name;
 
-                    const linkItems1 = document.createElement('div');
-                    linkItems1.className = 'link-items';
-                    linkItems1.textContent = steelArm.name;
+                        const linkItems2 = document.createElement('div');
+                        linkItems2.className = 'link-items';
+                        linkItems2.innerHTML = `${steelArm.size} s. &nbsp;&nbsp;&nbsp;&nbsp; ${steelArm.weight} kg.`;
 
-                    const linkItems2 = document.createElement('div');
-                    linkItems2.className = 'link-items';
-                    linkItems2.innerHTML = `${steelArm.size} s. &nbsp;&nbsp;&nbsp;&nbsp; ${steelArm.weight} kg.`;
-
-                    button.appendChild(linkItems1);
-                    button.appendChild(linkItems2);
-                    column.appendChild(button);
-                    row.appendChild(column);
+                        button.appendChild(linkItems1);
+                        button.appendChild(linkItems2);
+                        column.appendChild(button);
+                        row.appendChild(column);
+                    })
                 })
-                    .catch((error) => {
-                        console.error('Ошибка при запросе данных с сервера:', error);
-                    });
-            })
-    }
+                .catch((error) => {
+                    console.error('Ошибка при запросе данных с сервера:', error);
+                });
+        }
 
-    document.getElementById('weightCheckbox-1').addEventListener('change', updateFilters);
-    document.getElementById('weightCheckbox-2').addEventListener('change', updateFilters);
-    document.getElementById('weightCheckbox-3').addEventListener('change', updateFilters);
-    document.getElementById('weightCheckbox-4').addEventListener('change', updateFilters);
+        buttonSort.onclick = function () {
+            showSortingMenu();
+        };
 
-    document.getElementById('tierCheckbox-1').addEventListener('change', updateFilters);
-    document.getElementById('tierCheckbox-2').addEventListener('change', updateFilters);
-    document.getElementById('tierCheckbox-3').addEventListener('change', updateFilters);
-    document.getElementById('tierCheckbox-4').addEventListener('change', updateFilters);
-    document.getElementById('tierCheckbox-5').addEventListener('change', updateFilters);
+        closeButton.addEventListener('click', function () {
+            menu.style.display = 'none';
+        });
 
+        function showSortingMenu() {
+            const rect = buttonSort.getBoundingClientRect();
+            const offset = 25;
+            menu.style.top = (rect.bottom + offset) + 'px';
+            menu.style.left = '50%';
+            menu.style.display = 'block';
+        }
 
-    buttonSort.onclick = function () {
-        showSortingMenu();
-    };
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateFilters);
+        });
 
-    closeButton.addEventListener('click', function () {
-        menu.style.display = 'none';
-    });
-
-    function showSortingMenu() {
-        const rect = buttonSort.getBoundingClientRect();
-        const offset = 25;
-        menu.style.top = (rect.bottom + offset) + 'px';
-        menu.style.left = '50%';
-        menu.style.display = 'block';
-    }
     });
 </script>
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/weapons.js"></script>

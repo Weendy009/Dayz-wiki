@@ -45,10 +45,6 @@ public class UserService {
         return repository.existsUsersByEmail(email);
     }
 
-    public User getUserByName(String name) {
-        return repository.getUserByName(name);
-    }
-
     public boolean isValidUserEmail(String email, String password) {
         if (repository.getUserByEmail(email) == null) {
             return false;

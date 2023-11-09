@@ -157,9 +157,9 @@
             <button id="close-button" class="close-button">×</button>
         </div>
     </div>
-    <h1 id="weapon-name">shoes</h1>
+    <h1 id="armor-name">shoes</h1>
     <div class="weapon-info">
-        <div id="shoes">
+        <div id="shoes" style="display: none;">
             <div class="row">
                 <div th:each="shoe : ${shoes}" class="column">
                     <button class="weapon-type-button">
@@ -170,7 +170,7 @@
                 </div>
             </div>
         </div>
-        <div id="masks">
+        <div id="masks" style="display: none;">
             <div class="row">
                 <div th:each="mask : ${masks}" class="column">
                     <button class="weapon-type-button">
@@ -181,7 +181,7 @@
                 </div>
             </div>
         </div>
-        <div id="hats">
+        <div id="hats" style="display: none;">
             <div class="row">
                 <div th:each="hat : ${hats}" class="column">
                     <button class="weapon-type-button">
@@ -192,7 +192,7 @@
                 </div>
             </div>
         </div>
-        <div id="glasses">
+        <div id="glasses" style="display: none;">
             <div class="row">
                 <div th:each="glass : ${glasses}" class="column">
                     <button class="weapon-type-button">
@@ -203,7 +203,7 @@
                 </div>
             </div>
         </div>
-        <div id="gloves">
+        <div id="gloves" style="display: none;">
             <div class="row">
                 <div th:each="glov : ${gloves}" class="column">
                     <button class="weapon-type-button">
@@ -214,7 +214,7 @@
                 </div>
             </div>
         </div>
-        <div id="vests">
+        <div id="vests" style="display: none;">
             <div class="row">
                 <div th:each="vest : ${vests}" class="column">
                     <button class="weapon-type-button">
@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-        <div id="backpacks">
+        <div id="backpacks" style="display: none;">
             <div class="row">
                 <div th:each="backpack : ${backpacks}" class="column">
                     <button class="weapon-type-button">
@@ -236,7 +236,7 @@
                 </div>
             </div>
         </div>
-        <div id="cloth">
+        <div id="cloth" style="display: none;">
             <div class="row">
                 <div th:each="clot : ${cloth}" class="column">
                     <button class="weapon-type-button">
@@ -247,7 +247,7 @@
                 </div>
             </div>
         </div>
-        <div id="belts">
+        <div id="belts" style="display: none;">
             <div class="row">
                 <div th:each="belt : ${belts}" class="column">
                     <button class="weapon-type-button">
@@ -471,65 +471,34 @@
         const menu = document.getElementById('sorting-menu');
         const closeButton = document.getElementById('close-button');
         const row = document.querySelector('.row');
+
         function updateFilters() {
-            const weightFilters = {
-                'shoes': {},
-                'masks': {},
-                'hats': {},
-                'glasses': {},
-                'gloves': {},
-                'vests': {},
-                'backpacks': {},
-                'cloth': {},
-                'belts': {}
-            };
-            const tierFilters = {
-                'shoes': {},
-                'masks': {},
-                'hats': {},
-                'glasses': {},
-                'gloves': {},
-                'vests': {},
-                'backpacks': {},
-                'cloth': {},
-                'belts': {}
+            const selectedFilters = [];
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedFilters.push(checkbox.parentNode.textContent);
+                }
+            });
+            sendFiltersToServer(selectedFilters);
+        }
+
+        function sendFiltersToServer(selectedFilters) {
+            const filterRequest = {
+                selectedFilters: selectedFilters,
+                itemCategory: currentModeIndex
             };
 
-            for (const key in weightFilters) {
-                weightFilters[key] = {
-                    'weightCheckbox-1': document.getElementById(key + '-1').checked,
-                    'weightCheckbox-2': document.getElementById(key + '-2').checked,
-                    'weightCheckbox-3': document.getElementById(key + '-3').checked,
-                    'weightCheckbox-4': document.getElementById(key + '-4').checked,
-                };
-            }
-
-            for (const key in tierFilters) {
-                tierFilters[key] = {
-                    'tierCheckbox-1': document.getElementById(key + '-1').checked,
-                    'tierCheckbox-2': document.getElementById(key + '-2').checked,
-                    'tierCheckbox-3': document.getElementById(key + '-3').checked,
-                    'tierCheckbox-4': document.getElementById(key + '-4').checked,
-                    'tierCheckbox-5': document.getElementById(key + '-5').checked,
-                };
-            }
-
-            const requestData = {
-                weightFilters,
-                tierFilters,
-                weaponCategory: currentModeIndex
-            };
-
-            fetch('/api/weapons/filter', {
+            fetch('/api/armors/filter', {
                 method: 'POST',
-                body: JSON.stringify(requestData),
+                body: JSON.stringify(filterRequest),
                 headers: {
                     'Content-Type': 'application/json',
                 },
-            })
-                .then((response) => response.json())
+            }).then((response) => response.json())
                 .then((data) => {
-                    row.innerHTML = '';
+                    console.log(data)
+                    row.innerHTML = ''
                     data.forEach((steelArm) => {
                         const column = document.createElement('div');
                         column.className = 'column';
@@ -550,23 +519,11 @@
                         column.appendChild(button);
                         row.appendChild(column);
                     })
-                        .catch((error) => {
-                            console.error('Ошибка при запросе данных с сервера:', error);
-                        });
                 })
+                .catch((error) => {
+                    console.error('Ошибка при запросе данных с сервера:', error);
+                });
         }
-
-        document.getElementById('weightCheckbox-1').addEventListener('change', updateFilters);
-        document.getElementById('weightCheckbox-2').addEventListener('change', updateFilters);
-        document.getElementById('weightCheckbox-3').addEventListener('change', updateFilters);
-        document.getElementById('weightCheckbox-4').addEventListener('change', updateFilters);
-
-        document.getElementById('tierCheckbox-1').addEventListener('change', updateFilters);
-        document.getElementById('tierCheckbox-2').addEventListener('change', updateFilters);
-        document.getElementById('tierCheckbox-3').addEventListener('change', updateFilters);
-        document.getElementById('tierCheckbox-4').addEventListener('change', updateFilters);
-        document.getElementById('tierCheckbox-5').addEventListener('change', updateFilters);
-
 
         buttonSort.onclick = function () {
             showSortingMenu();
@@ -583,9 +540,161 @@
             menu.style.left = '50%';
             menu.style.display = 'block';
         }
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateFilters);
+        });
+
+        const armorName = document.getElementById('armor-name');
+        const shoesButtons = document.getElementById('shoes');
+        const masksButtons = document.getElementById('masks');
+        const hatsButtons = document.getElementById('hats');
+        const glassesButtons = document.getElementById('glasses');
+        const glovesButtons = document.getElementById('gloves');
+        const vestsButtons = document.getElementById('vests');
+        const backpacksButtons = document.getElementById('backpacks');
+        const clothButtons = document.getElementById('cloth');
+        const beltsButtons = document.getElementById('belts');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+
+        const armorsModes = [
+            'shoes',
+            'masks',
+            'hats',
+            'glasses',
+            'gloves',
+            'vests',
+            'backpacks',
+            'cloth',
+            'belts'
+        ];
+
+        let currentModeIndex = 0;
+
+        function updateWeaponMode() {
+            armorName.textContent = armorsModes[currentModeIndex];
+            switch (currentModeIndex) {
+                case 0:
+                    shoesButtons.style.display = 'block';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 1:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'block';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 2:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'block';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 3:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'block';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 4:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'block';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 5:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'block';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 6:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'block';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 7:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'block';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 8:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'block';
+                    break;
+            }
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentModeIndex = (currentModeIndex - 1 + armorsModes.length) % armorsModes.length;
+            updateWeaponMode();
+            showSortingMenu();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentModeIndex = (currentModeIndex + 1) % armorsModes.length;
+            updateWeaponMode();
+            showSortingMenu();
+        });
+
+        updateWeaponMode();
+
     });
+
 </script>
-<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/weapons.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>
 </body>

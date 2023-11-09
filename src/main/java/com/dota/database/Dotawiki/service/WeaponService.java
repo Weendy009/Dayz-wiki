@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class WeaponService {
@@ -16,15 +17,15 @@ public class WeaponService {
         this.repository = repository;
     }
 
-    public List<Weapon> getAllSteelArms() {
+    public Set<Weapon> getAllSteelArms() {
         return repository.findByType("steel arms");
     }
 
-    public List<Weapon> getAllPistols() {
+    public Set<Weapon> getAllPistols() {
         return repository.findByType("pistol");
     }
 
-    public List<Weapon> getAllSubmachineGuns() {
+    public Set<Weapon> getAllSubmachineGuns() {
         return repository.findByType("submachine guns");
     }
 

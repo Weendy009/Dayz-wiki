@@ -1,12 +1,12 @@
 package com.dota.database.Dotawiki.service;
 
 import com.dota.database.Dotawiki.entity.items.Armor;
-import com.dota.database.Dotawiki.entity.items.Weapon;
 import com.dota.database.Dotawiki.repository.ArmorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ArmorService {
@@ -17,31 +17,31 @@ public class ArmorService {
         this.repository = repository;
     }
 
-    public List<Armor> getAllShoes() {
+    public Set<Armor> getAllShoes() {
         return repository.findByType("shoes");
     }
-    public List<Armor> getAllMasks() {
+    public Set<Armor> getAllMasks() {
         return repository.findByType("mask");
     }
-    public List<Armor> getAllHats() {
+    public Set<Armor> getAllHats() {
         return repository.findByType("hats");
     }
-    public List<Armor> getAllGlasses() {
+    public Set<Armor> getAllGlasses() {
         return repository.findByType("glasses");
     }
-    public List<Armor> getAllGloves() {
+    public Set<Armor> getAllGloves() {
         return repository.findByType("gloves");
     }
-    public List<Armor> getAllVests() {
+    public Set<Armor> getAllVests() {
         return repository.findByType("vests");
     }
-    public List<Armor> getAllBackpacks() {
+    public Set<Armor> getAllBackpacks() {
         return repository.findByType("backpacks");
     }
-    public List<Armor> getAllCloth() {
+    public Set<Armor> getAllCloth() {
         return repository.findByType("cloth");
     }
-    public List<Armor> getAllBelts() {
+    public Set<Armor> getAllBelts() {
         return repository.findByType("belts");
     }
 

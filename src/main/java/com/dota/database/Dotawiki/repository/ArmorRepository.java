@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface ArmorRepository extends JpaRepository<Armor, Long> {
     @Transactional
     @Modifying
-    List<Armor> findByType(String type);
+    Set<Armor> findByType(String type);
 }
