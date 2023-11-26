@@ -45,7 +45,8 @@ public class UserHandlingController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<String> processLogin(@RequestBody LoginForm loginForm) {
+    public ResponseEntity<String> processLogin(@RequestBody LoginForm loginForm, HttpServletRequest request) {
+        HttpSession session = request.getSession();
         String name = loginForm.getName();
         String password = loginForm.getPassword();
 
@@ -55,10 +56,15 @@ public class UserHandlingController {
                 UserDetails userDetails = userDetailsService.findByUserId(user.getId());
                 userDetails.setLastActive(new Date());
                 userDetailsService.save(userDetails);
+                session.removeAttribute("userId");
+                session.setAttribute("userId", user.getId());
                 return ResponseEntity.ok("success");
             }
         } else {
             if (userService.isValidUser(name, password)) {
+                User user = userService.getUserByUserName(name);
+                session.removeAttribute("userId");
+                session.setAttribute("userId", user.getId());
                 return ResponseEntity.ok("success");
             }
         }

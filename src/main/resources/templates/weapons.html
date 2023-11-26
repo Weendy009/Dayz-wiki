@@ -36,7 +36,12 @@
             text-align: center;
         }
 
-        .weapon-type-button {
+        .ranged-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+        .pp-type-button {
             width: 90%;
             height: 50px;
             text-align: center;
@@ -131,6 +136,81 @@
             color: white;
         }
 
+        .pp-type-button  {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pp-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .pp-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .ranged-type-button  {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .ranged-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .ranged-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .menu-button-items {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            width: 5%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .menu-button:hover {
+            transform: scale(1.05);
+        }
+
+        .menu-button:active {
+            transform: scale(0.95);
+        }
+
+        .menu-button-items:hover {
+            transform: scale(1.1);
+        }
+
+        .menu-button-items:active {
+            transform: scale(0.90);
+        }
+
     </style>
 
 </head>
@@ -157,23 +237,59 @@
             <button id="close-button" class="close-button">×</button>
         </div>
     </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalBtn">&times;</span>
+            <div id="modalData">
+                <p>ID: <span id="modalId"></span></p>
+                <p>Name: <span id="modalName"></span></p>
+                <p>Type: <span id="modalType"></span></p>
+                <p>Size: <span id="modalSize"></span></p>
+                <p>Weight: <span id="modalWeight"></span></p>
+            </div>
+            <button id="bookmarkContainer" class="menu-button-items">
+                <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png" alt="Bookmarks" typeof="submit">
+            </button>
+        </div>
+    </div>
+    <div id="bookmarksModal" class="modal">
+        <div class="modal-content">
+            <table id="bookmarksTable">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Weight</th>
+                    <th>Size</th>
+                    <th>Tier</th>
+                    <th>Type</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <h1 id="weapon-name">Холодное оружие</h1>
     <div class="weapon-info">
-        <div id="melee-buttons">
+        <div id="melee-buttons" style="display: none;">
             <div class="row">
                 <div th:each="steelArm : ${steelArms}" class="column">
-                    <button class="weapon-type-button">
+                    <button class="weapon-type-button" data-name="${steelArm.name}" data-size="${steelArm.size}" data-weight="${steelArm.weight}" data-type="${steelArm.type}" data-id="${steelArm.id}">
                         <div class="link-items" th:text="${steelArm.name}"></div>
-                        <div class="link-items"
-                             th:text="${steelArm.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + steelArm.weight + ' kg.'}"></div>
+                        <div class="link-items" th:text="${steelArm.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + steelArm.weight + ' kg.'}"></div>
                     </button>
                 </div>
             </div>
         </div>
+
         <div id="ranged-buttons" style="display: none;">
             <div class="row">
                 <div th:each="pistol : ${pistols}" class="column">
-                    <button class="weapon-type-button">
+                    <button class="ranged-type-button" data-name="${pistol.name}" data-size="${pistol.size}" data-weight="${pistol.weight}" data-type="${steelArm.type}" data-id="${steelArm.id}">
                         <div class="link-items" th:text="${pistol.name}"></div>
                         <div class="link-items"
                              th:text="${pistol.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + pistol.weight + ' kg.'}"></div>
@@ -184,7 +300,7 @@
         <div id="pp-buttons" style="display: none;">
             <div class="row">
                 <div th:each="submachineGun : ${submachineGuns}" class="column">
-                    <button class="weapon-type-button">
+                    <button class="pp-type-button" data-name="${submachineGun.name}" data-size="${submachineGun.size}" data-weight="${submachineGun.weight}" data-type="${steelArm.type}" data-id="${steelArm.id}">
                         <div class="link-items" th:text="${submachineGun.name}"></div>
                         <div class="link-items"
                              th:text="${submachineGun.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + submachineGun.weight + ' kg.'}"></div>
@@ -211,6 +327,10 @@
     <button id="toggleButton" class="menu-button">
         <div class="icon" id="icon">&#8801;</div>
     </button>
+    <button id="bookmarksButton" class="menu-button">
+        <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png"
+             alt="Bookmark" typeof="submit">
+    </button>
     <div class="social-links">
         <a href="https://www.instagram.com/dayz.game/" class="social-link">
             <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/instagram-logo.png"
@@ -232,6 +352,7 @@
              class="btn-icon-img" alt="Вход">
     </button>
 </div>
+
 <div id="myModal" class="modal">
     <div class="modal-content-two">
         <div class="header">
@@ -250,9 +371,8 @@
                 </div>
                 <div class="cell"><p>Снаряжение</p>
                     <hr id="hr2">
-                    <p><a href="/armors">Броня</a></p>
+                    <p><a href="/equipment">Броня-Одежда</a></p>
                     <p><a href="/weapons">Оружия</a></p>
-                    <p><a href="/backpacks">Рюкзаки</a></p>
                     <p><a href="/advice_equipment">Советы</a></p>
                 </div>
                 <div class="cell"><p>Разное</p>
@@ -272,6 +392,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -399,12 +520,107 @@
         </div>
     </div>
 </div>
-<script>
+<script th:inline="javascript">
     document.addEventListener('DOMContentLoaded', function () {
         const buttonSort = document.getElementById('sorting-button');
         const menu = document.getElementById('sorting-menu');
         const closeButton = document.getElementById('close-button');
         const row = document.querySelector('.row');
+        const bookmarksButton = document.getElementById("bookmarksButton");
+        const bookmarksModal = document.getElementById("bookmarksModal");
+        const bookmarksTableBody = document.querySelector("#bookmarksTable tbody");
+
+        bookmarksButton.addEventListener("click", function () {
+            bookmarksTableBody.innerHTML = "";
+
+            fetch('/bookmarks/getAll', {
+                method: 'GET'
+            }).then(response => {
+                console.log(response)
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data)
+                    data.forEach(bookmark => {
+                        addToBookmarksTable(bookmark);
+                    });
+
+                    bookmarksModal.style.display = "block";
+                })
+                .catch(error => {
+                    console.error('Ошибка при получении данных с сервера:', error);
+                });
+        });
+
+        function addToBookmarksTable(item) {
+            const tableBody = document.querySelector("#bookmarksTable tbody");
+            const newRow = tableBody.insertRow();
+
+            const fields = ['id', 'name', 'weight', 'size', 'tier', 'type'];
+
+            fields.forEach(field => {
+                const cell = newRow.insertCell();
+                cell.textContent = item.hasOwnProperty(field) ? item[field] : '';
+            });
+
+            const deleteCell = newRow.insertCell();
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.classList.add("btn", "btn-danger");
+            deleteButton.addEventListener("click", function () {
+                deleteBookmark(item.id);
+            });
+            deleteCell.appendChild(deleteButton);
+        }
+        function deleteBookmark(bookmarkId) {
+            fetch(`/bookmarks/delete/${bookmarkId}`, {
+                method: 'DELETE',
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        refreshBookmarksTable();
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка при удалении закладки:', error);
+                });
+        }
+
+        function refreshBookmarksTable() {
+            const tableBody = document.querySelector("#bookmarksTable tbody");
+            tableBody.innerHTML = "";
+
+            fetch('/bookmarks/getAll')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    data.forEach(bookmark => {
+                        addToBookmarksTable(bookmark);
+                    });
+                })
+                .catch(error => {
+                    console.error('Ошибка при обновлении данных и таблицы:', error);
+                });
+        }
+
+        window.addEventListener("click", function (event) {
+            if (event.target === bookmarksModal) {
+                bookmarksModal.style.display = "none";
+            }
+        });
 
         function updateFilters() {
             const selectedFilters = [];
@@ -480,10 +696,335 @@
             checkbox.addEventListener('change', updateFilters);
         });
 
+        document.getElementById("bookmarkContainer").addEventListener("click", function() {
+            addBookmark();
+        });
+
+        function addBookmark() {
+            const formData = new FormData();
+            formData.append("name", modalName.textContent);
+            formData.append("size", modalSize.textContent);
+            formData.append("weight", modalWeight.textContent);
+            formData.append("id", modalId.textContent);
+            formData.append("type", modalType.textContent);
+
+            fetch('/bookmarks/add', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Ошибка при отправке данных на сервер:', error);
+                });
+        }
+
+
+
+        var weaponTypeButtons = document.querySelectorAll(".weapon-type-button");
+        var rangedTypeButtons = document.querySelectorAll(".ranged-type-button");
+        var ppTypeButtons = document.querySelectorAll(".pp-type-button");
+
+        var steelArmsData = [[${steelArms}]];
+        var pistolsData = [[${pistols}]];
+        var submachineGunsData = [[${submachineGuns}]];
+
+        var modal = document.getElementById("modal");
+        var modalName = document.getElementById("modalName");
+        var modalSize = document.getElementById("modalSize");
+        var modalWeight = document.getElementById("modalWeight");
+        var modalType = document.getElementById("modalType");
+        var modalId = document.getElementById("modalId");
+        var closeModalBtn = document.getElementById("closeModalBtn");
+
+        function showModal(data) {
+            modalName.textContent = data.name;
+            modalSize.textContent = data.size + " slots";
+            modalWeight.textContent = data.weight + " kg";
+            modalId.textContent = data.id;
+            modalType.textContent = data.type;
+            modal.style.display = "block";
+        }
+
+        function addClickEvent(buttons, data) {
+            buttons.forEach(function (button, index) {
+                button.addEventListener("click", function () {
+                    showModal(data[index]);
+                });
+            });
+        }
+
+        addClickEvent(weaponTypeButtons, steelArmsData);
+        addClickEvent(rangedTypeButtons, pistolsData);
+        addClickEvent(ppTypeButtons, submachineGunsData);
+
+        closeModalBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
     });
+    const customLoginButton = document.getElementById('customLoginButton');
+    const handleAuthorizedUser = () => {
+        const customLoginButton = document.getElementById('customLoginButton');
+        const btnIconImg = customLoginButton.querySelector('.btn-icon-img');
+        btnIconImg.src = 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png';
+
+        customLoginButton.addEventListener('click', function () {
+            const welcomeModal = `
+      <div class="modal" id="welcomeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Добрый день, ${username}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Ваш контент здесь...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" id="logoutButton" style="border-radius: 15px">Выйти</button>
+          </div>
+        </div>
+      </div>
+    `;
+            $('body').append(welcomeModal);
+            $('#welcomeModal').modal('show');
+
+            const logoutButton = document.getElementById('logoutButton');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', function () {
+                    let isAuthenticated = false;
+                    let serializedObject = JSON.stringify(isAuthenticated);
+                    sessionStorage.removeItem("isAuthenticated");
+                    sessionStorage.setItem("isAuthenticated", serializedObject);
+                    handleAuthorizedUser();
+                });
+            }
+        });
+    };
+
+    window.onload = () => {
+        let deserializedObject = JSON.parse(sessionStorage.getItem("isAuthenticated"));
+        console.log(deserializedObject)
+        if (deserializedObject) {
+            handleAuthorizedUser();
+        }
+    };
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const formData = {
+            name: document.querySelector('input[name=name]').value,
+            password: document.querySelector('input[name=password]').value
+        };
+
+        let nameUser = document.querySelector('input[name=name]').value;
+        sessionStorage.removeItem("username")
+        sessionStorage.setItem("username", nameUser)
+
+        $.ajax({
+            url: '/authenticate',
+            type: 'POST',
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function (response) {
+                if (response === "success") {
+                    let isAuthenticated = true;
+                    let serializedObject = JSON.stringify(isAuthenticated);
+                    sessionStorage.removeItem("isAuthenticated")
+                    sessionStorage.setItem("isAuthenticated", serializedObject);
+
+                    showNotification("You are successfully logged!", "success", 3000);
+
+                    setTimeout(function () {
+                        $('#loginModal').modal('hide');
+                    }, 500);
+                    handleAuthorizedUser();
+                } else {
+                    let isAuthenticated = false;
+                    let serializedObject = JSON.stringify(isAuthenticated);
+                    sessionStorage.removeItem("isAuthenticated")
+                    sessionStorage.setItem("isAuthenticated", serializedObject);
+
+                    showNotification("Invalid username or password", "danger", 3000);
+
+                    setTimeout(function () {
+                        $('#loginModal').modal('hide');
+                    }, 500);
+                }
+            },
+            error: function (error) {
+                console.error('Request error:', error);
+            }
+        });
+
+    });
+
+    let username = sessionStorage.getItem("username");
+
+    document.querySelector(".register-button-containerTwo button").addEventListener("click", function () {
+        closeModal('#registerModal');
+        closeModal('#resetPasswordModal')
+        $('#loginModal').modal('show');
+    });
+
+    const resetPasswordLoginButton = document.querySelector('#resetPasswordModal .register-button-containerTwo button');
+
+    resetPasswordLoginButton.addEventListener('click', function () {
+        closeModal('#resetPasswordModal');
+        $('#loginModal').modal('show');
+    });
+
+
+    document.querySelector(".forgot-password-button-container button").addEventListener("click", function () {
+        closeModal('#loginModal');
+        $('#resetPasswordModal').modal('show');
+    });
+
+    function closeModal(modalSelector) {
+        $(modalSelector).modal('hide');
+    }
+
+    function showNotification(message, type, duration) {
+        const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-times-circle';
+        const notification = $(`
+<div class="alert alert-${type} d-flex align-items-center">
+    <i class="fas ${iconClass} mr-2"></i>
+    <span>${message}</span>
+    <div class="progress-bar"></div>
+</div>`
+        );
+
+        $('.notifications').append(notification);
+
+        const progressBar = notification.find('.progress-bar');
+        progressBar.animate({width: '100%'}, duration, function () {
+            notification.fadeOut(300, function () {
+                $(this).remove();
+            });
+        });
+    }
+
+    document.querySelector(".register-button-container button").addEventListener("click", function () {
+        $('#loginModal').modal('hide');
+        $('#registerModal').modal('show');
+    });
+    document.getElementById("registerForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const nameField = document.querySelector('input[name=nameRegister]');
+        const emailField = document.querySelector('input[name=email]');
+        const passwordField = document.querySelector('input[name=passwordRegister]');
+        const confirmPasswordField = document.querySelector('input[name=confirmPassword]');
+
+        clearFieldErrors([nameField, emailField, passwordField, confirmPasswordField]);
+
+        const formData = {
+            name: nameField.value,
+            email: emailField.value,
+            password: passwordField.value,
+            confirmPassword: confirmPasswordField.value
+        };
+
+        $.ajax({
+            url: '/register',
+            type: 'POST',
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                if (response === "success") {
+                    showNotification("Registration successful!", "success", 3000);
+                    setTimeout(function () {
+                        $('#registerModal').modal('hide');
+                    }, 500);
+                } else if (response === "This email is already in use on another account") {
+                    showError(emailField, response);
+                } else if (response === "This username is already taken") {
+                    showError(nameField, response);
+                } else if (response === "Password mismatch") {
+                    showError(passwordField, response);
+                    showError(confirmPasswordField, response);
+                } else if (response === "Password at least 6 characters") {
+                    showError(passwordField, response);
+                    showError(confirmPasswordField, response);
+                }
+            },
+            error: function (error) {
+                console.error('Request error:', error);
+            }
+        });
+    });
+
+    document.getElementById("resetForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const emailField = document.querySelector('input[name=emailReset]');
+        const formData = {
+            email: emailField.value
+        };
+
+        console.log(JSON.stringify(formData));
+
+        $.ajax({
+            url: '/reset',
+            type: 'POST',
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                if (response === "success") {
+                    showNotification("Reset successful check your email!", "success", 3000);
+                    setTimeout(function () {
+                        $('#registerModal').modal('hide');
+                    }, 500);
+                } else if (response === "please enter a valid email address") {
+                    showError(emailField, response);
+                }
+            },
+            error: function (error) {
+                console.error('Request error:', error);
+            }
+        });
+    });
+
+    function showError(field, message) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.innerText = message;
+        field.parentNode.appendChild(errorDiv);
+        field.classList.add('error-input');
+    }
+
+    function clearFieldErrors(fields) {
+        fields.forEach(function (field) {
+            const errorDiv = field.parentNode.querySelector('.error-message');
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+            field.classList.remove('error-input');
+        });
+    }
+
+
 </script>
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/weapons.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>-->
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>
 </body>
 </html>

@@ -24,7 +24,7 @@ public class EquipmentController {
         model.addAttribute("submachineGuns", weaponService.getAllSubmachineGuns());
         return "weapons";
     }
-    @GetMapping("/armors")
+    @GetMapping("/equipment")
     public String armors(Model model) {
         model.addAttribute("shoes", armorService.getAllShoes());
         model.addAttribute("masks", armorService.getAllMasks());

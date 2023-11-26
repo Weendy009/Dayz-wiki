@@ -41,7 +41,7 @@ public class ItemsController {
 
         return filterItemsByRequest(filterRequest.getSelectedFilters(), new HashSet<>(allWeapons));
     }
-    @PostMapping("/armors/filter")
+    @PostMapping("/equipment/filter")
     public Set<Item> counterArmorList (@RequestBody FilterRequest filterRequest) {
         Set<Armor> allArmors = new HashSet<>();
         switch (filterRequest.getItemCategory()) {

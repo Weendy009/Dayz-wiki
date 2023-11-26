@@ -1,18 +1,19 @@
 package com.dota.database.Dotawiki.repository;
 
-import com.dota.database.Dotawiki.entity.items.Armor;
+import com.dota.database.Dotawiki.entity.bookmarks.Bookmark;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.Set;
+import java.util.List;
 
 @Repository
-public interface ArmorRepository extends JpaRepository<Armor, Long> {
+public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
+    public List<Bookmark> getBookmarksByUserId(Long userId);
+
     @Transactional
     @Modifying
-    Set<Armor> findByType(String type);
+    public void deleteBookmarkByItemId(String itemId);
 
-    Armor getArmorByIdAndType(Long itemId, String itemType);
 }

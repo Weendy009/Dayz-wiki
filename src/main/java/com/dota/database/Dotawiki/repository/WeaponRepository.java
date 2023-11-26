@@ -13,4 +13,6 @@ public interface WeaponRepository extends JpaRepository<Weapon, Long> {
     @Transactional
     @Modifying
     Set<Weapon> findByType(String type);
+
+    Weapon getWeaponByIdAndType(Long weaponId, String weaponType);
 }

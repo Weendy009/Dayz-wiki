@@ -66,8 +66,12 @@ public class UserService {
         return repository.getUserByEmail(email);
     }
 
-    public User getUserById(Long id) {
-        return repository.findById(id).get();
+    public User getUserByUserName(String name) {
+        return repository.getUserByName(name);
     }
+
+/*    public User getUserById(Long id) {
+        return repository.findById(id).get();
+    }*/
 }
 

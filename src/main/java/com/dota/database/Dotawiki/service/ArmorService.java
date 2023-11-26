@@ -5,7 +5,6 @@ import com.dota.database.Dotawiki.repository.ArmorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -43,6 +42,10 @@ public class ArmorService {
     }
     public Set<Armor> getAllBelts() {
         return repository.findByType("belts");
+    }
+
+    public Armor getArmorByIdAndType(Long itemId, String itemType) {
+        return repository.getArmorByIdAndType(itemId, itemType);
     }
 
 }

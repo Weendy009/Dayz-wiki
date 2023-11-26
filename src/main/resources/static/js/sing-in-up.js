@@ -39,7 +39,6 @@ window.onload = () => {
 };
 
 document.getElementById("loginForm").addEventListener("submit", function (event) {
-
     event.preventDefault();
     event.stopPropagation();
 
