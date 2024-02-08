@@ -1,6 +1,7 @@
 package com.dota.database.Dotawiki.controller;
 
 import com.dota.database.Dotawiki.service.ArmorService;
+import com.dota.database.Dotawiki.service.MedicineService;
 import com.dota.database.Dotawiki.service.WeaponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class EquipmentController {
     private final WeaponService weaponService;
     private final ArmorService armorService;
+    private final MedicineService medicineService;
+
     @Autowired
-    public EquipmentController(WeaponService weaponService, ArmorService armorService) {
+    public EquipmentController(WeaponService weaponService, ArmorService armorService, MedicineService medicineService) {
         this.weaponService = weaponService;
         this.armorService = armorService;
+        this.medicineService = medicineService;
     }
 
     @GetMapping("/weapons")
@@ -37,13 +41,13 @@ public class EquipmentController {
         model.addAttribute("belts", armorService.getAllBelts());
         return "armors";
     }
-    @GetMapping("/backpacks")
-    public String backpacks() {
-        return "backpacks";
-    }
-    @GetMapping("/adviсe_equipment")
-    public String adviсeEquipment() {
-        return "adviсe_equipment";
+
+    @GetMapping("/medicaments")
+    public String medicaments(Model model) {
+        model.addAttribute("pills", medicineService.getAllMedicamentByType("Pills"));
+        model.addAttribute("medical_consumables", medicineService.getAllMedicamentByType("medical consumables"));
+        model.addAttribute("Injections_and_serums", medicineService.getAllMedicamentByType("Injections and serums"));
+        return "medicaments";
     }
 
 }

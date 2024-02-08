@@ -1,4 +1,4 @@
-package com.dota.database.Dotawiki.entity.controllerRequests;
+package com.dota.database.Dotawiki.entity.dto;
 
 import lombok.Data;
 

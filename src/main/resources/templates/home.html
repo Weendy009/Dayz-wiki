@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dayz-wiki знания для всех</title>
     <link rel="icon" type="image/png"
-          href="https://icons-for-free.com/iconfiles/png/512/dota2+game+inkcontober+juggernaut+mask+icon-1320183879752698440.png"
-          sizes="64x64"/>
+          href="https://icons.iconarchive.com/icons/icons8/ios7/64/Healthcare-Virus-icon.png" sizes="64x64"/>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -25,10 +25,60 @@
         .menu-button:hover {
             transform: scale(1.05);
         }
-
         .menu-button:active {
             transform: scale(0.95);
         }
+
+        body{
+            background: #d1d5db;
+        }
+
+        .height{
+            height: 100vh;
+        }
+
+        .form{
+            position: relative;
+        }
+
+        .form .fa-search{
+            position: absolute;
+            top:15px;
+            left: 10px;
+            color: #9ca3af;
+
+        }
+
+        .form span{
+            position: absolute;
+            right: 17px;
+            top: 10px;
+            padding: 2px;
+            border-left: 1px solid #d1d5db;
+
+        }
+
+        .left-pan{
+            padding-left: 7px;
+        }
+
+        .left-pan i{
+            padding-left: 10px;
+        }
+
+        .form-input{
+            margin-bottom: 100%;
+            height: 47px;
+            weight: 100%;
+            text-indent: 35px;
+            border-radius: 20px;
+        }
+
+        .form-input:focus{
+            box-shadow: none;
+            border:none;
+        }
+
     </style>
 
 </head>
@@ -52,9 +102,9 @@
         <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png"
              alt="Bookmarks" typeof="submit">
     </button>
-    <button id="searchButton" class="menu-button">
+    <button id="searchButtonMenu" class="menu-button">
         <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@master/src/main/resources/img/search-logo.png"
-             alt="Bookmarks" typeof="submit">
+             alt="Search" typeof="submit">
     </button>
 
     <div class="social-links">
@@ -78,6 +128,19 @@
              class="btn-icon-img" alt="Вход">
     </button>
 </div>
+
+<div class="container">
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-6">
+            <div class="form">
+                <i class="fa fa-search"></i>
+                <input type="text" class="form-control form-input" id="searchInput" placeholder="Search anything..." onkeydown="searchOnEnter(event)">
+                <span class="left-pan"><i class="fa fa-microphone"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="centered-grid">
     <a class="custom-button-gun" href="/weapons"></a>
     <button class="custom-button-backpack" type="submit"></button>
@@ -86,6 +149,7 @@
     <a class="custom-button-cloth" href="/equipment"></a>
     <button class="custom-button-food" type="submit"></button>
 </div>
+
 <div id="bookmarksModal" class="modal">
     <div class="modal-content">
         <table id="bookmarksTable">
@@ -118,7 +182,7 @@
             <div class="row">
                 <div class="cell"><p>Медицина</p>
                     <hr id="hr1">
-                    <p>Медикаменты</p>
+                    <p><a href="/medicaments">Медикаменты</a></p>
                     <p>Заболевания</p>
                     <p>Советы</p>
                 </div>
@@ -276,6 +340,30 @@
 <!--<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>-->
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>
 <script>
+
+    function searchOnEnter(event) {
+        if (event.key === "Enter") {
+            var searchTerm = document.getElementById("searchInput").value;
+            console.log(searchTerm)
+            fetch('/api/v1/search?q=' + encodeURIComponent(searchTerm), {
+                method: 'POST',
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+
+                .then(data => {
+                    console.log(data);
+                })
+
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                });
+        }
+    }
 
     const row = document.querySelector('.row');
     const bookmarksButton = document.getElementById("bookmarksButton");

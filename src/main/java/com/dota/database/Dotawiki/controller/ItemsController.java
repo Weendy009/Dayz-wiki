@@ -1,6 +1,6 @@
 package com.dota.database.Dotawiki.controller;
 
-import com.dota.database.Dotawiki.entity.controllerRequests.FilterRequest;
+import com.dota.database.Dotawiki.entity.dto.FilterRequest;
 import com.dota.database.Dotawiki.entity.items.Armor;
 import com.dota.database.Dotawiki.entity.items.Item;
 import com.dota.database.Dotawiki.entity.items.Weapon;

@@ -1,7 +1,7 @@
 package com.dota.database.Dotawiki.controller;
 
 import com.dota.database.Dotawiki.entity.bookmarks.Bookmark;
-import com.dota.database.Dotawiki.entity.controllerRequests.BookmarkDTO;
+import com.dota.database.Dotawiki.entity.dto.BookmarkDTO;
 import com.dota.database.Dotawiki.entity.items.Item;
 import com.dota.database.Dotawiki.service.BookmarkService;
 import com.dota.database.Dotawiki.service.WeaponService;

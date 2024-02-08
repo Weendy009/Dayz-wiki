@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:a="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,17 +33,6 @@
         .column {
             flex: 33.33%;
             padding: 3px;
-            text-align: center;
-        }
-
-        .ranged-type-button {
-            width: 90%;
-            height: 50px;
-            text-align: center;
-        }
-        .pp-type-button {
-            width: 90%;
-            height: 50px;
             text-align: center;
         }
 
@@ -136,7 +125,7 @@
             color: white;
         }
 
-        .pp-type-button  {
+        .pp-type-button {
             background-color: rgba(255, 255, 255, 0.60);
             user-select: none;
             -webkit-user-select: none;
@@ -160,7 +149,7 @@
             transform: scale(0.95);
         }
 
-        .ranged-type-button  {
+        .ranged-type-button {
             background-color: rgba(255, 255, 255, 0.60);
             user-select: none;
             -webkit-user-select: none;
@@ -248,7 +237,8 @@
                 <p>Weight: <span id="modalWeight"></span></p>
             </div>
             <button id="bookmarkContainer" class="menu-button-items">
-                <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png" alt="Bookmarks" typeof="submit">
+                <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png"
+                     alt="Bookmarks" typeof="submit">
             </button>
         </div>
     </div>
@@ -273,42 +263,45 @@
         </div>
     </div>
 
-    <h1 id="weapon-name">Холодное оружие</h1>
+    <h1 id="weapon-name">Tablets</h1>
     <div class="weapon-info">
-
-        <div id="melee-buttons" style="display: none;">
+        <div id="tablets" style="display: none;">
             <div class="row">
-                <div th:each="steelArm : ${steelArms}" class="column">
-                    <button class="weapon-type-button" data-name="${steelArm.name}" data-size="${steelArm.size}" data-weight="${steelArm.weight}" data-type="${steelArm.type}" data-id="${steelArm.id}">
-                        <div class="link-items" th:text="${steelArm.name}"></div>
-                        <div class="link-items" th:text="${steelArm.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + steelArm.weight + ' kg.'}"></div>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="ranged-buttons" style="display: none;">
-            <div class="row">
-                <div th:each="pistol : ${pistols}" class="column">
-                    <button class="ranged-type-button" data-name="${pistol.name}" data-size="${pistol.size}" data-weight="${pistol.weight}" data-type="${steelArm.type}" data-id="${steelArm.id}">
-                        <div class="link-items" th:text="${pistol.name}"></div>
+                <div th:each="pill : ${pills}" class="column">
+                    <button class="weapon-type-button" data-name="${tablet.name}" data-size="${tablet.size}"
+                            data-weight="${tablet.weight}" data-type="${tablet.type}" data-id="${tablet.id}">
+                        <div class="link-items" th:text="${pill.name}"></div>
                         <div class="link-items"
-                             th:text="${pistol.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + pistol.weight + ' kg.'}"></div>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="pp-buttons" style="display: none;">
-            <div class="row">
-                <div th:each="submachineGun : ${submachineGuns}" class="column">
-                    <button class="pp-type-button" data-name="${submachineGun.name}" data-size="${submachineGun.size}" data-weight="${submachineGun.weight}" data-type="${steelArm.type}" data-id="${steelArm.id}">
-                        <div class="link-items" th:text="${submachineGun.name}"></div>
-                        <div class="link-items"
-                             th:text="${submachineGun.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + submachineGun.weight + ' kg.'}"></div>
+                             th:text="${pill.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + pill.weight + ' kg.'}"></div>
                     </button>
                 </div>
             </div>
         </div>
 
+        <div id="medical consumables" style="display: none;">
+            <div class="row">
+                <div th:each="medical_consumable : ${medical_consumables}" class="column">
+                    <button class="weapon-type-button" data-name="${tablet.name}" data-size="${tablet.size}"
+                            data-weight="${tablet.weight}" data-type="${tablet.type}" data-id="${tablet.id}">
+                        <div class="link-items" th:text="${medical_consumable.name}"></div>
+                        <div class="link-items"
+                             th:text="${medical_consumable.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + medical_consumable.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="Injections and serums" style="display: none;">
+            <div class="row">
+                <div th:each="Injections_and_serum : ${Injections_and_serums}" class="column">
+                    <button class="weapon-type-button" data-name="${tablet.name}" data-size="${tablet.size}"
+                            data-weight="${tablet.weight}" data-type="${tablet.type}" data-id="${tablet.id}">
+                        <div class="link-items" th:text="${Injections_and_serum.name}"></div>
+                        <div class="link-items"
+                             th:text="${Injections_and_serum.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + Injections_and_serum.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -353,7 +346,6 @@
              class="btn-icon-img" alt="Вход">
     </button>
 </div>
-
 <div id="myModal" class="modal">
     <div class="modal-content-two">
         <div class="header">
@@ -538,11 +530,11 @@
                 method: 'GET'
             }).then(response => {
                 console.log(response)
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
                 .then(data => {
                     console.log(data)
                     data.forEach(bookmark => {
@@ -576,6 +568,7 @@
             });
             deleteCell.appendChild(deleteButton);
         }
+
         function deleteBookmark(bookmarkId) {
             fetch(`/bookmarks/delete/${bookmarkId}`, {
                 method: 'DELETE',
@@ -640,7 +633,7 @@
                 itemCategory: currentModeIndex
             };
 
-            fetch('/api/weapons/filter', {
+            fetch('/api/medicament/filter', {
                 method: 'POST',
                 body: JSON.stringify(filterRequest),
                 headers: {
@@ -697,7 +690,7 @@
             checkbox.addEventListener('change', updateFilters);
         });
 
-        document.getElementById("bookmarkContainer").addEventListener("click", function() {
+        document.getElementById("bookmarkContainer").addEventListener("click", function () {
             addBookmark();
         });
 
@@ -722,15 +715,9 @@
                 });
         }
 
-
-
         var weaponTypeButtons = document.querySelectorAll(".weapon-type-button");
-        var rangedTypeButtons = document.querySelectorAll(".ranged-type-button");
-        var ppTypeButtons = document.querySelectorAll(".pp-type-button");
 
-        var steelArmsData = [[${steelArms}]];
-        var pistolsData = [[${pistols}]];
-        var submachineGunsData = [[${submachineGuns}]];
+        var medicamentsData = [[${steelArms}]];
 
         var modal = document.getElementById("modal");
         var modalName = document.getElementById("modalName");
@@ -757,9 +744,7 @@
             });
         }
 
-        addClickEvent(weaponTypeButtons, steelArmsData);
-        addClickEvent(rangedTypeButtons, pistolsData);
-        addClickEvent(ppTypeButtons, submachineGunsData);
+        addClickEvent(weaponTypeButtons, medicamentsData);
 
         closeModalBtn.addEventListener("click", function () {
             modal.style.display = "none";
@@ -923,6 +908,7 @@
         $('#loginModal').modal('hide');
         $('#registerModal').modal('show');
     });
+
     document.getElementById("registerForm").addEventListener("submit", function (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -970,7 +956,6 @@
             }
         });
     });
-
     document.getElementById("resetForm").addEventListener("submit", function (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -1022,9 +1007,52 @@
         });
     }
 
+    const weaponName = document.getElementById('weapon-name');
+    const tablets = document.getElementById('tablets');
+    const medical_consumables = document.getElementById('medical consumables');
+    const injections_and_serums = document.getElementById('Injections and serums');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+
+    const weaponModes = [
+        'Tablets',
+        'Medical consumables',
+        'Injections and serums'
+    ];
+
+    let currentModeIndex = 0;
+
+    function updateWeaponMode() {
+        weaponName.textContent = weaponModes[currentModeIndex];
+        if (currentModeIndex === 0) {
+            tablets.style.display = 'block';
+            medical_consumables.style.display = 'none';
+            injections_and_serums.style.display = 'none';
+        } else if (currentModeIndex === 1) {
+            tablets.style.display = 'none';
+            medical_consumables.style.display = 'block';
+            injections_and_serums.style.display = 'none';
+        } else if (currentModeIndex === 2) {
+            tablets.style.display = 'none';
+            medical_consumables.style.display = 'none';
+            injections_and_serums.style.display = 'block';
+        }
+    }
+
+    prevButton.addEventListener('click', () => {
+        currentModeIndex = (currentModeIndex - 1 + weaponModes.length) % weaponModes.length;
+        updateWeaponMode();
+    });
+
+    nextButton.addEventListener('click', () => {
+        currentModeIndex = (currentModeIndex + 1) % weaponModes.length;
+        updateWeaponMode();
+    });
+
+    updateWeaponMode();
+
 
 </script>
-<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/weapons.js"></script>
 <!--<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>-->
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>
 </body>

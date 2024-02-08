@@ -1,9 +1,9 @@
 package com.dota.database.Dotawiki.controller;
 
-import com.dota.database.Dotawiki.entity.controllerRequests.LoginForm;
-import com.dota.database.Dotawiki.entity.controllerRequests.PasswordChangeRequest;
-import com.dota.database.Dotawiki.entity.controllerRequests.RegistrationRequest;
-import com.dota.database.Dotawiki.entity.controllerRequests.ResetPasswordRequest;
+import com.dota.database.Dotawiki.entity.dto.LoginForm;
+import com.dota.database.Dotawiki.entity.dto.PasswordChangeRequest;
+import com.dota.database.Dotawiki.entity.dto.RegistrationRequest;
+import com.dota.database.Dotawiki.entity.dto.ResetPasswordRequest;
 import com.dota.database.Dotawiki.entity.users.User;
 import com.dota.database.Dotawiki.entity.users.UserDetails;
 import com.dota.database.Dotawiki.service.RegistrationService;
