@@ -125,54 +125,6 @@
             color: white;
         }
 
-        .pp-type-button {
-            background-color: rgba(255, 255, 255, 0.60);
-            user-select: none;
-            -webkit-user-select: none;
-            font-size: 12px;
-            text-align: left;
-            border-radius: 5px;
-            width: 150px;
-            height: 60px;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .pp-type-button:hover {
-            transform: scale(1.05);
-        }
-
-        .pp-type-button:active {
-            transform: scale(0.95);
-        }
-
-        .ranged-type-button {
-            background-color: rgba(255, 255, 255, 0.60);
-            user-select: none;
-            -webkit-user-select: none;
-            font-size: 12px;
-            text-align: left;
-            border-radius: 5px;
-            width: 150px;
-            height: 60px;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .ranged-type-button:hover {
-            transform: scale(1.05);
-        }
-
-        .ranged-type-button:active {
-            transform: scale(0.95);
-        }
-
         .menu-button-items {
             background-color: transparent;
             border: none;
@@ -198,6 +150,70 @@
 
         .menu-button-items:active {
             transform: scale(0.90);
+        }
+
+        .pill-button {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .medical-consumables-button {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .injections-and-serum-button {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .pill-button:hover {
+            transform: scale(1.05);
+        }
+        .pill-button:active {
+            transform: scale(0.95);
+        }
+        .medical-consumables-button:hover {
+            transform: scale(1.05);
+        }
+        .medical-consumables-button:active {
+            transform: scale(0.95);
+        }
+        .injections-and-serum-button:hover {
+            transform: scale(1.05);
+        }
+        .injections-and-serum-button:active {
+            transform: scale(0.95);
         }
 
     </style>
@@ -262,13 +278,12 @@
             </table>
         </div>
     </div>
-
     <h1 id="weapon-name">Tablets</h1>
     <div class="weapon-info">
         <div id="tablets" style="display: none;">
             <div class="row">
                 <div th:each="pill : ${pills}" class="column">
-                    <button class="weapon-type-button" data-name="${tablet.name}" data-size="${tablet.size}"
+                    <button class="pill-button" data-name="${tablet.name}" data-size="${tablet.size}"
                             data-weight="${tablet.weight}" data-type="${tablet.type}" data-id="${tablet.id}">
                         <div class="link-items" th:text="${pill.name}"></div>
                         <div class="link-items"
@@ -277,11 +292,10 @@
                 </div>
             </div>
         </div>
-
         <div id="medical consumables" style="display: none;">
             <div class="row">
                 <div th:each="medical_consumable : ${medical_consumables}" class="column">
-                    <button class="weapon-type-button" data-name="${tablet.name}" data-size="${tablet.size}"
+                    <button class="medical-consumables-button" data-name="${tablet.name}" data-size="${tablet.size}"
                             data-weight="${tablet.weight}" data-type="${tablet.type}" data-id="${tablet.id}">
                         <div class="link-items" th:text="${medical_consumable.name}"></div>
                         <div class="link-items"
@@ -293,7 +307,7 @@
         <div id="Injections and serums" style="display: none;">
             <div class="row">
                 <div th:each="Injections_and_serum : ${Injections_and_serums}" class="column">
-                    <button class="weapon-type-button" data-name="${tablet.name}" data-size="${tablet.size}"
+                    <button class="injections-and-serum-button" data-name="${tablet.name}" data-size="${tablet.size}"
                             data-weight="${tablet.weight}" data-type="${tablet.type}" data-id="${tablet.id}">
                         <div class="link-items" th:text="${Injections_and_serum.name}"></div>
                         <div class="link-items"
@@ -715,10 +729,6 @@
                 });
         }
 
-        var weaponTypeButtons = document.querySelectorAll(".weapon-type-button");
-
-        var medicamentsData = [[${steelArms}]];
-
         var modal = document.getElementById("modal");
         var modalName = document.getElementById("modalName");
         var modalSize = document.getElementById("modalSize");
@@ -736,6 +746,13 @@
             modal.style.display = "block";
         }
 
+        var pillTypeButtons = document.querySelectorAll(".pill-button");
+        var medicalConsumablesTypeButtons = document.querySelectorAll(".medical-consumables-button");
+        var injectionsAndSerumTypeButtons = document.querySelectorAll(".injections-and-serum-button");
+
+        var pillsData = [[${pills}]];
+        var medicalConsumablesData = [[${medical_consumables}]];
+        var injectionsAndSerumData = [[${Injections_and_serums}]];
         function addClickEvent(buttons, data) {
             buttons.forEach(function (button, index) {
                 button.addEventListener("click", function () {
@@ -744,7 +761,9 @@
             });
         }
 
-        addClickEvent(weaponTypeButtons, medicamentsData);
+        addClickEvent(pillTypeButtons, pillsData);
+        addClickEvent(medicalConsumablesTypeButtons, medicalConsumablesData);
+        addClickEvent(injectionsAndSerumTypeButtons, injectionsAndSerumData);
 
         closeModalBtn.addEventListener("click", function () {
             modal.style.display = "none";
@@ -1050,8 +1069,6 @@
     });
 
     updateWeaponMode();
-
-
 </script>
 <!--<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>-->
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>

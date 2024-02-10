@@ -239,8 +239,8 @@ body::before {
     grid-gap: 10px;
 }
 
-.custom-button-backpack {
-    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@4bfb2a64bc240d335c18d9a7351ab3f50cfd85cc/src/main/resources/img/backpack-logo.png');
+.custom-button-medicine {
+    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@master/src/main/resources/img/medicine-logo.png');
     background-size: cover;
     background-repeat: no-repeat;
     width: 270px;
@@ -377,10 +377,10 @@ body::before {
     transform: scale(0.95);
 }
 
-.custom-button-backpack:hover {
+.custom-button-medicine:hover {
     transform: scale(1.05);
 }
 
-.custom-button-backpack:active {
+.custom-button-medicine:active {
     transform: scale(0.95);
 }

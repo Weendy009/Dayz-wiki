@@ -50,10 +50,11 @@ public class BookmarksController {
             Long userId = (Long) session.getAttribute("userId");
             List<Bookmark> bookmarks = bookmarkService.getAllBookmarkByUserId(userId);
             List<Item> bookmarkDTOS = new ArrayList<>();
-
+            System.out.println(bookmarks);
             for (Bookmark bookmark : bookmarks) {
                 bookmarkDTOS.add(weaponService.getWeaponByIdAndType(Long.valueOf(bookmark.getItemId()), bookmark.getItemType()));
             }
+            System.out.println(bookmarkDTOS);
             return ResponseEntity.ok(bookmarkDTOS);
         } catch (Exception e) {
             e.printStackTrace();

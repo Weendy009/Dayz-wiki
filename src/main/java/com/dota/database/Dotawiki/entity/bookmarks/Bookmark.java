@@ -1,6 +1,8 @@
 package com.dota.database.Dotawiki.entity.bookmarks;
 
 import lombok.Data;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 
