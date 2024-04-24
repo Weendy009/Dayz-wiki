@@ -1,6 +1,7 @@
 package com.dota.database.Dotawiki.controller;
 
 import com.dota.database.Dotawiki.service.ArmorService;
+import com.dota.database.Dotawiki.service.CarService;
 import com.dota.database.Dotawiki.service.MedicineService;
 import com.dota.database.Dotawiki.service.WeaponService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,14 @@ public class EquipmentController {
     private final ArmorService armorService;
     private final MedicineService medicineService;
 
+    private final CarService carService;
+
     @Autowired
-    public EquipmentController(WeaponService weaponService, ArmorService armorService, MedicineService medicineService) {
+    public EquipmentController(WeaponService weaponService, ArmorService armorService, MedicineService medicineService, CarService carService) {
         this.weaponService = weaponService;
         this.armorService = armorService;
         this.medicineService = medicineService;
+        this.carService = carService;
     }
 
     @GetMapping("/weapons")
@@ -50,4 +54,9 @@ public class EquipmentController {
         return "medicaments";
     }
 
+    @GetMapping("/cars")
+    public String cars(Model model) {
+        model.addAttribute("cars", carService.getAllCarsByType("car"));
+        return "car";
+    }
 }

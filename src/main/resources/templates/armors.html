@@ -1198,13 +1198,11 @@
         prevButton.addEventListener('click', () => {
             currentModeIndex = (currentModeIndex - 1 + armorsModes.length) % armorsModes.length;
             updateWeaponMode();
-            showSortingMenu();
         });
 
         nextButton.addEventListener('click', () => {
             currentModeIndex = (currentModeIndex + 1) % armorsModes.length;
             updateWeaponMode();
-            showSortingMenu();
         });
 
         updateWeaponMode();

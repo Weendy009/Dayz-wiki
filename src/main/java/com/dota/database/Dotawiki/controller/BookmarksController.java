@@ -4,6 +4,7 @@ import com.dota.database.Dotawiki.entity.bookmarks.Bookmark;
 import com.dota.database.Dotawiki.entity.dto.BookmarkDTO;
 import com.dota.database.Dotawiki.entity.items.Item;
 import com.dota.database.Dotawiki.service.BookmarkService;
+import com.dota.database.Dotawiki.service.ItemService;
 import com.dota.database.Dotawiki.service.WeaponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,15 +20,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/bookmarks")
 public class BookmarksController {
-
-    private final WeaponService weaponService;
-
     private final BookmarkService bookmarkService;
+    private final ItemService itemService;
 
     @Autowired
-    public BookmarksController(BookmarkService bookmarkService, WeaponService weaponService) {
+    public BookmarksController(BookmarkService bookmarkService, ItemService itemService) {
         this.bookmarkService = bookmarkService;
-        this.weaponService = weaponService;
+        this.itemService = itemService;
     }
 
     @PostMapping("/add")
@@ -50,11 +49,9 @@ public class BookmarksController {
             Long userId = (Long) session.getAttribute("userId");
             List<Bookmark> bookmarks = bookmarkService.getAllBookmarkByUserId(userId);
             List<Item> bookmarkDTOS = new ArrayList<>();
-            System.out.println(bookmarks);
             for (Bookmark bookmark : bookmarks) {
-                bookmarkDTOS.add(weaponService.getWeaponByIdAndType(Long.valueOf(bookmark.getItemId()), bookmark.getItemType()));
+                bookmarkDTOS.add(itemService.getItemByIdAndType(Long.valueOf(bookmark.getItemId()), bookmark.getItemType()));
             }
-            System.out.println(bookmarkDTOS);
             return ResponseEntity.ok(bookmarkDTOS);
         } catch (Exception e) {
             e.printStackTrace();

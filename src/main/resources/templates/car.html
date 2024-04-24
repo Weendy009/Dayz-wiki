@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:a="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dayz-wiki знания для всех</title>
     <link rel="icon" type="image/png"
-          href="https://icons.iconarchive.com/icons/icons8/ios7/64/Healthcare-Virus-icon.png" sizes="64x64"/>
-
+          href="https://icons-for-free.com/iconfiles/png/512/dota2+game+inkcontober+juggernaut+mask+icon-1320183879752698440.png"
+          sizes="64x64"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -14,76 +14,248 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <script src="https://apis.google.com/js/api:client.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/weapons.css">
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@master/src/main/resources/static/css/home.css">
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/home.css">
     <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/css/menu.css">
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/menu.css">
     <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/css/button-menu.css">
-
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/button-menu.css">
     <style>
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .column {
+            flex: 33.33%;
+            padding: 3px;
+            text-align: center;
+        }
+
+        #next-button {
+            user-select: none;
+            -webkit-user-select: none;
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            margin-left: 20%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #sorting-button {
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            margin-left: 20%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .sorting-menu {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            color: #333;
+            width: 500px;
+            height: 300px;
+            top: calc(100% + 15%);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .tier {
+            color: #f4f4f4;
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .weight {
+            color: #f4f4f4;
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #sorting-button:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        #sorting-button:active {
+            transform: scale(0.95);
+        }
+
+        input[type="checkbox"] {
+            transform: scale(1.5);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 90%;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 1;
+            background: transparent;
+            border: none;
+            color: white;
+        }
+
+        .menu-button-items {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            width: 5%;
+            display: block;
+            margin: 0 auto;
+        }
+
         .menu-button:hover {
             transform: scale(1.05);
         }
+
         .menu-button:active {
             transform: scale(0.95);
         }
 
-        body{
-            background: #d1d5db;
+        .menu-button-items:hover {
+            transform: scale(1.1);
         }
 
-        .height{
-            height: 100vh;
+        .menu-button-items:active {
+            transform: scale(0.90);
         }
 
-        .form{
-            position: relative;
+        .car-button {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .form .fa-search{
-            position: absolute;
-            top:15px;
-            left: 10px;
-            color: #9ca3af;
-
+        .car-button:hover {
+            transform: scale(1.05);
         }
-
-        .form span{
-            position: absolute;
-            right: 17px;
-            top: 10px;
-            padding: 2px;
-            border-left: 1px solid #d1d5db;
-
-        }
-
-        .left-pan{
-            padding-left: 7px;
-        }
-
-        .left-pan i{
-            padding-left: 10px;
-        }
-
-        .form-input{
-            margin-bottom: 100%;
-            height: 47px;
-            weight: 100%;
-            text-indent: 35px;
-            border-radius: 20px;
-        }
-
-        .form-input:focus{
-            box-shadow: none;
-            border:none;
+        .car-button:active {
+            transform: scale(0.95);
         }
 
     </style>
-
 </head>
+
 <body>
+<div class="weapon-selection">
+    <div class="button-bar">
+        <button id="prev-button">◄</button>
+        <button id="sorting-button">≡</button>
+        <button id="next-button">►</button>
+        <div id="sorting-menu" class="sorting-menu" style="display: none;">
+            <div class="tier">
+                <h5>Tier None <input type="checkbox" id="tierCheckbox-1" name="tier" value="1"></h5>
+                <h5>Tier 1 <input type="checkbox" id="tierCheckbox-2" name="tier" value="1"></h5>
+                <h5>Tier 2 <input type="checkbox" id="tierCheckbox-3" name="tier" value="2"></h5>
+                <h5>Tier 3 <input type="checkbox" id="tierCheckbox-4" name="tier" value="3"></h5>
+                <h5>Tier 4 <input type="checkbox" id="tierCheckbox-5" name="tier" value="4"></h5>
+            </div>
+            <div class="weight">
+                <h5> 0kg < 2kg <input id="weightCheckbox-1" type="checkbox" name="tier" value="0-2"></h5>
+                <h5> 2kg < 5kg <input id="weightCheckbox-2" type="checkbox" name="tier" value="2-5"></h5>
+                <h5> 5kg < 10kg <input id="weightCheckbox-3" type="checkbox" name="tier" value="5-10"></h5>
+                <h5> 10kg < ∞kg <input id="weightCheckbox-4" type="checkbox" name="tier" value="10-∞"></h5>
+            </div>
+            <button id="close-button" class="close-button">×</button>
+        </div>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalBtn">&times;</span>
+            <div id="modalData">
+                <p>ID: <span id="modalId"></span></p>
+                <p>Name: <span id="modalName"></span></p>
+                <p>Capacity: <span id="modalCapacity"></span></p>
+                <p>Tier: <span id="modalTier"></span></p>
+                <p>Type: <span id="modalType"></span></p>
+                <p>Fuel tank: <span id="modalFuelTank"></span></p>
+                <p>Top Speed: <span id="modalTopSpeed"></span></p>
+            </div>
+            <button id="bookmarkContainer" class="menu-button-items">
+                <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png"
+                     alt="Bookmarks" typeof="submit">
+            </button>
+        </div>
+    </div>
+    <div id="bookmarksModal" class="modal">
+        <div class="modal-content">
+            <table id="bookmarksTable">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Weight</th>
+                    <th>Size</th>
+                    <th>Tier</th>
+                    <th>Type</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h1 id="weapon-name">Cars</h1>
+    <div class="weapon-info">
+        <div id="cars" style="display: none;">
+            <div class="row">
+                <div th:each="car : ${cars}" class="column">
+                    <button class="car-button" data-name="${car.name}" data-size="${car.size}"
+                            data-weight="${car.weight}" data-type="${car.type}" data-id="${car.id}">
+                        <div class="link-items" th:text="${car.name}"></div>
+                        <div class="link-items"
+                             th:text="${car.fuelTank + ' l.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + car.topSpeed + ' kph.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="notifications position-fixed top-0 end-0 p-3"></div>
+
 <div class="navigation-container">
     <form method="get" action="/">
         <div class="logo">
@@ -100,13 +272,8 @@
     </button>
     <button id="bookmarksButton" class="menu-button">
         <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png"
-             alt="Bookmarks" typeof="submit">
+             alt="Bookmark" typeof="submit">
     </button>
-    <button id="searchButtonMenu" class="menu-button">
-        <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@master/src/main/resources/img/search-logo.png"
-             alt="Search" typeof="submit">
-    </button>
-
     <div class="social-links">
         <a href="https://www.instagram.com/dayz.game/" class="social-link">
             <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/instagram-logo.png"
@@ -128,48 +295,6 @@
              class="btn-icon-img" alt="Вход">
     </button>
 </div>
-
-<div class="container">
-    <div class="row height d-flex justify-content-center align-items-center">
-        <div class="col-md-6">
-            <div class="form">
-                <i class="fa fa-search"></i>
-                <input type="text" class="form-control form-input" id="searchInput" placeholder="Search anything..." onkeydown="searchOnEnter(event)">
-                <span class="left-pan"><i class="fa fa-microphone"></i></span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="centered-grid">
-    <a class="custom-button-gun" href="/weapons"></a>
-    <a class="custom-button-medicine" href="/medicaments"></a>
-    <a class="custom-button-car" href="/cars"></a>
-    <button class="custom-button-cartridges" type="submit"></button>
-    <a class="custom-button-cloth" href="/equipment"></a>
-    <button class="custom-button-food" type="submit"></button>
-</div>
-
-<div id="bookmarksModal" class="modal">
-    <div class="modal-content">
-        <table id="bookmarksTable">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Weight</th>
-                <th>Size</th>
-                <th>Tier</th>
-                <th>Type</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-    </div>
-</div>
 <div id="myModal" class="modal">
     <div class="modal-content-two">
         <div class="header">
@@ -182,7 +307,7 @@
             <div class="row">
                 <div class="cell"><p>Медицина</p>
                     <hr id="hr1">
-                    <p><a href="/medicaments">Медикаменты</a></p>
+                    <p>Медикаменты</p>
                     <p>Заболевания</p>
                     <p>Советы</p>
                 </div>
@@ -337,133 +462,220 @@
         </div>
     </div>
 </div>
-<!--<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>-->
-<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>
-<script>
+</body>
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        const buttonSort = document.getElementById('sorting-button');
+        const menu = document.getElementById('sorting-menu');
+        const closeButton = document.getElementById('close-button');
+        const row = document.querySelector('.row');
+        const bookmarksButton = document.getElementById("bookmarksButton");
+        const bookmarksModal = document.getElementById("bookmarksModal");
+        const bookmarksTableBody = document.querySelector("#bookmarksTable tbody");
 
-    function searchOnEnter(event) {
-        if (event.key === "Enter") {
-            var searchTerm = document.getElementById("searchInput").value;
-            console.log(searchTerm)
-            fetch('/api/v1/search?q=' + encodeURIComponent(searchTerm), {
-                method: 'POST',
+        bookmarksButton.addEventListener("click", function () {
+            bookmarksTableBody.innerHTML = "";
+
+            fetch('/bookmarks/getAll', {
+                method: 'GET'
+            }).then(response => {
+                console.log(response)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+                .then(data => {
+                    console.log(data)
+                    data.forEach(bookmark => {
+                        addToBookmarksTable(bookmark);
+                    });
+
+                    bookmarksModal.style.display = "block";
+                })
+                .catch(error => {
+                    console.error('Ошибка при получении данных с сервера:', error);
+                });
+        });
+
+        function addToBookmarksTable(item) {
+            const tableBody = document.querySelector("#bookmarksTable tbody");
+            const newRow = tableBody.insertRow();
+
+            const fields = ['id', 'name', 'capacity', 'tier', 'type', 'fuel tank', 'topSpeed'];
+
+            fields.forEach(field => {
+                const cell = newRow.insertCell();
+                cell.textContent = item.hasOwnProperty(field) ? item[field] : '';
+            });
+
+            const deleteCell = newRow.insertCell();
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.classList.add("btn", "btn-danger");
+            deleteButton.addEventListener("click", function () {
+                deleteBookmark(item.id);
+            });
+            deleteCell.appendChild(deleteButton);
+        }
+
+        function deleteBookmark(bookmarkId) {
+            fetch(`/bookmarks/delete/${bookmarkId}`, {
+                method: 'DELETE',
             })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Network response was not ok');
+                        throw new Error(`HTTP error! Status: ${response.status}`);
                     }
                     return response.json();
                 })
+                .then(data => {
+                    if (data.status === 'success') {
+                        refreshBookmarksTable();
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка при удалении закладки:', error);
+                });
+        }
 
+        function refreshBookmarksTable() {
+            const tableBody = document.querySelector("#bookmarksTable tbody");
+            tableBody.innerHTML = "";
+
+            fetch('/bookmarks/getAll')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    data.forEach(bookmark => {
+                        addToBookmarksTable(bookmark);
+                    });
+                })
+                .catch(error => {
+                    console.error('Ошибка при обновлении данных и таблицы:', error);
+                });
+        }
+
+        window.addEventListener("click", function (event) {
+            if (event.target === bookmarksModal) {
+                bookmarksModal.style.display = "none";
+            }
+        });
+
+        function updateFilters() {
+            const selectedFilters = [];
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedFilters.push(checkbox.parentNode.textContent);
+                }
+            });
+            sendFiltersToServer(selectedFilters);
+        }
+
+        function sendFiltersToServer(selectedFilters) {
+            const filterRequest = {
+                selectedFilters: selectedFilters,
+                itemCategory: currentModeIndex
+            };
+        }
+
+        buttonSort.onclick = function () {
+            showSortingMenu();
+        };
+
+        closeButton.addEventListener('click', function () {
+            menu.style.display = 'none';
+        });
+
+        function showSortingMenu() {
+            const rect = buttonSort.getBoundingClientRect();
+            const offset = 25;
+            menu.style.top = (rect.bottom + offset) + 'px';
+            menu.style.left = '50%';
+            menu.style.display = 'block';
+        }
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateFilters);
+        });
+
+        document.getElementById("bookmarkContainer").addEventListener("click", function () {
+            addBookmark();
+        });
+
+        function addBookmark() {
+            const formData = new FormData();
+            formData.append("name", modalName.textContent);
+            formData.append("size", modalSize.textContent);
+            formData.append("weight", modalWeight.textContent);
+            formData.append("id", modalId.textContent);
+            formData.append("type", modalType.textContent);
+
+            fetch('/bookmarks/add', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
                 .then(data => {
                     console.log(data);
                 })
-
                 .catch(error => {
-                    console.error('Ошибка:', error);
+                    console.error('Ошибка при отправке данных на сервер:', error);
                 });
         }
-    }
 
-    const row = document.querySelector('.row');
-    const bookmarksButton = document.getElementById("bookmarksButton");
-    const bookmarksModal = document.getElementById("bookmarksModal");
-    const bookmarksTableBody = document.querySelector("#bookmarksTable tbody");
+        var modal = document.getElementById("modal");
+        var modalId = document.getElementById("modalId");
+        var modalName = document.getElementById("modalName");
+        var modalWeight = document.getElementById("modalWeight");
+        var modalCapacity = document.getElementById("modalCapacity");
+        var modalTier = document.getElementById("modalTier");
+        var modalType = document.getElementById("modalType");
+        var modalFuelTank = document.getElementById("modalFuelTank");
+        var modalTopSpeed = document.getElementById("modalTopSpeed");
+        var closeModalBtn = document.getElementById("closeModalBtn");
 
-    bookmarksButton.addEventListener("click", function () {
-        bookmarksTableBody.innerHTML = "";
+        var modalSize = document.getElementById("modalSize");
 
-        fetch('/bookmarks/getAll', {
-            method: 'GET'
-        }).then(response => {
-            console.log(response)
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+        function showModal(data) {
+            modalName.textContent = data.name;
+            modalCapacity.textContent = data.capacity + " slots";
+            modalTier.textContent = data.tier;
+            modalType.textContent = data.type;
+            modalFuelTank.textContent = data.fuelTank + " l.";
+            modalTopSpeed.textContent = data.topSpeed + " kph.";
+            modal.style.display = "block";
+        }
+
+        var carTypeButtons = document.querySelectorAll(".car-button");
+        var carsData = [[${cars}]];
+        function addClickEvent(buttons, data) {
+            buttons.forEach(function (button, index) {
+                button.addEventListener("click", function () {
+                    showModal(data[index]);
+                });
+            });
+        }
+
+        addClickEvent(carTypeButtons, carsData);
+
+        closeModalBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
             }
-            return response.json();
-        })
-            .then(data => {
-                console.log(data)
-                data.forEach(bookmark => {
-                    addToBookmarksTable(bookmark);
-                });
-
-                bookmarksModal.style.display = "block";
-            })
-            .catch(error => {
-                console.error('Ошибка при получении данных с сервера:', error);
-            });
-    });
-    function addToBookmarksTable(item) {
-        const tableBody = document.querySelector("#bookmarksTable tbody");
-        const newRow = tableBody.insertRow();
-
-        const fields = ['id', 'name', 'weight', 'size', 'tier', 'type'];
-
-        fields.forEach(field => {
-            const cell = newRow.insertCell();
-            cell.textContent = item.hasOwnProperty(field) ? item[field] : '';
         });
-
-        const deleteCell = newRow.insertCell();
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
-        deleteButton.classList.add("btn", "btn-danger");
-        deleteButton.addEventListener("click", function () {
-            deleteBookmark(item.id);
-        });
-        deleteCell.appendChild(deleteButton);
-    }
-
-    function deleteBookmark(bookmarkId) {
-        fetch(`/bookmarks/delete/${bookmarkId}`, {
-            method: 'DELETE',
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.status === 'success') {
-                    refreshBookmarksTable();
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка при удалении закладки:', error);
-            });
-    }
-
-    function refreshBookmarksTable() {
-        const tableBody = document.querySelector("#bookmarksTable tbody");
-        tableBody.innerHTML = "";
-
-        fetch('/bookmarks/getAll')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                data.forEach(bookmark => {
-                    addToBookmarksTable(bookmark);
-                });
-            })
-            .catch(error => {
-                console.error('Ошибка при обновлении данных и таблицы:', error);
-            });
-    }
-
-    window.addEventListener("click", function (event) {
-        if (event.target === bookmarksModal) {
-            bookmarksModal.style.display = "none";
-        }
     });
-
-    let username = sessionStorage.getItem("username");
-
+    const customLoginButton = document.getElementById('customLoginButton');
     const handleAuthorizedUser = () => {
         const customLoginButton = document.getElementById('customLoginButton');
         const btnIconImg = customLoginButton.querySelector('.btn-icon-img');
@@ -566,6 +778,7 @@
 
     });
 
+    let username = sessionStorage.getItem("username");
 
     document.querySelector(".register-button-containerTwo button").addEventListener("click", function () {
         closeModal('#registerModal');
@@ -614,6 +827,7 @@
         $('#loginModal').modal('hide');
         $('#registerModal').modal('show');
     });
+
     document.getElementById("registerForm").addEventListener("submit", function (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -631,7 +845,6 @@
             password: passwordField.value,
             confirmPassword: confirmPasswordField.value
         };
-
         $.ajax({
             url: '/register',
             type: 'POST',
@@ -661,7 +874,6 @@
             }
         });
     });
-
     document.getElementById("resetForm").addEventListener("submit", function (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -712,6 +924,38 @@
             field.classList.remove('error-input');
         });
     }
+
+    const weaponName = document.getElementById('weapon-name');
+    const cars = document.getElementById('cars');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+
+    const weaponModes = [
+        'Cars',
+    ];
+
+    let currentModeIndex = 0;
+
+    function updateWeaponMode() {
+        weaponName.textContent = weaponModes[currentModeIndex];
+        if (currentModeIndex === 0) {
+            cars.style.display = 'block';
+        }
+    }
+
+    prevButton.addEventListener('click', () => {
+        currentModeIndex = (currentModeIndex - 1 + weaponModes.length) % weaponModes.length;
+        updateWeaponMode();
+    });
+
+    nextButton.addEventListener('click', () => {
+        currentModeIndex = (currentModeIndex + 1) % weaponModes.length;
+        updateWeaponMode();
+    });
+
+    updateWeaponMode();
 </script>
-</body>
+<!--<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>-->
+<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>
+
 </html>

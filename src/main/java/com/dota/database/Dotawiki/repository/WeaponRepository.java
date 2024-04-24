@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import java.util.Set;
 
 @Repository
-public interface WeaponRepository extends JpaRepository<Weapon, Long> {
+public interface WeaponRepository extends JpaRepository<Weapon, Long>, ItemRepository {
     @Transactional
     @Modifying
     Set<Weapon> findByType(String type);
