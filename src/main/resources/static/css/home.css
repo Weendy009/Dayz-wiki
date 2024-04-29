@@ -1,0 +1,386 @@
+.modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 30%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+#customLoginButton {
+    margin-top: 2%;
+}
+
+.modal-header {
+    background-image: url('https://ixbt.online/gametech/covers/2021/11/30/nova-filepond-721val.jpg?w=948');
+    background-size: cover;
+    background-position: top center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    color: white;
+    font-size: 36px;
+    margin: 0;
+    padding: 50px 0 50px;
+    border: none;
+    box-shadow: none;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    height: 160px;
+}
+
+.modal-title {
+    text-align: center;
+}
+
+.close {
+    font-size: 28px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.modal-body {
+    background-color: rgba(255, 255, 255, 0.0);
+    flex-grow: 1;
+    padding-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    box-shadow: none;
+    border-radius: 20px;
+}
+
+.modal-content {
+    width: 800px;
+    height: 450px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-size: 22px;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    border-radius: 22px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.form-group {
+    margin-bottom: 15px;
+    border-radius: 20px;
+
+}
+
+.form-control {
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    padding: 5px 0;
+    font-size: 18px;
+    width: 100%;
+    outline: none;
+}
+
+.notifications {
+    z-index: 1000;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.alert {
+    position: relative;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 15px;
+}
+
+.progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 5px;
+    border-radius: 0 0 15px 15px;
+    background-color: #000000;
+}
+
+.btn-square {
+    padding: 10px;
+    border: none;
+    width: 80px;
+    height: 80px;
+}
+
+.btn-icon-img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.login-button-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 20px;
+    left: 35px;
+    width: calc(100% - 40px);
+}
+
+.register-button-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 20px;
+    left: 149px;
+    width: calc(100% - 100px);
+}
+
+.forgot-password-button-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 20px;
+    left: 280px;
+    width: calc(100% - 100px);
+}
+
+.register-button-containerTwo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 20px;
+    left: 65px;
+    width: calc(100px);
+}
+
+
+.btn-primary {
+    width: auto;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.btn-primary-register {
+    width: auto;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-secondary {
+    width: auto;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    right: 20px;
+}
+
+.google-button {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin-left: 100px;
+    margin-bottom: 100px;
+}
+
+.google-icon {
+    margin-right: 5px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6a0627430cbd3cf2e1460f5926d7970afcce3586/src/main/resources/img/desktop-1920x1080.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    filter: brightness(50%);
+    z-index: -1;
+}
+
+.centered-grid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.custom-button-medicine {
+    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@master/src/main/resources/img/medicine-logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 270px;
+    height: 115px;
+    border: none;
+    color: #e6e6e6;
+    font-size: 18px;
+    position: relative;
+    transition: transform 0.2s ease;
+    border-radius: 10px;
+}
+.custom-button-cartridges {
+    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@c857dc230592694dbea9419b45d4e1027ade6ba2/src/main/resources/img/cartridges-logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 270px;
+    height: 115px;
+    border: none;
+    color: #e6e6e6;
+    font-size: 18px;
+    position: relative;
+    transition: transform 0.2s ease;
+    border-radius: 10px;
+}
+
+.custom-button-car {
+    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@4bfb2a64bc240d335c18d9a7351ab3f50cfd85cc/src/main/resources/img/car-logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 270px;
+    height: 115px;
+    border: none;
+    color: #e6e6e6;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+    position: relative;
+    border-radius: 10px;
+}
+
+.custom-button-gun {
+    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@4bfb2a64bc240d335c18d9a7351ab3f50cfd85cc/src/main/resources/img/gun-logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 270px;
+    height: 115px;
+    border: none;
+    color: #e6e6e6;
+    transition: transform 0.2s ease;
+    font-size: 18px;
+    position: relative;
+    border-radius: 10px;
+}
+
+.custom-button-food {
+    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@c857dc230592694dbea9419b45d4e1027ade6ba2/src/main/resources/img/food-logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 270px;
+    height: 115px;
+    border: none;
+    color: #e6e6e6;
+    transition: transform 0.2s ease;
+    font-size: 18px;
+    position: relative;
+    border-radius: 10px;
+}
+
+.custom-button-cloth {
+    background-image: url('https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@c857dc230592694dbea9419b45d4e1027ade6ba2/src/main/resources/img/cloth-logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 270px;
+    height: 115px;
+    border: none;
+    transition: transform 0.2s ease;
+    color: #e6e6e6;
+    font-size: 18px;
+    position: relative;
+    border-radius: 10px;
+}
+
+.navigation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+
+.custom-button-gun:hover {
+    transform: scale(1.05);
+}
+
+.custom-button-gun:active {
+    transform: scale(0.95);
+}
+
+.custom-button-cloth:hover {
+    transform: scale(1.05);
+}
+
+.custom-button-cloth:active {
+    transform: scale(0.95);
+}
+
+.custom-button-food:hover {
+    transform: scale(1.05);
+}
+
+.custom-button-food:active {
+    transform: scale(0.95);
+}
+
+.custom-button-car:hover {
+    transform: scale(1.05);
+}
+
+.custom-button-car:active {
+    transform: scale(0.95);
+}
+
+.custom-button-cartridges:hover {
+    transform: scale(1.05);
+}
+
+.custom-button-cartridges:active {
+    transform: scale(0.95);
+}
+
+.custom-button-medicine:hover {
+    transform: scale(1.05);
+}
+
+.custom-button-medicine:active {
+    transform: scale(0.95);
+}

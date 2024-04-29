@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dayz-wiki знания для всех</title>
+    <link rel="icon" type="image/png"
+          href="https://icons-for-free.com/iconfiles/png/512/dota2+game+inkcontober+juggernaut+mask+icon-1320183879752698440.png"
+          sizes="64x64"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/weapons.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/home.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/menu.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/button-menu.css">
+
+    <style>
+        .menu-button:hover {
+            transform: scale(1.05);
+        }
+
+        .menu-button:active {
+            transform: scale(0.95);
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .column {
+            flex: 33.33%;
+            padding: 3px;
+            text-align: center;
+        }
+
+        .weapon-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        #next-button {
+            user-select: none;
+            -webkit-user-select: none;
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            margin-left: 20%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #sorting-button {
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            margin-left: 20%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .sorting-menu {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            color: #333;
+            width: 500px;
+            height: 300px;
+            top: calc(100% + 15%);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .tier {
+            color: #f4f4f4;
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .weight {
+            color: #f4f4f4;
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #sorting-button:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        #sorting-button:active {
+            transform: scale(0.95);
+        }
+
+        input[type="checkbox"] {
+            transform: scale(1.5);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 90%;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 1;
+            background: transparent;
+            border: none;
+            color: white;
+        }
+
+        .one-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .one-type-button  {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .one-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .one-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .two-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .two-type-button  {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .two-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .two-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .three-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .three-type-button  {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .three-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .three-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .four-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .four-type-button  {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .four-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .four-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .five-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .five-type-button  {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .five-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .five-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .six-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .six-type-button  {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .six-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .six-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .seven-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .seven-type-button  {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .seven-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .seven-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .eight-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .eight-type-button  {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .eight-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .eight-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .nine-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .nine-type-button  {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .nine-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .nine-type-button:active {
+            transform: scale(0.95);
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="weapon-selection">
+    <div class="button-bar">
+        <button id="prev-button">◄</button>
+        <button id="sorting-button">≡</button>
+        <button id="next-button">►</button>
+        <div id="sorting-menu" class="sorting-menu" style="display: none;">
+            <div class="tier">
+                <h5>Tier None <input type="checkbox" id="tierCheckbox-1" name="tier" value="1"></h5>
+                <h5>Tier 1 <input type="checkbox" id="tierCheckbox-2" name="tier" value="1"></h5>
+                <h5>Tier 2 <input type="checkbox" id="tierCheckbox-3" name="tier" value="2"></h5>
+                <h5>Tier 3 <input type="checkbox" id="tierCheckbox-4" name="tier" value="3"></h5>
+                <h5>Tier 4 <input type="checkbox" id="tierCheckbox-5" name="tier" value="4"></h5>
+            </div>
+            <div class="weight">
+                <h5> 0kg < 2kg <input id="weightCheckbox-1" type="checkbox" name="tier" value="0-2"></h5>
+                <h5> 2kg < 5kg <input id="weightCheckbox-2" type="checkbox" name="tier" value="2-5"></h5>
+                <h5> 5kg < 10kg <input id="weightCheckbox-3" type="checkbox" name="tier" value="5-10"></h5>
+                <h5> 10kg < ∞kg <input id="weightCheckbox-4" type="checkbox" name="tier" value="10-∞"></h5>
+            </div>
+            <button id="close-button" class="close-button">×</button>
+        </div>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalBtn">&times;</span>
+            <div id="modalData">
+                <p>ID: <span id="modalId"></span></p>
+                <p>Name: <span id="modalName"></span></p>
+                <p>Type: <span id="modalType"></span></p>
+                <p>Size: <span id="modalSize"></span></p>
+                <p>Weight: <span id="modalWeight"></span></p>
+            </div>
+            <button id="bookmarkContainer" class="menu-button-items">
+                <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png" alt="Bookmarks" typeof="submit">
+            </button>
+        </div>
+    </div>
+    <div id="bookmarksModal" class="modal">
+        <div class="modal-content">
+            <table id="bookmarksTable">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Weight</th>
+                    <th>Size</th>
+                    <th>Tier</th>
+                    <th>Type</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h1 id="armor-name">shoes</h1>
+    <div class="weapon-info">
+        <div id="shoes" style="display: none;">
+            <div class="row">
+                <div th:each="shoe : ${shoes}" class="column">
+                    <button class="one-type-button" data-name="${shoe.name}" data-size="${shoe.size}" data-weight="${shoe.weight}" data-type="${shoe.type}" data-id="${shoe.id}">
+                        <div class="link-items" th:text="${shoe.name}"></div>
+                        <div class="link-items"
+                             th:text="${shoe.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + shoe.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="masks" style="display: none;">
+            <div class="row">
+                <div th:each="mask : ${masks}" class="column">
+                    <button class="two-type-button" data-name="${mask.name}" data-size="${mask.size}" data-weight="${mask.weight}" data-type="${mask.type}" data-id="${mask.id}">
+                        <div class="link-items" th:text="${mask.name}"></div>
+                        <div class="link-items"
+                             th:text="${mask.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + mask.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="hats" style="display: none;">
+            <div class="row">
+                <div th:each="hat : ${hats}" class="column">
+                    <button class="three-type-button" data-name="${hat.name}" data-size="${hat.size}" data-weight="${hat.weight}" data-type="${hat.type}" data-id="${hat.id}">
+                        <div class="link-items" th:text="${hat.name}"></div>
+                        <div class="link-items"
+                             th:text="${hat.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + hat.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="glasses" style="display: none;">
+            <div class="row">
+                <div th:each="glass : ${glasses}" class="column">
+                    <button class="four-type-button" data-name="${glass.name}" data-size="${glass.size}" data-weight="${glass.weight}" data-type="${glass.type}" data-id="${glass.id}">
+                        <div class="link-items" th:text="${glass.name}"></div>
+                        <div class="link-items"
+                             th:text="${glass.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + glass.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="gloves" style="display: none;">
+            <div class="row">
+                <div th:each="glov : ${gloves}" class="column">
+                    <button class="five-type-button" data-name="${glov.name}" data-size="${glov.size}" data-weight="${glov.weight}" data-type="${glov.type}" data-id="${glov.id}">
+                        <div class="link-items" th:text="${glov.name}"></div>
+                        <div class="link-items"
+                             th:text="${glov.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + glov.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="vests" style="display: none;">
+            <div class="row">
+                <div th:each="vest : ${vests}" class="column">
+                    <button class="six-type-button" data-name="${vest.name}" data-size="${vest.size}" data-weight="${vest.weight}" data-type="${vest.type}" data-id="${vest.id}">
+                        <div class="link-items" th:text="${vest.name}"></div>
+                        <div class="link-items"
+                             th:text="${vest.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + vest.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="backpacks" style="display: none;">
+            <div class="row">
+                <div th:each="backpack : ${backpacks}" class="column">
+                    <button class="seven-type-button" data-name="${backpack.name}" data-size="${backpack.size}" data-weight="${backpack.weight}" data-type="${backpack.type}" data-id="${backpack.id}">
+                        <div class="link-items" th:text="${backpack.name}"></div>
+                        <div class="link-items"
+                             th:text="${backpack.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + backpack.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="cloth" style="display: none;">
+            <div class="row">
+                <div th:each="clot : ${cloth}" class="column">
+                    <button class="eight-type-button" data-name="${clot.name}" data-size="${clot.size}" data-weight="${clot.weight}" data-type="${clot.type}" data-id="${clot.id}">
+                        <div class="link-items" th:text="${clot.name}"></div>
+                        <div class="link-items"
+                             th:text="${clot.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + clot.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="belts" style="display: none;">
+            <div class="row">
+                <div th:each="belt : ${belts}" class="column">
+                    <button class="nine-type-button" data-name="${belt.name}" data-size="${belt.size}" data-weight="${belt.weight}" data-type="${belt.type}" data-id="${belt.id}">
+                        <div class="link-items" th:text="${belt.name}"></div>
+                        <div class="link-items"
+                             th:text="${belt.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + belt.weight + ' kg.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="notifications position-fixed top-0 end-0 p-3"></div>
+
+<div class="navigation-container">
+    <form method="get" action="/">
+        <div class="logo">
+            <button id="customLogoButton" type="submit" class="btn btn-link" data-toggle="modal"
+                    data-target="#logoModal">
+                <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/website-logo.png"
+                     alt="Logo" class="logo-img">
+            </button>
+        </div>
+    </form>
+    <hr id="hr_1">
+    <button id="toggleButton" class="menu-button">
+        <div class="icon" id="icon">&#8801;</div>
+    </button>
+    <button id="bookmarksButton" class="menu-button">
+        <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png"
+             alt="Bookmark" typeof="submit">
+    </button>
+    <div class="social-links">
+        <a href="https://www.instagram.com/dayz.game/" class="social-link">
+            <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/instagram-logo.png"
+                 alt="Social Instagram" class="social-icon" typeof="submit">
+        </a>
+        <a href="https://discord.gg/dayz" class="social-link">
+            <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/discord-logo.png"
+                 alt="Social Discord" class="social-icon" typeof="submit">
+        </a>
+        <a href="https://twitter.com/DayZ" class="social-link">
+            <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@main/src/main/resources/img/twitter-logo.png?v=1.0"
+                 alt="Social Twitter" class="social-icon" typeof="submit">
+        </a>
+    </div>
+    <hr id="hr_2">
+    <button id="customLoginButton" type="button" class="btn btn-black btn-square" data-toggle="modal"
+            data-target="#loginModal">
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
+             class="btn-icon-img" alt="Вход">
+    </button>
+</div>
+<div id="myModal" class="modal">
+    <div class="modal-content-two">
+        <div class="header">
+            <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/website-logo.png"
+                 alt="Логотип DAYZ">
+            <p>Онлайн справочник по Dayz
+            <p>
+        </div>
+        <div class="table">
+            <div class="row">
+                <div class="cell"><p>Медицина</p>
+                    <hr id="hr1">
+                    <p>Медикаменты</p>
+                    <p>Заболевания</p>
+                    <p>Советы</p>
+                </div>
+                <div class="cell"><p>Снаряжение</p>
+                    <hr id="hr2">
+                    <p><a href="/equipment">Броня-Одежда</a></p>
+                    <p><a href="/weapons">Оружия</a></p>
+                    <p><a href="/advice_equipment">Советы</a></p>
+                </div>
+                <div class="cell"><p>Разное</p>
+                    <hr id="hr4">
+                    <p>Машины</p>
+                    <p>Палатки</p>
+                    <p>Предметы</p>
+                    <p>Гранаты</p>
+                </div>
+                <div class="cell"><p>Мир игры</p>
+                    <hr id="hr3">
+                    <p>История создания</p>
+                    <p>Локации</p>
+                    <p>Сюжет</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SING IN</h5>
+            </div>
+            <form id="loginForm" method="post" action="/authenticate">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>
+                            <input type="text" class="form-control" name="name" placeholder="Enter login or email"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="password" class="form-control" name="password" placeholder="Enter password"
+                                   size="40">
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group login-button-container">
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </div>
+                <div class="form-group register-button-container">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#registerModal">
+                        Register
+                    </button>
+                </div>
+                <div class="form-group forgot-password-button-container">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal"
+                            data-target="#resetPasswordModal">
+                        Forgot password?
+                    </button>
+                </div>
+            </form>
+            <div id="gSignInWrapper">
+                <form method="get" action="/login">
+                    <div id="customBtn" class="customGPlusSignIn">
+                        <button type="submit" class="google-button">
+                            <img src="https://developers-dot-devsite-v2-prod.appspot.com/identity/sign-in/g-normal.png"
+                                 alt="" class="google-icon">
+                            Google
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SING UP</h5>
+            </div>
+            <form id="registerForm" method="post" action="/register">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>
+                            <input type="text" class="form-control" name="nameRegister" placeholder="Enter username"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="email" class="form-control" name="email" placeholder="Enter email" size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="password" class="form-control" name="passwordRegister"
+                                   placeholder="Enter password"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="password" class="form-control" name="confirmPassword"
+                                   placeholder="Confirm password"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary-register btn-block">Register</button>
+                    </div>
+                    <div class="form-group register-button-containerTwo">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#loginModal">
+                            Login
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="resetPasswordModal" tabindex="-1" role="dialog" aria-labelledby="resetPasswordModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">PASSWORD RECOVERY</h5>
+            </div>
+            <form id="resetForm" method="post" action="/reset">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>
+                            <input type="text" class="form-control" name="emailReset"
+                                   placeholder="Enter email"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary-register btn-block">Reset</button>
+                    </div>
+                    <div class="form-group register-button-containerTwo">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#loginModal">
+                            Login
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        const buttonSort = document.getElementById('sorting-button');
+        const menu = document.getElementById('sorting-menu');
+        const closeButton = document.getElementById('close-button');
+        const row = document.querySelector('.row');
+        const bookmarksButton = document.getElementById("bookmarksButton");
+        const bookmarksModal = document.getElementById("bookmarksModal");
+        const bookmarksTableBody = document.querySelector("#bookmarksTable tbody");
+
+        bookmarksButton.addEventListener("click", function () {
+            bookmarksTableBody.innerHTML = "";
+
+            fetch('/bookmarks/getAll', {
+                method: 'GET'
+            }).then(response => {
+                console.log(response)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+                .then(data => {
+                    console.log(data)
+                    data.forEach(bookmark => {
+                        addToBookmarksTable(bookmark);
+                    });
+
+                    bookmarksModal.style.display = "block";
+                })
+                .catch(error => {
+                    console.error('Ошибка при получении данных с сервера:', error);
+                });
+        });
+
+        function addToBookmarksTable(item) {
+            const tableBody = document.querySelector("#bookmarksTable tbody");
+            const newRow = tableBody.insertRow();
+
+            const fields = ['id', 'name', 'weight', 'size', 'tier', 'type'];
+
+            fields.forEach(field => {
+                const cell = newRow.insertCell();
+                cell.textContent = item.hasOwnProperty(field) ? item[field] : '';
+            });
+
+            const deleteCell = newRow.insertCell();
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.classList.add("btn", "btn-danger");
+            deleteButton.addEventListener("click", function () {
+                deleteBookmark(item.id);
+            });
+            deleteCell.appendChild(deleteButton);
+        }
+
+        function deleteBookmark(bookmarkId) {
+            fetch(`/bookmarks/delete/${bookmarkId}`, {
+                method: 'DELETE',
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        refreshBookmarksTable();
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка при удалении закладки:', error);
+                });
+        }
+
+        function refreshBookmarksTable() {
+            const tableBody = document.querySelector("#bookmarksTable tbody");
+            tableBody.innerHTML = "";
+
+            fetch('/bookmarks/getAll')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    data.forEach(bookmark => {
+                        addToBookmarksTable(bookmark);
+                    });
+                })
+                .catch(error => {
+                    console.error('Ошибка при обновлении данных и таблицы:', error);
+                });
+        }
+
+        window.addEventListener("click", function (event) {
+            if (event.target === bookmarksModal) {
+                bookmarksModal.style.display = "none";
+            }
+        });
+
+        document.getElementById("bookmarkContainer").addEventListener("click", function() {
+            addBookmark();
+        });
+
+        function addBookmark() {
+            const formData = new FormData();
+            formData.append("name", modalName.textContent);
+            formData.append("size", modalSize.textContent);
+            formData.append("weight", modalWeight.textContent);
+            formData.append("id", modalId.textContent);
+            formData.append("type", modalType.textContent);
+
+            fetch('/bookmarks/add', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Ошибка при отправке данных на сервер:', error);
+                });
+        }
+
+        var oneTypeButtons = document.querySelectorAll(".one-type-button");
+        var twoTypeButtons = document.querySelectorAll(".two-type-button");
+        var threeTypeButtons = document.querySelectorAll(".three-type-button");
+        var fourTypeButtons = document.querySelectorAll(".four-type-button");
+        var fiveTypeButtons = document.querySelectorAll(".five-type-button");
+        var sixTypeButtons = document.querySelectorAll(".six-type-button");
+        var sevenTypeButtons = document.querySelectorAll(".seven-type-button");
+        var eightTypeButtons = document.querySelectorAll(".eight-type-button");
+        var nineTypeButtons = document.querySelectorAll(".nine-type-button");
+
+        var shoesData = [[${shoes}]];
+        var masksData = [[${masks}]];
+        var hatsData = [[${hats}]];
+        var glassesData = [[${glasses}]];
+        var glovesData = [[${gloves}]];
+        var vestsData = [[${vests}]];
+        var backpacksData = [[${backpacks}]];
+        var clothData = [[${cloth}]];
+        var beltsData = [[${belts}]];
+
+        var modal = document.getElementById("modal");
+        var modalName = document.getElementById("modalName");
+        var modalSize = document.getElementById("modalSize");
+        var modalWeight = document.getElementById("modalWeight");
+        var modalType = document.getElementById("modalType");
+        var modalId = document.getElementById("modalId");
+        var closeModalBtn = document.getElementById("closeModalBtn");
+
+        function showModal(data) {
+            modalName.textContent = data.name;
+            modalSize.textContent = data.size + " slots";
+            modalWeight.textContent = data.weight + " kg";
+            modalId.textContent = data.id;
+            modalType.textContent = data.type;
+            modal.style.display = "block";
+        }
+
+        function addClickEvent(buttons, data) {
+            buttons.forEach(function (button, index) {
+                button.addEventListener("click", function () {
+                    showModal(data[index]);
+                });
+            });
+        }
+
+        addClickEvent(oneTypeButtons, shoesData);
+        addClickEvent(twoTypeButtons, masksData);
+        addClickEvent(threeTypeButtons, hatsData);
+        addClickEvent(fourTypeButtons, glassesData);
+        addClickEvent(fiveTypeButtons, glovesData);
+        addClickEvent(sixTypeButtons, vestsData);
+        addClickEvent(sevenTypeButtons, backpacksData);
+        addClickEvent(eightTypeButtons, clothData);
+        addClickEvent(nineTypeButtons, beltsData);
+
+        closeModalBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function updateFilters() {
+            const selectedFilters = [];
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedFilters.push(checkbox.parentNode.textContent);
+                }
+            });
+            sendFiltersToServer(selectedFilters);
+        }
+
+        function sendFiltersToServer(selectedFilters) {
+            const filterRequest = {
+                selectedFilters: selectedFilters,
+                itemCategory: currentModeIndex
+            };
+
+            fetch('/api/equipment/filter', {
+                method: 'POST',
+                body: JSON.stringify(filterRequest),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                    row.innerHTML = ''
+                    data.forEach((steelArm) => {
+                        const column = document.createElement('div');
+                        column.className = 'column';
+
+                        const button = document.createElement('button');
+                        button.className = 'weapon-type-button';
+
+                        const linkItems1 = document.createElement('div');
+                        linkItems1.className = 'link-items';
+                        linkItems1.textContent = steelArm.name;
+
+                        const linkItems2 = document.createElement('div');
+                        linkItems2.className = 'link-items';
+                        linkItems2.innerHTML = `${steelArm.size} s. &nbsp;&nbsp;&nbsp;&nbsp; ${steelArm.weight} kg.`;
+
+                        button.appendChild(linkItems1);
+                        button.appendChild(linkItems2);
+                        column.appendChild(button);
+                        row.appendChild(column);
+                    })
+                })
+                .catch((error) => {
+                    console.error('Ошибка при запросе данных с сервера:', error);
+                });
+        }
+
+        buttonSort.onclick = function () {
+            showSortingMenu();
+        };
+
+        closeButton.addEventListener('click', function () {
+            menu.style.display = 'none';
+        });
+
+        function showSortingMenu() {
+            const rect = buttonSort.getBoundingClientRect();
+            const offset = 25;
+            menu.style.top = (rect.bottom + offset) + 'px';
+            menu.style.left = '50%';
+            menu.style.display = 'block';
+        }
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateFilters);
+        });
+
+        const armorName = document.getElementById('armor-name');
+        const shoesButtons = document.getElementById('shoes');
+        const masksButtons = document.getElementById('masks');
+        const hatsButtons = document.getElementById('hats');
+        const glassesButtons = document.getElementById('glasses');
+        const glovesButtons = document.getElementById('gloves');
+        const vestsButtons = document.getElementById('vests');
+        const backpacksButtons = document.getElementById('backpacks');
+        const clothButtons = document.getElementById('cloth');
+        const beltsButtons = document.getElementById('belts');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+
+        const armorsModes = [
+            'shoes',
+            'masks',
+            'hats',
+            'glasses',
+            'gloves',
+            'vests',
+            'backpacks',
+            'cloth',
+            'belts'
+        ];
+
+        let currentModeIndex = 0;
+
+        function updateWeaponMode() {
+            armorName.textContent = armorsModes[currentModeIndex];
+            switch (currentModeIndex) {
+                case 0:
+                    shoesButtons.style.display = 'block';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 1:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'block';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 2:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'block';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 3:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'block';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 4:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'block';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 5:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'block';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 6:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'block';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 7:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'block';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 8:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'block';
+                    break;
+            }
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentModeIndex = (currentModeIndex - 1 + armorsModes.length) % armorsModes.length;
+            updateWeaponMode();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentModeIndex = (currentModeIndex + 1) % armorsModes.length;
+            updateWeaponMode();
+        });
+
+        updateWeaponMode();
+
+    });
+
+</script>
+<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:a="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dayz-wiki знания для всех</title>
+    <link rel="icon" type="image/png"
+          href="https://icons.iconarchive.com/icons/icons8/ios7/64/Healthcare-Virus-icon.png" sizes="64x64"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@master/src/main/resources/static/css/home.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/css/menu.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/css/button-menu.css">
+
+    <style>
+        .menu-button:hover {
+            transform: scale(1.05);
+        }
+        .menu-button:active {
+            transform: scale(0.95);
+        }
+
+        body{
+            background: #d1d5db;
+        }
+
+        .form span{
+            position: absolute;
+            right: 17px;
+            top: 10px;
+            padding: 2px;
+            border-left: 1px solid #d1d5db;
+
+        }
+
+        .left-pan i{
+            padding-left: 10px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .search-input {
+            padding: 10px;
+            border-radius: 20px 0 0 20px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            width: 500px;
+            outline: none;
+        }
+
+        .search-button {
+            background-color: #777777;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            height: 46px;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #9ca3af;
+            transform: scale(1.05);
+        }
+
+        .search-button:active {
+            background-color: #777777;
+            transform: scale(0.95);
+        }
+    </style>
+
+</head>
+<body>
+<div class="notifications position-fixed top-0 end-0 p-3"></div>
+<div class="navigation-container">
+    <form method="get" action="/">
+        <div class="logo">
+            <button id="customLogoButton" type="submit" class="btn btn-link" data-toggle="modal"
+                    data-target="#logoModal">
+                <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/website-logo.png"
+                     alt="Logo" class="logo-img">
+            </button>
+        </div>
+    </form>
+    <hr id="hr_1">
+    <button id="toggleButton" class="menu-button">
+        <div class="icon" id="icon">&#8801;</div>
+    </button>
+    <button id="bookmarksButton" class="menu-button">
+        <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png"
+             alt="Bookmarks" typeof="submit">
+    </button>
+
+    <div class="social-links">
+        <a href="https://www.instagram.com/dayz.game/" class="social-link">
+            <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/instagram-logo.png"
+                 alt="Social Instagram" class="social-icon" typeof="submit">
+        </a>
+        <a href="https://discord.gg/dayz" class="social-link">
+            <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/discord-logo.png"
+                 alt="Social Discord" class="social-icon" typeof="submit">
+        </a>
+        <a href="https://twitter.com/DayZ" class="social-link">
+            <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@main/src/main/resources/img/twitter-logo.png?v=1.0"
+                 alt="Social Twitter" class="social-icon" typeof="submit">
+        </a>
+    </div>
+    <hr id="hr_2">
+    <button id="customLoginButton" type="button" class="btn btn-black btn-square" data-toggle="modal"
+            data-target="#loginModal">
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
+             class="btn-icon-img" alt="Вход">
+    </button>
+</div>
+<div id="bookmarksModal" class="modal">
+    <div class="modal-content">
+        <table id="bookmarksTable">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Weight</th>
+                <th>Size</th>
+                <th>Tier</th>
+                <th>Type</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="myModal" class="modal">
+    <div class="modal-content-two">
+        <div class="header">
+            <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/website-logo.png"
+                 alt="Логотип DAYZ">
+            <p>Онлайн справочник по Dayz
+            <p>
+        </div>
+        <div class="table">
+            <div class="row">
+                <div class="cell"><p>Медицина</p>
+                    <hr id="hr1">
+                    <p><a href="/medicaments">Медикаменты</a></p>
+                    <p>Заболевания</p>
+                    <p>Советы</p>
+                </div>
+                <div class="cell"><p>Снаряжение</p>
+                    <hr id="hr2">
+                    <p><a href="/equipment">Броня-Одежда</a></p>
+                    <p><a href="/weapons">Оружия</a></p>
+                    <p><a href="/advice_equipment">Советы</a></p>
+                </div>
+                <div class="cell"><p>Разное</p>
+                    <hr id="hr4">
+                    <p>Машины</p>
+                    <p>Палатки</p>
+                    <p>Предметы</p>
+                    <p>Гранаты</p>
+                </div>
+                <div class="cell"><p>Мир игры</p>
+                    <hr id="hr3">
+                    <p>История создания</p>
+                    <p>Локации</p>
+                    <p>Сюжет</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="searchForm" action="/search" method="post">
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" name="searchQuery" placeholder="Введите запрос для поиска">
+        <button type="submit" class="search-button">Поиск</button>
+    </div>
+</form>
+<div id="notificationContainer" class="position-fixed top-0 end-0 p-3"></div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SING IN</h5>
+            </div>
+            <form id="loginForm" method="post" action="/authenticate">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>
+                            <input type="text" class="form-control" name="name" placeholder="Enter login or email"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="password" class="form-control" name="password" placeholder="Enter password"
+                                   size="40">
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group login-button-container">
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </div>
+                <div class="form-group register-button-container">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#registerModal">
+                        Register
+                    </button>
+                </div>
+                <div class="form-group forgot-password-button-container">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal"
+                            data-target="#resetPasswordModal">
+                        Forgot password?
+                    </button>
+                </div>
+            </form>
+            <div id="gSignInWrapper">
+                <form method="get" action="/login">
+                    <div id="customBtn" class="customGPlusSignIn">
+                        <button type="submit" class="google-button">
+                            <img src="https://developers-dot-devsite-v2-prod.appspot.com/identity/sign-in/g-normal.png"
+                                 alt="" class="google-icon">
+                            Google
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SING UP</h5>
+            </div>
+            <form id="registerForm" method="post" action="/register">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>
+                            <input type="text" class="form-control" name="nameRegister" placeholder="Enter username"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="email" class="form-control" name="email" placeholder="Enter email" size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="password" class="form-control" name="passwordRegister"
+                                   placeholder="Enter password"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="password" class="form-control" name="confirmPassword"
+                                   placeholder="Confirm password"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary-register btn-block">Register</button>
+                    </div>
+                    <div class="form-group register-button-containerTwo">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#loginModal">
+                            Login
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="resetPasswordModal" tabindex="-1" role="dialog" aria-labelledby="resetPasswordModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">PASSWORD RECOVERY</h5>
+            </div>
+            <form id="resetForm" method="post" action="/reset">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>
+                            <input type="text" class="form-control" name="emailReset"
+                                   placeholder="Enter email"
+                                   size="40">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary-register btn-block">Reset</button>
+                    </div>
+                    <div class="form-group register-button-containerTwo">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#loginModal">
+                            Login
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>-->
+<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>
+<script>
+
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var searchInputValue = document.getElementById('searchInput').value.trim();
+        if (searchInputValue === '') {
+            showNotification("Enter data into the search bar", "danger", 3000);
+            return;
+        }
+
+        fetch('/search?text=' + encodeURIComponent(searchInputValue), {
+            method: 'POST',
+        })
+    });
+
+
+
+    const row = document.querySelector('.row');
+    const bookmarksButton = document.getElementById("bookmarksButton");
+    const bookmarksModal = document.getElementById("bookmarksModal");
+    const bookmarksTableBody = document.querySelector("#bookmarksTable tbody");
+
+    bookmarksButton.addEventListener("click", function () {
+        bookmarksTableBody.innerHTML = "";
+
+        fetch('/bookmarks/getAll', {
+            method: 'GET'
+        }).then(response => {
+            console.log(response)
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+            .then(data => {
+                console.log(data)
+                data.forEach(bookmark => {
+                    addToBookmarksTable(bookmark);
+                });
+
+                bookmarksModal.style.display = "block";
+            })
+            .catch(error => {
+                console.error('Ошибка при получении данных с сервера:', error);
+            });
+    });
+    function addToBookmarksTable(item) {
+        const tableBody = document.querySelector("#bookmarksTable tbody");
+        const newRow = tableBody.insertRow();
+
+        const fields = ['id', 'name', 'weight', 'size', 'tier', 'type'];
+
+        fields.forEach(field => {
+            const cell = newRow.insertCell();
+            cell.textContent = item.hasOwnProperty(field) ? item[field] : '';
+        });
+
+        const deleteCell = newRow.insertCell();
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.classList.add("btn", "btn-danger");
+        deleteButton.addEventListener("click", function () {
+            deleteBookmark(item.id);
+        });
+        deleteCell.appendChild(deleteButton);
+    }
+
+    function deleteBookmark(bookmarkId) {
+        fetch(`/bookmarks/delete/${bookmarkId}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    refreshBookmarksTable();
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка при удалении закладки:', error);
+            });
+    }
+
+    function refreshBookmarksTable() {
+        const tableBody = document.querySelector("#bookmarksTable tbody");
+        tableBody.innerHTML = "";
+
+        fetch('/bookmarks/getAll')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                data.forEach(bookmark => {
+                    addToBookmarksTable(bookmark);
+                });
+            })
+            .catch(error => {
+                console.error('Ошибка при обновлении данных и таблицы:', error);
+            });
+    }
+
+    window.addEventListener("click", function (event) {
+        if (event.target === bookmarksModal) {
+            bookmarksModal.style.display = "none";
+        }
+    });
+
+    let username = sessionStorage.getItem("username");
+
+    const handleAuthorizedUser = () => {
+        const customLoginButton = document.getElementById('customLoginButton');
+        const btnIconImg = customLoginButton.querySelector('.btn-icon-img');
+        btnIconImg.src = 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png';
+
+        customLoginButton.addEventListener('click', function () {
+            const welcomeModal = `
+      <div class="modal" id="welcomeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Добрый день, ${username}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Ваш контент здесь...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" id="logoutButton" style="border-radius: 15px">Выйти</button>
+          </div>
+        </div>
+      </div>
+    `;
+            $('body').append(welcomeModal);
+            $('#welcomeModal').modal('show');
+
+            const logoutButton = document.getElementById('logoutButton');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', function () {
+                    let isAuthenticated = false;
+                    let serializedObject = JSON.stringify(isAuthenticated);
+                    sessionStorage.removeItem("isAuthenticated");
+                    sessionStorage.setItem("isAuthenticated", serializedObject);
+                    handleAuthorizedUser();
+                });
+            }
+        });
+    };
+
+    window.onload = () => {
+        let deserializedObject = JSON.parse(sessionStorage.getItem("isAuthenticated"));
+        console.log(deserializedObject)
+        if (deserializedObject) {
+            handleAuthorizedUser();
+        }
+    };
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const formData = {
+            name: document.querySelector('input[name=name]').value,
+            password: document.querySelector('input[name=password]').value
+        };
+
+        let nameUser = document.querySelector('input[name=name]').value;
+        sessionStorage.removeItem("username")
+        sessionStorage.setItem("username", nameUser)
+
+        $.ajax({
+            url: '/authenticate',
+            type: 'POST',
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function (response) {
+                if (response === "success") {
+                    let isAuthenticated = true;
+                    let serializedObject = JSON.stringify(isAuthenticated);
+                    sessionStorage.removeItem("isAuthenticated")
+                    sessionStorage.setItem("isAuthenticated", serializedObject);
+
+                    showNotification("You are successfully logged!", "success", 3000);
+
+                    setTimeout(function () {
+                        $('#loginModal').modal('hide');
+                    }, 500);
+                    handleAuthorizedUser();
+                } else {
+                    let isAuthenticated = false;
+                    let serializedObject = JSON.stringify(isAuthenticated);
+                    sessionStorage.removeItem("isAuthenticated")
+                    sessionStorage.setItem("isAuthenticated", serializedObject);
+
+                    showNotification("Invalid username or password", "danger", 3000);
+
+                    setTimeout(function () {
+                        $('#loginModal').modal('hide');
+                    }, 500);
+                }
+            },
+            error: function (error) {
+                console.error('Request error:', error);
+            }
+        });
+
+    });
+
+
+    document.querySelector(".register-button-containerTwo button").addEventListener("click", function () {
+        closeModal('#registerModal');
+        closeModal('#resetPasswordModal')
+        $('#loginModal').modal('show');
+    });
+
+    const resetPasswordLoginButton = document.querySelector('#resetPasswordModal .register-button-containerTwo button');
+
+    resetPasswordLoginButton.addEventListener('click', function () {
+        closeModal('#resetPasswordModal');
+        $('#loginModal').modal('show');
+    });
+
+
+    document.querySelector(".forgot-password-button-container button").addEventListener("click", function () {
+        closeModal('#loginModal');
+        $('#resetPasswordModal').modal('show');
+    });
+
+    function closeModal(modalSelector) {
+        $(modalSelector).modal('hide');
+    }
+
+    function showNotification(message, type, duration) {
+        const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-times-circle';
+        const notification = $(`
+<div class="alert alert-${type} d-flex align-items-center">
+    <i class="fas ${iconClass} mr-2"></i>
+    <span>${message}</span>
+    <div class="progress-bar"></div>
+</div>`
+        );
+
+        $('.notifications').append(notification);
+
+        const progressBar = notification.find('.progress-bar');
+        progressBar.animate({width: '100%'}, duration, function () {
+            notification.fadeOut(300, function () {
+                $(this).remove();
+            });
+        });
+    }
+
+    document.querySelector(".register-button-container button").addEventListener("click", function () {
+        $('#loginModal').modal('hide');
+        $('#registerModal').modal('show');
+    });
+    document.getElementById("registerForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const nameField = document.querySelector('input[name=nameRegister]');
+        const emailField = document.querySelector('input[name=email]');
+        const passwordField = document.querySelector('input[name=passwordRegister]');
+        const confirmPasswordField = document.querySelector('input[name=confirmPassword]');
+
+        clearFieldErrors([nameField, emailField, passwordField, confirmPasswordField]);
+
+        const formData = {
+            name: nameField.value,
+            email: emailField.value,
+            password: passwordField.value,
+            confirmPassword: confirmPasswordField.value
+        };
+
+        $.ajax({
+            url: '/register',
+            type: 'POST',
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                if (response === "success") {
+                    showNotification("Registration successful!", "success", 3000);
+                    setTimeout(function () {
+                        $('#registerModal').modal('hide');
+                    }, 500);
+                } else if (response === "This email is already in use on another account") {
+                    showError(emailField, response);
+                } else if (response === "This username is already taken") {
+                    showError(nameField, response);
+                } else if (response === "Password mismatch") {
+                    showError(passwordField, response);
+                    showError(confirmPasswordField, response);
+                } else if (response === "Password at least 6 characters") {
+                    showError(passwordField, response);
+                    showError(confirmPasswordField, response);
+                }
+            },
+            error: function (error) {
+                console.error('Request error:', error);
+            }
+        });
+    });
+
+    document.getElementById("resetForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const emailField = document.querySelector('input[name=emailReset]');
+        const formData = {
+            email: emailField.value
+        };
+
+        console.log(JSON.stringify(formData));
+
+        $.ajax({
+            url: '/reset',
+            type: 'POST',
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                if (response === "success") {
+                    showNotification("Reset successful check your email!", "success", 3000);
+                    setTimeout(function () {
+                        $('#registerModal').modal('hide');
+                    }, 500);
+                } else if (response === "please enter a valid email address") {
+                    showError(emailField, response);
+                }
+            },
+            error: function (error) {
+                console.error('Request error:', error);
+            }
+        });
+    });
+
+    function showError(field, message) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.innerText = message;
+        field.parentNode.appendChild(errorDiv);
+        field.classList.add('error-input');
+    }
+
+    function clearFieldErrors(fields) {
+        fields.forEach(function (field) {
+            const errorDiv = field.parentNode.querySelector('.error-message');
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+            field.classList.remove('error-input');
+        });
+    }
+</script>
+</body>
+</html>
