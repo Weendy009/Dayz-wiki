@@ -1,4 +1,4 @@
-package com.dayz.database.Dotawiki.service;
+package com.dayz.database.Dotawiki.service.items;
 
 import com.dayz.database.Dotawiki.entity.items.Car;
 import com.dayz.database.Dotawiki.repository.CarRepository;
@@ -19,6 +19,10 @@ public class CarService {
 
     public List<Car> getAllCarsByType(String typeCar) {
         return carRepository.getCarsByType(typeCar);
+    }
+
+    public List<Car> getAllCars() {
+        return carRepository.findAll();
     }
 
 }

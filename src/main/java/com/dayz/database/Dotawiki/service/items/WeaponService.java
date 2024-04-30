@@ -1,10 +1,11 @@
-package com.dayz.database.Dotawiki.service;
+package com.dayz.database.Dotawiki.service.items;
 
 import com.dayz.database.Dotawiki.entity.items.Weapon;
 import com.dayz.database.Dotawiki.repository.WeaponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -16,16 +17,10 @@ public class WeaponService {
         this.repository = repository;
     }
 
-    public Set<Weapon> getAllSteelArms() {
-        return repository.findByType("steel arms");
+    public Set<Weapon> getAllWeaponsByType(String type) {
+        return repository.getAllByType(type);
     }
 
-    public Set<Weapon> getAllPistols() {
-        return repository.findByType("pistol");
-    }
-
-    public Set<Weapon> getAllSubmachineGuns() {
-        return repository.findByType("submachine guns");
-    }
+    public List<Weapon> getAllWeapons() {return repository.findAll();}
 
 }

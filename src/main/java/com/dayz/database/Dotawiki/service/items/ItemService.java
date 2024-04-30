@@ -1,21 +1,36 @@
-package com.dayz.database.Dotawiki.service;
+package com.dayz.database.Dotawiki.service.items;
 
-import com.dayz.database.Dotawiki.entity.items.Item;
-import com.dayz.database.Dotawiki.repository.ArmorRepository;
-import com.dayz.database.Dotawiki.repository.ItemRepository;
-import com.dayz.database.Dotawiki.repository.MedicineRepository;
-import com.dayz.database.Dotawiki.repository.WeaponRepository;
+import com.dayz.database.Dotawiki.entity.items.*;
+import com.dayz.database.Dotawiki.repository.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class ItemService {
     private final Map<String, ItemRepository> repositoryMap;
-    public ItemService(WeaponRepository weaponRepository, ArmorRepository armorRepository, MedicineRepository medicineRepository) {
+    private final List<String> itemsNames;
+
+    public ItemService(WeaponRepository weaponRepository, ArmorRepository armorRepository, MedicineRepository medicineRepository, CarRepository carRepository) {
         this.repositoryMap = new HashMap<>();
-        addRepositoryMap(repositoryMap, weaponRepository, armorRepository, medicineRepository);
+        addRepositoryMap(repositoryMap, weaponRepository, armorRepository, medicineRepository, carRepository);
+
+        itemsNames = new ArrayList<>();
+        for (Armor armor : armorRepository.findAll()) {
+            itemsNames.add(armor.getName());
+        }
+        for (Weapon weapon : weaponRepository.findAll()) {
+            itemsNames.add(weapon.getName());
+        }
+        for (Medicine medicine : medicineRepository.findAll()) {
+            itemsNames.add(medicine.getName());
+        }
+        for (Car car : carRepository.findAll()) {
+            itemsNames.add(car.getName());
+        }
     }
 
     public Item getItemByIdAndType(Long itemId, String itemType) {
@@ -27,8 +42,12 @@ public class ItemService {
         return item;
     }
 
+    public List<String> getAllItemsNames() {
+        return itemsNames;
+    }
+
     private void addRepositoryMap(Map<String, ItemRepository> repositoryMap, WeaponRepository weaponRepository,
-                                         ArmorRepository armorRepository, MedicineRepository medicineRepository) {
+                                  ArmorRepository armorRepository, MedicineRepository medicineRepository, CarRepository carRepository) {
         repositoryMap.put("steel arms", weaponRepository);
         repositoryMap.put("pistol", weaponRepository);
         repositoryMap.put("submachine guns", weaponRepository);
@@ -44,5 +63,6 @@ public class ItemService {
         repositoryMap.put("Pills", medicineRepository);
         repositoryMap.put("medical consumables", medicineRepository);
         repositoryMap.put("Injections and serums", medicineRepository);
+        repositoryMap.put("car", carRepository);
     }
 }

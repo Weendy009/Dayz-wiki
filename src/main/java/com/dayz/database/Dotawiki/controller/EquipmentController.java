@@ -1,9 +1,9 @@
 package com.dayz.database.Dotawiki.controller;
 
-import com.dayz.database.Dotawiki.service.ArmorService;
-import com.dayz.database.Dotawiki.service.CarService;
-import com.dayz.database.Dotawiki.service.MedicineService;
-import com.dayz.database.Dotawiki.service.WeaponService;
+import com.dayz.database.Dotawiki.service.items.ArmorService;
+import com.dayz.database.Dotawiki.service.items.CarService;
+import com.dayz.database.Dotawiki.service.items.MedicineService;
+import com.dayz.database.Dotawiki.service.items.WeaponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,22 +27,22 @@ public class EquipmentController {
 
     @GetMapping("/weapons")
     public String showHomePage(Model model) {
-        model.addAttribute("steelArms", weaponService.getAllSteelArms());
-        model.addAttribute("pistols", weaponService.getAllPistols());
-        model.addAttribute("submachineGuns", weaponService.getAllSubmachineGuns());
+        model.addAttribute("steelArms", weaponService.getAllWeaponsByType("steel arms"));
+        model.addAttribute("pistols", weaponService.getAllWeaponsByType("pistol"));
+        model.addAttribute("submachineGuns", weaponService.getAllWeaponsByType("submachine guns"));
         return "weapons";
     }
     @GetMapping("/equipment")
     public String armors(Model model) {
-        model.addAttribute("shoes", armorService.getAllShoes());
-        model.addAttribute("masks", armorService.getAllMasks());
-        model.addAttribute("hats", armorService.getAllHats());
-        model.addAttribute("glasses", armorService.getAllGlasses());
-        model.addAttribute("gloves", armorService.getAllGloves());
-        model.addAttribute("vests", armorService.getAllVests());
-        model.addAttribute("backpacks", armorService.getAllBackpacks());
-        model.addAttribute("cloth", armorService.getAllCloth());
-        model.addAttribute("belts", armorService.getAllBelts());
+        model.addAttribute("shoes", armorService.getAllArmorByType("shoes"));
+        model.addAttribute("masks", armorService.getAllArmorByType("mask"));
+        model.addAttribute("hats", armorService.getAllArmorByType("hats"));
+        model.addAttribute("glasses", armorService.getAllArmorByType("glasses"));
+        model.addAttribute("gloves", armorService.getAllArmorByType("gloves"));
+        model.addAttribute("vests", armorService.getAllArmorByType("vests"));
+        model.addAttribute("backpacks", armorService.getAllArmorByType("backpacks"));
+        model.addAttribute("cloth", armorService.getAllArmorByType("cloth"));
+        model.addAttribute("belts", armorService.getAllArmorByType("belts"));
         return "armors";
     }
 

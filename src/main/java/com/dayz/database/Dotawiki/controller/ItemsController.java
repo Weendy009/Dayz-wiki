@@ -4,8 +4,8 @@ import com.dayz.database.Dotawiki.entity.dto.FilterRequest;
 import com.dayz.database.Dotawiki.entity.items.Armor;
 import com.dayz.database.Dotawiki.entity.items.Item;
 import com.dayz.database.Dotawiki.entity.items.Weapon;
-import com.dayz.database.Dotawiki.service.ArmorService;
-import com.dayz.database.Dotawiki.service.WeaponService;
+import com.dayz.database.Dotawiki.service.items.ArmorService;
+import com.dayz.database.Dotawiki.service.items.WeaponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,13 +29,13 @@ public class ItemsController {
         Set<Weapon> allWeapons = new HashSet<>();
         switch (filterRequest.getItemCategory()) {
             case 0:
-                allWeapons = weaponService.getAllSteelArms();
+                allWeapons = weaponService.getAllWeaponsByType("steel arms");
                 break;
             case 1:
-                allWeapons = weaponService.getAllPistols();
+                allWeapons = weaponService.getAllWeaponsByType("pistol");
                 break;
             case 2:
-                allWeapons = weaponService.getAllSubmachineGuns();
+                allWeapons = weaponService.getAllWeaponsByType("submachine guns");
                 break;
         }
 
@@ -46,31 +46,31 @@ public class ItemsController {
         Set<Armor> allArmors = new HashSet<>();
         switch (filterRequest.getItemCategory()) {
             case 0:
-                allArmors = armorService.getAllShoes();
+                allArmors = armorService.getAllArmorByType("shoes");
                 break;
             case 1:
-                allArmors = armorService.getAllMasks();
+                allArmors = armorService.getAllArmorByType("mask");
                 break;
             case 2:
-                allArmors = armorService.getAllHats();
+                allArmors = armorService.getAllArmorByType("hats");
                 break;
             case 3:
-                allArmors = armorService.getAllGlasses();
+                allArmors = armorService.getAllArmorByType("glasses");
                 break;
             case 4:
-                allArmors = armorService.getAllGloves();
+                allArmors = armorService.getAllArmorByType("gloves");
                 break;
             case 5:
-                allArmors = armorService.getAllVests();
+                allArmors = armorService.getAllArmorByType("vests");
                 break;
             case 6:
-                allArmors = armorService.getAllBackpacks();
+                allArmors = armorService.getAllArmorByType("backpacks");
                 break;
             case 7:
-                allArmors = armorService.getAllCloth();
+                allArmors = armorService.getAllArmorByType("cloth");
                 break;
             case 8:
-                allArmors = armorService.getAllBelts();
+                allArmors = armorService.getAllArmorByType("belts");
                 break;
         }
 

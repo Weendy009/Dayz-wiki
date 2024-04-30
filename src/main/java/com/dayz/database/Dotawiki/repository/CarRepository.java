@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CarRepository extends JpaRepository<Car, Long>, ItemRepository {
-    public List<Car> getCarsByType(String type);
+    List<Car> getCarsByType(String type);
 }

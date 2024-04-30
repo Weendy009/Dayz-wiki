@@ -193,10 +193,13 @@
 
 <form id="searchForm" action="/search" method="post">
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" name="searchQuery" placeholder="Введите запрос для поиска">
-        <button type="submit" class="search-button">Поиск</button>
+        <input type="text" id="searchInput" class="search-input" name="searchQuery" placeholder="Search anything...">
+        <button type="submit" class="search-button">Search</button>
     </div>
 </form>
+
+<div th:each="result : ${searchResults}" th:text="${result}"></div>
+
 <div id="notificationContainer" class="position-fixed top-0 end-0 p-3"></div>
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
      aria-hidden="true">
@@ -340,7 +343,11 @@
 
         fetch('/search?text=' + encodeURIComponent(searchInputValue), {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         })
+
     });
 
 

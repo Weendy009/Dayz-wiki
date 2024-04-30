@@ -1,4 +1,4 @@
-package com.dayz.database.Dotawiki.service;
+package com.dayz.database.Dotawiki.service.items;
 
 import com.dayz.database.Dotawiki.entity.items.Medicine;
 import com.dayz.database.Dotawiki.repository.MedicineRepository;
@@ -18,6 +18,10 @@ public class MedicineService {
 
     public List<Medicine> getAllMedicamentByType(String typeMedicament) {
         return medicineRepository.getMedicinesByType(typeMedicament);
+    }
+
+    public List<Medicine> getAllMedicament() {
+        return medicineRepository.findAll();
     }
 
 }

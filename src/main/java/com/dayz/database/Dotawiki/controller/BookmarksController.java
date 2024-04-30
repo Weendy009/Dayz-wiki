@@ -4,7 +4,7 @@ import com.dayz.database.Dotawiki.entity.bookmarks.Bookmark;
 import com.dayz.database.Dotawiki.entity.dto.BookmarkDTO;
 import com.dayz.database.Dotawiki.entity.items.Item;
 import com.dayz.database.Dotawiki.service.BookmarkService;
-import com.dayz.database.Dotawiki.service.ItemService;
+import com.dayz.database.Dotawiki.service.items.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
