@@ -33,22 +33,6 @@
             background: #d1d5db;
         }
 
-        .height{
-            height: 100vh;
-        }
-
-        .form{
-            position: relative;
-        }
-
-        .form .fa-search{
-            position: absolute;
-            top:15px;
-            left: 10px;
-            color: #9ca3af;
-
-        }
-
         .form span{
             position: absolute;
             right: 17px;
@@ -57,26 +41,71 @@
             border-left: 1px solid #d1d5db;
 
         }
-
-        .left-pan{
-            padding-left: 7px;
-        }
-
         .left-pan i{
             padding-left: 10px;
         }
 
-        .form-input{
-            margin-bottom: 100%;
-            height: 47px;
-            weight: 100%;
-            text-indent: 35px;
-            border-radius: 20px;
+        #searchResults {
+            text-align: center;
+            color: white;
+            width: 60%;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
         }
 
-        .form-input:focus{
-            box-shadow: none;
-            border:none;
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        #searchResults div {
+            margin: 10px 0;
+            padding: 15px;
+            background-color: #3f3f3f;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .search-input {
+            padding: 10px;
+            border-radius: 20px 0 0 20px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            width: 500px;
+            outline: none;
+        }
+
+        .search-button {
+            background-color: #777777;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            height: 46px;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #9ca3af;
+            transform: scale(1.05);
+        }
+
+        .search-button:active {
+            background-color: #777777;
+            transform: scale(0.95);
         }
 
     </style>
@@ -102,11 +131,6 @@
         <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png"
              alt="Bookmarks" typeof="submit">
     </button>
-    <button id="searchButtonMenu" class="menu-button">
-        <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@master/src/main/resources/img/search-logo.png"
-             alt="Search">
-    </button>
-
     <div class="social-links">
         <a href="https://www.instagram.com/dayz.game/" class="social-link">
             <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/instagram-logo.png"
@@ -129,17 +153,14 @@
     </button>
 </div>
 
-<div class="container">
-    <div class="row height d-flex justify-content-center align-items-center">
-        <div class="col-md-6">
-            <div class="form">
-                <i class="fa fa-search"></i>
-                <input type="text" class="form-control form-input" id="searchInput" placeholder="Search anything..." onkeydown="searchOnEnter(event)">
-                <span class="left-pan"><i class="fa fa-microphone"></i></span>
-            </div>
-        </div>
+<form id="searchForm" action="/search" method="post">
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" name="searchQuery" placeholder="Search anything...">
+        <button type="submit" class="search-button">Search</button>
     </div>
-</div>
+</form>
+
+<div id="searchResults" class="grid-container"></div>
 
 <div class="centered-grid">
     <a class="custom-button-gun" href="/weapons"></a>
@@ -194,7 +215,7 @@
                 </div>
                 <div class="cell"><p>Разное</p>
                     <hr id="hr4">
-                    <p>Машины</p>
+                    <p><a href="/cars">Машины</a></p>
                     <p>Палатки</p>
                     <p>Предметы</p>
                     <p>Гранаты</p>
@@ -340,34 +361,39 @@
 <!--<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>-->
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>
 <script>
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    document.getElementById("searchButtonMenu").addEventListener("click", function() {
-        window.location.href = "/search";
+        var searchInputValue = document.getElementById('searchInput').value.trim();
+        if (searchInputValue === '') {
+            showNotification("Enter data into the search bar", "danger", 3000);
+            return;
+        }
+
+        fetch('/search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'text=' + encodeURIComponent(searchInputValue)
+        })
+            .then(response => response.json())
+            .then(data => {
+                var searchResultsContainer = document.getElementById('searchResults');
+                searchResultsContainer.innerHTML = '';
+
+                data.forEach(function(result) {
+                    var resultDiv = document.createElement('div');
+                    resultDiv.classList.add('grid-item');
+                    resultDiv.textContent = result;
+                    searchResultsContainer.appendChild(resultDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching search results:', error);
+            });
     });
 
-    function searchOnEnter(event) {
-        if (event.key === "Enter") {
-            var searchTerm = document.getElementById("searchInput").value;
-            console.log(searchTerm)
-            fetch('/api/v1/search?q=' + encodeURIComponent(searchTerm), {
-                method: 'POST',
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-
-                .then(data => {
-                    console.log(data);
-                })
-
-                .catch(error => {
-                    console.error('Ошибка:', error);
-                });
-        }
-    }
 
     const row = document.querySelector('.row');
     const bookmarksButton = document.getElementById("bookmarksButton");

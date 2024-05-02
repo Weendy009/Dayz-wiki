@@ -1,17 +1,11 @@
 package com.dayz.database.Dotawiki.controller;
 
-import com.dayz.database.Dotawiki.entity.items.Armor;
-import com.dayz.database.Dotawiki.entity.items.Car;
-import com.dayz.database.Dotawiki.entity.items.Medicine;
-import com.dayz.database.Dotawiki.entity.items.Weapon;
 import com.dayz.database.Dotawiki.service.items.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,23 +20,16 @@ public class SearchController {
         itemsNames = itemService.getAllItemsNames();
     }
 
-    @PostMapping
-    public String handleSearchRequest(@RequestParam("text") String searchText, Model model) {
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<String>> handleSearchRequest(@RequestParam("text") String searchText) {
         List<String> searchResults = new ArrayList<>();
-
         for (String itemName : itemsNames) {
             if (itemName.toLowerCase().contains(searchText.toLowerCase())) {
                 searchResults.add(itemName);
             }
         }
-        model.addAttribute("searchResults", searchResults);
-        System.out.println(searchResults);
-        return "search";
-    }
-
-    @GetMapping
-    public String getSearchView() {
-        return "search";
+        return ResponseEntity.ok(searchResults);
     }
 
 }

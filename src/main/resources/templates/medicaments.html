@@ -246,11 +246,11 @@
         <div class="modal-content">
             <span class="close" id="closeModalBtn">&times;</span>
             <div id="modalData">
-                <p>ID: <span id="modalId"></span></p>
-                <p>Name: <span id="modalName"></span></p>
-                <p>Type: <span id="modalType"></span></p>
-                <p>Size: <span id="modalSize"></span></p>
-                <p>Weight: <span id="modalWeight"></span></p>
+                <p><span id="modalId"></span></p>
+                <p><span id="modalName"></span></p>
+                <p><span id="modalType"></span></p>
+                <p><span id="modalSize"></span></p>
+                <p><span id="modalWeight"></span></p>
             </div>
             <button id="bookmarkContainer" class="menu-button-items">
                 <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png"
@@ -738,11 +738,11 @@
         var closeModalBtn = document.getElementById("closeModalBtn");
 
         function showModal(data) {
-            modalName.textContent = data.name;
-            modalSize.textContent = data.size + " slots";
-            modalWeight.textContent = data.weight + " kg";
-            modalId.textContent = data.id;
-            modalType.textContent = data.type;
+            modalName.textContent = "Name: " + data.name;
+            modalSize.textContent = "Size:" + data.size + " slots";
+            modalWeight.textContent = "Weight:" + data.weight + " kg";
+            modalId.textContent = "ID: " + data.id;
+            modalType.textContent = "Type: " + data.type;
             modal.style.display = "block";
         }
 
