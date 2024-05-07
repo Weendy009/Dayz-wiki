@@ -15,15 +15,13 @@ public class Armor implements Item {
 
     private String name;
 
+    private String type;
+
     private int durability;
 
     private Double weight;
 
     private String size;
-
-    private String tier;
-
-    private String type;
 
     private String insulation;
 
@@ -35,7 +33,6 @@ public class Armor implements Item {
                 ", durability=" + durability +
                 ", weight=" + weight +
                 ", size='" + size + '\'' +
-                ", tier='" + tier + '\'' +
                 ", type='" + type + '\'' +
                 ", insulation='" + insulation + '\'' +
                 '}';
@@ -53,7 +50,6 @@ public class Armor implements Item {
         if (!Objects.equals(name, armor.name)) return false;
         if (!Objects.equals(weight, armor.weight)) return false;
         if (!Objects.equals(size, armor.size)) return false;
-        if (!Objects.equals(tier, armor.tier)) return false;
         if (!Objects.equals(type, armor.type)) return false;
         return Objects.equals(insulation, armor.insulation);
     }
@@ -65,7 +61,6 @@ public class Armor implements Item {
         result = 31 * result + durability;
         result = 31 * result + (weight != null ? weight.hashCode() : 0);
         result = 31 * result + (size != null ? size.hashCode() : 0);
-        result = 31 * result + (tier != null ? tier.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (insulation != null ? insulation.hashCode() : 0);
         return result;

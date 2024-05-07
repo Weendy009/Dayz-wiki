@@ -30,8 +30,8 @@ public class ViewResolverConfig {
 
     private ITemplateResolver templateResolver() {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-        ApplicationContextConfig applicationContextConfig = new ApplicationContextConfig();
-        resolver.setApplicationContext(applicationContextConfig.applicationContext());
+        ApplicationConfig applicationConfig = new ApplicationConfig();
+        resolver.setApplicationContext(applicationConfig.applicationContext());
         resolver.setPrefix("classpath:/templates/");
         resolver.setSuffix(".html");
         resolver.setTemplateMode(TemplateMode.HTML);

@@ -88,17 +88,6 @@
             transform: translate(-50%, -50%);
         }
 
-        .weight {
-            color: #f4f4f4;
-            display: flex;
-            gap: 30px;
-            width: 100%;
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
         #sorting-button:hover {
             background-color: #333;
             color: #fff;
@@ -170,6 +159,7 @@
         .car-button:hover {
             transform: scale(1.05);
         }
+
         .car-button:active {
             transform: scale(0.95);
         }
@@ -191,12 +181,6 @@
                 <h5>Tier 3 <input type="checkbox" id="tierCheckbox-4" name="tier" value="3"></h5>
                 <h5>Tier 4 <input type="checkbox" id="tierCheckbox-5" name="tier" value="4"></h5>
             </div>
-            <div class="weight">
-                <h5> 0kg < 2kg <input id="weightCheckbox-1" type="checkbox" name="tier" value="0-2"></h5>
-                <h5> 2kg < 5kg <input id="weightCheckbox-2" type="checkbox" name="tier" value="2-5"></h5>
-                <h5> 5kg < 10kg <input id="weightCheckbox-3" type="checkbox" name="tier" value="5-10"></h5>
-                <h5> 10kg < ∞kg <input id="weightCheckbox-4" type="checkbox" name="tier" value="10-∞"></h5>
-            </div>
             <button id="close-button" class="close-button">×</button>
         </div>
     </div>
@@ -206,11 +190,10 @@
             <div id="modalData">
                 <p>ID: <span id="modalId"></span></p>
                 <p>Name: <span id="modalName"></span></p>
-                <p>Capacity: <span id="modalCapacity"></span></p>
-                <p>Tier: <span id="modalTier"></span></p>
+                <p>Capacity: <span id="modalCapacity"></span> slots</p>
                 <p>Type: <span id="modalType"></span></p>
-                <p>Fuel tank: <span id="modalFuelTank"></span></p>
-                <p>Top Speed: <span id="modalTopSpeed"></span></p>
+                <p>Fuel tank: <span id="modalFuelTank"></span> l.</p>
+                <p>Top Speed: <span id="modalTopSpeed"></span> kph.</p>
             </div>
             <button id="bookmarkContainer" class="menu-button-items">
                 <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png"
@@ -225,7 +208,6 @@
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
-                    <th>Weight</th>
                     <th>Size</th>
                     <th>Tier</th>
                     <th>Type</th>
@@ -243,8 +225,7 @@
         <div id="cars" style="display: none;">
             <div class="row">
                 <div th:each="car : ${cars}" class="column">
-                    <button class="car-button" data-name="${car.name}" data-size="${car.size}"
-                            data-weight="${car.weight}" data-type="${car.type}" data-id="${car.id}">
+                    <button class="car-button" data-name="${car.name}" data-size="${car.size}" data-type="${car.type}" data-id="${car.id}">
                         <div class="link-items" th:text="${car.name}"></div>
                         <div class="link-items"
                              th:text="${car.fuelTank + ' l.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + car.topSpeed + ' kph.'}"></div>
@@ -612,8 +593,7 @@
         function addBookmark() {
             const formData = new FormData();
             formData.append("name", modalName.textContent);
-            formData.append("size", modalSize.textContent);
-            formData.append("weight", modalWeight.textContent);
+            formData.append("size", modalCapacity.textContent);
             formData.append("id", modalId.textContent);
             formData.append("type", modalType.textContent);
 
@@ -633,28 +613,25 @@
         var modal = document.getElementById("modal");
         var modalId = document.getElementById("modalId");
         var modalName = document.getElementById("modalName");
-        var modalWeight = document.getElementById("modalWeight");
         var modalCapacity = document.getElementById("modalCapacity");
-        var modalTier = document.getElementById("modalTier");
         var modalType = document.getElementById("modalType");
         var modalFuelTank = document.getElementById("modalFuelTank");
         var modalTopSpeed = document.getElementById("modalTopSpeed");
         var closeModalBtn = document.getElementById("closeModalBtn");
 
-        var modalSize = document.getElementById("modalSize");
-
         function showModal(data) {
+            modalId.textContent = data.id;
             modalName.textContent = data.name;
-            modalCapacity.textContent = data.capacity + " slots";
-            modalTier.textContent = data.tier;
+            modalCapacity.textContent = data.capacity;
             modalType.textContent = data.type;
-            modalFuelTank.textContent = data.fuelTank + " l.";
-            modalTopSpeed.textContent = data.topSpeed + " kph.";
+            modalFuelTank.textContent = data.fuelTank;
+            modalTopSpeed.textContent = data.topSpeed;
             modal.style.display = "block";
         }
 
         var carTypeButtons = document.querySelectorAll(".car-button");
         var carsData = [[${cars}]];
+
         function addClickEvent(buttons, data) {
             buttons.forEach(function (button, index) {
                 button.addEventListener("click", function () {

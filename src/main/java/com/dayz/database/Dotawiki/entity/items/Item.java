@@ -1,8 +1,8 @@
 package com.dayz.database.Dotawiki.entity.items;
 
+
 public interface Item {
     String getName();
-    Double getWeight();
-    String getTier();
+    Long getId();
     String getType();
 }

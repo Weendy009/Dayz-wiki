@@ -21,8 +21,6 @@ public class Medicine implements Item {
 
     private String size;
 
-    private String tier;
-
     private String type;
 
 
@@ -37,7 +35,6 @@ public class Medicine implements Item {
         if (!Objects.equals(name, medicine.name)) return false;
         if (!Objects.equals(weight, medicine.weight)) return false;
         if (!Objects.equals(size, medicine.size)) return false;
-        if (!Objects.equals(tier, medicine.tier)) return false;
         return Objects.equals(type, medicine.type);
     }
 
@@ -47,7 +44,6 @@ public class Medicine implements Item {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (weight != null ? weight.hashCode() : 0);
         result = 31 * result + (size != null ? size.hashCode() : 0);
-        result = 31 * result + (tier != null ? tier.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }

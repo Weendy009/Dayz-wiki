@@ -2,14 +2,17 @@ package com.dayz.database.Dotawiki.config;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @Configuration
-@ImportResource(locations = {"classpath*:applicationContext.xml"})
-public class ApplicationContextConfig {
+@ComponentScan(basePackages = {"com.dayz.database.Dotawiki.repository"})
+public class ApplicationConfig {
+
     @Bean
     public ApplicationContext applicationContext() {
-        return new org.springframework.context.support.ClassPathXmlApplicationContext();
+        return new ClassPathXmlApplicationContext();
     }
+
 }

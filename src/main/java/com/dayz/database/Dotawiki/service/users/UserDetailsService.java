@@ -1,6 +1,5 @@
 package com.dayz.database.Dotawiki.service.users;
 
-import com.dayz.database.Dotawiki.entity.users.User;
 import com.dayz.database.Dotawiki.entity.users.UserDetails;
 import com.dayz.database.Dotawiki.repository.UserDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,13 +7,13 @@ import com.dayz.database.Dotawiki.entity.users.UserRoles;
 import com.dayz.database.Dotawiki.repository.RolesRepository;
 import com.dayz.database.Dotawiki.repository.UserDetailsRepository;
 import com.dayz.database.Dotawiki.repository.UserRepository;
+import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

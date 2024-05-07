@@ -246,6 +246,7 @@
                 <p>Type: <span id="modalType"></span></p>
                 <p>Size: <span id="modalSize"></span></p>
                 <p>Weight: <span id="modalWeight"></span></p>
+                <p>Tier: <span id="modalTier"></span></p>
             </div>
             <button id="bookmarkContainer" class="menu-button-items">
                 <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png" alt="Bookmarks" typeof="submit">
@@ -706,6 +707,7 @@
             formData.append("name", modalName.textContent);
             formData.append("size", modalSize.textContent);
             formData.append("weight", modalWeight.textContent);
+            formData.append("tier", modalTier.textContent);
             formData.append("id", modalId.textContent);
             formData.append("type", modalType.textContent);
 
@@ -736,6 +738,7 @@
         var modalName = document.getElementById("modalName");
         var modalSize = document.getElementById("modalSize");
         var modalWeight = document.getElementById("modalWeight");
+        var modalTier = document.getElementById("modalTier");
         var modalType = document.getElementById("modalType");
         var modalId = document.getElementById("modalId");
         var closeModalBtn = document.getElementById("closeModalBtn");
@@ -745,6 +748,7 @@
             modalSize.textContent = data.size + " slots";
             modalWeight.textContent = data.weight + " kg";
             modalId.textContent = data.id;
+            modalTier.textContent = data.tier;
             modalType.textContent = data.type;
             modal.style.display = "block";
         }

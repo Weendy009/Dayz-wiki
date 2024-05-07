@@ -4,6 +4,7 @@ import com.dayz.database.Dotawiki.entity.bookmarks.Bookmark;
 import com.dayz.database.Dotawiki.entity.dto.BookmarkDTO;
 import com.dayz.database.Dotawiki.entity.items.Item;
 import com.dayz.database.Dotawiki.service.BookmarkService;
+import com.dayz.database.Dotawiki.service.items.IllnessesService;
 import com.dayz.database.Dotawiki.service.items.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,21 +16,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/bookmarks")
 public class BookmarksController {
     private final BookmarkService bookmarkService;
     private final ItemService itemService;
+    private final IllnessesService illnessesService;
 
     @Autowired
-    public BookmarksController(BookmarkService bookmarkService, ItemService itemService) {
+    public BookmarksController(BookmarkService bookmarkService, ItemService itemService, IllnessesService illnessesService) {
         this.bookmarkService = bookmarkService;
         this.itemService = itemService;
+        this.illnessesService = illnessesService;
     }
 
     @PostMapping("/add")
     public ResponseEntity<String> addBookmark(BookmarkDTO bookmarkDTO, HttpServletRequest request) {
+        System.out.println(bookmarkDTO);
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
         Bookmark bookmark = new Bookmark();
@@ -49,9 +54,15 @@ public class BookmarksController {
             Long userId = (Long) session.getAttribute("userId");
             List<Bookmark> bookmarks = bookmarkService.getAllBookmarkByUserId(userId);
             List<Item> bookmarkDTOS = new ArrayList<>();
+
             for (Bookmark bookmark : bookmarks) {
-                bookmarkDTOS.add(itemService.getItemByIdAndType(Long.valueOf(bookmark.getItemId()), bookmark.getItemType()));
+                if (bookmark.getItemType().equals("illnesses")) {
+                    bookmarkDTOS.add(illnessesService.getItemByIdAndType(Long.valueOf(bookmark.getItemId()), bookmark.getItemType()));
+                } else {
+                    bookmarkDTOS.add(itemService.getItemByIdAndType(Long.valueOf(bookmark.getItemId()), bookmark.getItemType()));
+                }
             }
+            bookmarkDTOS.removeIf(Objects::isNull);
             return ResponseEntity.ok(bookmarkDTOS);
         } catch (Exception e) {
             e.printStackTrace();

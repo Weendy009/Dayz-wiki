@@ -1,13 +1,13 @@
-package com.dayz.database.Dotawiki.entity;
+package com.dayz.database.Dotawiki.entity.items;
 
-import lombok.Data;
 import javax.persistence.*;
+import lombok.Data;
 import java.util.Objects;
 
 @Data
 @Entity
 @Table(name = "illnesses")
-public class Illnesses {
+public class Illnesses implements Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +21,8 @@ public class Illnesses {
     private String symptoms;
 
     private String treatment;
+
+    private String type;
 
     @Override
     public String toString() {
@@ -45,4 +47,5 @@ public class Illnesses {
     public int hashCode() {
         return Objects.hash(id, name, causes, symptoms, treatment);
     }
+
 }
