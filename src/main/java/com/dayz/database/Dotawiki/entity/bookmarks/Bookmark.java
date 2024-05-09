@@ -21,5 +21,5 @@ public class Bookmark {
     private String itemType;
 
     @Column(name = "item_id")
-    private String itemId;
+    private Long itemId;
 }

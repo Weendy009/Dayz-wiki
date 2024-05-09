@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class BookmarkDTO {
-    private String id;
+    private Long id;
     private String name;
     private String type;
 

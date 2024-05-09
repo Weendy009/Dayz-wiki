@@ -7,7 +7,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ItemRepository {
-    Item getItemByIdAndType(Long itemId, String itemType);
+
+    Item getItemByIdAndType(Long id, String type);
 
     @Query(value = "SELECT name FROM illnesses WHERE name LIKE %:name% " +
             "UNION ALL SELECT name FROM armors WHERE name LIKE %:name% " +

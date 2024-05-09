@@ -20,8 +20,8 @@ public class BookmarkService {
         bookmarkRepository.save(bookmark);
     }
 
-    public void deleteBookmarkByItemId(String itemId) {
-        bookmarkRepository.deleteBookmarkByItemId(itemId);
+    public void deleteBookmarkByItemIdAndType(Long itemId,String type) {
+        bookmarkRepository.deleteBookmarkByItemIdAndItemType(itemId, type);
     }
 
     public List<Bookmark> getAllBookmarkByUserId(Long userId) {

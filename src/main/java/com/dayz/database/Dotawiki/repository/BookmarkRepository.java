@@ -14,6 +14,6 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
 
     @Transactional
     @Modifying
-    public void deleteBookmarkByItemId(String itemId);
+    public void deleteBookmarkByItemIdAndItemType(Long itemId, String itemType);
 
 }

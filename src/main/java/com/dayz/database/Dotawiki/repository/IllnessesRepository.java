@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IllnessesRepository extends JpaRepository<Illnesses, Long>, ItemRepository {
-    Illnesses getByIdAndType(Long id, String type);
 }
