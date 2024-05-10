@@ -24,6 +24,27 @@
           href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/button-menu.css">
 
     <style>
+        .modal-content-bookmark {
+            position: fixed;
+            top: 50%;
+            left: 37%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid white;
+            color: #FFFFFF;
+            background-color: rgba(50, 50, 50, 0.6);
+        }
+        #bookmarksTable tbody tr {
+            padding: 15px 0;
+        }
+
+        #bookmarksTable tbody tr td {
+            padding: 0 15px;
+        }
         .row {
             display: flex;
             flex-wrap: wrap;
@@ -259,25 +280,19 @@
         </div>
     </div>
     <div id="bookmarksModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content-bookmark">
             <table id="bookmarksTable">
                 <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Weight</th>
-                    <th>Size</th>
-                    <th>Tier</th>
-                    <th>Type</th>
-                    <th>Delete</th>
+                <tr id="typeHeaderRow">
+                    <th colspan="7" id="typeHeaderCell"></th>
                 </tr>
                 </thead>
                 <tbody>
-
                 </tbody>
             </table>
         </div>
     </div>
+
     <h1 id="weapon-name">Tablets</h1>
     <div class="weapon-info">
         <div id="tablets" style="display: none;">
@@ -525,6 +540,21 @@
     </div>
 </div>
 <script th:inline="javascript">
+    function setModalHeight() {
+        const modalContent = document.querySelector(".modal-content-bookmark");
+        const table = document.getElementById("bookmarksTable");
+        const contentHeight = table.clientHeight;
+        const maxHeight = window.innerHeight * 0.8;
+
+        if (contentHeight > maxHeight) {
+            modalContent.style.height = maxHeight + "px";
+        } else {
+            modalContent.style.height = "auto";
+        }
+    }
+    window.addEventListener("DOMContentLoaded", setModalHeight);
+    window.addEventListener("resize", setModalHeight);
+
     document.addEventListener('DOMContentLoaded', function () {
         const buttonSort = document.getElementById('sorting-button');
         const menu = document.getElementById('sorting-menu');
@@ -532,26 +562,17 @@
         const row = document.querySelector('.row');
         const bookmarksButton = document.getElementById("bookmarksButton");
         const bookmarksModal = document.getElementById("bookmarksModal");
-        const bookmarksTableBody = document.querySelector("#bookmarksTable tbody");
 
         bookmarksButton.addEventListener("click", function () {
-            bookmarksTableBody.innerHTML = "";
-
-            fetch('/bookmarks/getAll', {
-                method: 'GET'
-            }).then(response => {
-                console.log(response)
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
+            fetch('/bookmarks/getAll')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
-                    console.log(data)
-                    data.forEach(bookmark => {
-                        addToBookmarksTable(bookmark);
-                    });
-
+                    addToBookmarksTableByType(data);
                     bookmarksModal.style.display = "block";
                 })
                 .catch(error => {
@@ -559,29 +580,52 @@
                 });
         });
 
-        function addToBookmarksTable(item) {
+        function addToBookmarksTableByType(items) {
             const tableBody = document.querySelector("#bookmarksTable tbody");
-            const newRow = tableBody.insertRow();
 
-            const fields = ['id', 'name', 'weight', 'size', 'tier', 'type'];
+            tableBody.innerHTML = "";
 
-            fields.forEach(field => {
-                const cell = newRow.insertCell();
-                cell.textContent = item.hasOwnProperty(field) ? item[field] : '';
+            const rowsByType = {};
+
+            items.forEach(item => {
+                if (!rowsByType[item.type]) {
+                    rowsByType[item.type] = [];
+                }
+                rowsByType[item.type].push(item);
             });
 
-            const deleteCell = newRow.insertCell();
-            const deleteButton = document.createElement("button");
-            deleteButton.textContent = "Delete";
-            deleteButton.classList.add("btn", "btn-danger");
-            deleteButton.addEventListener("click", function () {
-                deleteBookmark(item.id);
-            });
-            deleteCell.appendChild(deleteButton);
+            for (const type in rowsByType) {
+                if (rowsByType.hasOwnProperty(type)) {
+                    const typeRow = tableBody.insertRow();
+                    const typeCell = typeRow.insertCell();
+                    typeCell.colSpan = Object.keys(items[0]).length + 1;
+                    typeCell.textContent = "---------------------------------------------------------------------------------- Type: " + type + " ----------------------------------------------------------------------------------";
+                    typeCell.classList.add("type-header");
+
+                    rowsByType[type].forEach(item => {
+                        const newRow = tableBody.insertRow();
+                        for (const field in item) {
+                            if (item.hasOwnProperty(field)) {
+                                const cell = newRow.insertCell();
+                                cell.textContent = item[field];
+                            }
+                        }
+                        const deleteCell = newRow.insertCell();
+                        const deleteButton = document.createElement("button");
+                        deleteButton.textContent = "Delete";
+                        deleteButton.classList.add("btn", "btn-danger");
+                        deleteButton.addEventListener("click", function () {
+                            deleteBookmark(item.id, item.type);
+                        });
+                        deleteCell.appendChild(deleteButton);
+                    });
+                }
+            }
         }
 
-        function deleteBookmark(bookmarkId) {
-            fetch(`/bookmarks/delete/${bookmarkId}`, {
+
+        function deleteBookmark(bookmarkId, bookmarkType) {
+            fetch(`/bookmarks/delete/${bookmarkId}-${bookmarkType}`, {
                 method: 'DELETE',
             })
                 .then(response => {
@@ -612,9 +656,7 @@
                     return response.json();
                 })
                 .then(data => {
-                    data.forEach(bookmark => {
-                        addToBookmarksTable(bookmark);
-                    });
+                    addToBookmarksTableByType(data);
                 })
                 .catch(error => {
                     console.error('Ошибка при обновлении данных и таблицы:', error);

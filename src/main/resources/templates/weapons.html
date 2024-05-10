@@ -24,6 +24,27 @@
           href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/button-menu.css">
 
     <style>
+        .modal-content-bookmark {
+            position: fixed;
+            top: 50%;
+            left: 37%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid white;
+            color: #FFFFFF;
+            background-color: rgba(50, 50, 50, 0.6);
+        }
+        #bookmarksTable tbody tr {
+            padding: 15px 0;
+        }
+
+        #bookmarksTable tbody tr td {
+            padding: 0 15px;
+        }
         .row {
             display: flex;
             flex-wrap: wrap;
@@ -211,6 +232,53 @@
             transform: scale(0.90);
         }
 
+        .rifle-type-button:hover {
+            transform: scale(1.1);
+        }
+
+        .rifle-type-button:active {
+            transform: scale(0.90);
+        }
+
+        .shotgun-type-button:hover {
+            transform: scale(1.1);
+        }
+
+        .shotgun-type-button:active {
+            transform: scale(0.90);
+        }
+
+        .shotgun-type-button {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .rifle-type-button {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
     </style>
 
 </head>
@@ -247,6 +315,8 @@
                 <p>Size: <span id="modalSize"></span></p>
                 <p>Weight: <span id="modalWeight"></span></p>
                 <p>Tier: <span id="modalTier"></span></p>
+                <p>Caliber: <span id="modalCaliber"></span></p>
+                <p>Damage: <span id="modalDamage"></span></p>
             </div>
             <button id="bookmarkContainer" class="menu-button-items">
                 <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png" alt="Bookmarks" typeof="submit">
@@ -254,25 +324,19 @@
         </div>
     </div>
     <div id="bookmarksModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content-bookmark">
             <table id="bookmarksTable">
                 <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Weight</th>
-                    <th>Size</th>
-                    <th>Tier</th>
-                    <th>Type</th>
-                    <th>Delete</th>
+                <tr id="typeHeaderRow">
+                    <th colspan="7" id="typeHeaderCell"></th>
                 </tr>
                 </thead>
                 <tbody>
-
                 </tbody>
             </table>
         </div>
     </div>
+
 
     <h1 id="weapon-name">Холодное оружие</h1>
     <div class="weapon-info">
@@ -280,9 +344,11 @@
         <div id="melee-buttons" style="display: none;">
             <div class="row">
                 <div th:each="steelArm : ${steelArms}" class="column">
-                    <button class="weapon-type-button" data-name="${steelArm.name}" data-size="${steelArm.size}" data-weight="${steelArm.weight}" data-type="${steelArm.type}" data-id="${steelArm.id}">
+                    <button class="weapon-type-button" data-name="${steelArm.name}" data-size="${steelArm.size}" data-weight="${steelArm.weight}"
+                            data-type="${steelArm.type}" data-id="${steelArm.id}" data-damge="${steelArm.damage}" data-caliber="${steelArm.caliber}">
                         <div class="link-items" th:text="${steelArm.name}"></div>
                         <div class="link-items" th:text="${steelArm.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + steelArm.weight + ' kg.'}"></div>
+                        <div class="link-items" th:text="${steelArm.damage}"></div>
                     </button>
                 </div>
             </div>
@@ -290,10 +356,13 @@
         <div id="ranged-buttons" style="display: none;">
             <div class="row">
                 <div th:each="pistol : ${pistols}" class="column">
-                    <button class="ranged-type-button" data-name="${pistol.name}" data-size="${pistol.size}" data-weight="${pistol.weight}" data-type="${steelArm.type}" data-id="${steelArm.id}">
+                    <button class="ranged-type-button" data-name="${pistol.name}" data-size="${pistol.size}"
+                            data-weight="${pistol.weight}" data-type="${pistol.type}" data-id="${pistol.id}" data-damge="${pistol.damage}" data-caliber="${pistol.caliber}">
                         <div class="link-items" th:text="${pistol.name}"></div>
                         <div class="link-items"
                              th:text="${pistol.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + pistol.weight + ' kg.'}"></div>
+                        <div class="link-items" th:text="${pistol.caliber}"></div>
+                        <div class="link-items" th:text="${pistol.damage}"></div>
                     </button>
                 </div>
             </div>
@@ -301,15 +370,43 @@
         <div id="pp-buttons" style="display: none;">
             <div class="row">
                 <div th:each="submachineGun : ${submachineGuns}" class="column">
-                    <button class="pp-type-button" data-name="${submachineGun.name}" data-size="${submachineGun.size}" data-weight="${submachineGun.weight}" data-type="${steelArm.type}" data-id="${steelArm.id}">
+                    <button class="pp-type-button" data-name="${submachineGun.name}" data-size="${submachineGun.size}"
+                            data-weight="${submachineGun.weight}" data-type="${submachineGun.type}" data-id="${submachineGun.id}" data-damge="${submachineGun.damage}" data-caliber="${submachineGun.caliber}">
                         <div class="link-items" th:text="${submachineGun.name}"></div>
                         <div class="link-items"
                              th:text="${submachineGun.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + submachineGun.weight + ' kg.'}"></div>
+                        <div class="link-items" th:text="${submachineGun.caliber}"></div>
+                        <div class="link-items" th:text="${submachineGun.damage}"></div>
                     </button>
                 </div>
             </div>
         </div>
-
+        <div id="rifle-buttons" style="display: none;">
+            <div class="row">
+                <div th:each="rifle : ${rifles}" class="column">
+                    <button class="rifle-type-button" data-name="${rifle.name}" data-size="${rifle.size}" data-weight="${rifle.weight}" data-type="${rifle.type}"
+                            data-id="${rifle.id}" data-caliber="${rifle.caliber}" data-damge="${shotgun.damage}">
+                        <div class="link-items" th:text="${rifle.name}"></div>
+                        <div class="link-items" th:text="${rifle.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + rifle.weight + ' kg.'}"></div>
+                        <div class="link-items" th:text="${rifle.caliber}"></div>
+                        <div class="link-items" th:text="${rifle.damage}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="shotgun-buttons" style="display: none;">
+            <div class="row">
+                <div th:each="shotgun : ${shotguns}" class="column">
+                    <button class="shotgun-type-button" data-name="${shotgun.name}" data-size="${shotgun.size}" data-weight="${shotgun.weight}"
+                            data-type="${shotgun.type}" data-id="${shotgun.id}" data-caliber="${shotgun.caliber}" data-damge="${shotgun.damage}">
+                        <div class="link-items" th:text="${shotgun.name}"></div>
+                        <div class="link-items" th:text="${shotgun.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + shotgun.weight + ' kg.'}"></div>
+                        <div class="link-items" th:text="${shotgun.caliber}"></div>
+                        <div class="link-items" th:text="${shotgun.damage}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -520,6 +617,21 @@
     </div>
 </div>
 <script th:inline="javascript">
+    function setModalHeight() {
+        const modalContent = document.querySelector(".modal-content-bookmark");
+        const table = document.getElementById("bookmarksTable");
+        const contentHeight = table.clientHeight;
+        const maxHeight = window.innerHeight * 0.8;
+
+        if (contentHeight > maxHeight) {
+            modalContent.style.height = maxHeight + "px";
+        } else {
+            modalContent.style.height = "auto";
+        }
+    }
+    window.addEventListener("DOMContentLoaded", setModalHeight);
+    window.addEventListener("resize", setModalHeight);
+
     document.addEventListener('DOMContentLoaded', function () {
         const buttonSort = document.getElementById('sorting-button');
         const menu = document.getElementById('sorting-menu');
@@ -527,26 +639,17 @@
         const row = document.querySelector('.row');
         const bookmarksButton = document.getElementById("bookmarksButton");
         const bookmarksModal = document.getElementById("bookmarksModal");
-        const bookmarksTableBody = document.querySelector("#bookmarksTable tbody");
 
         bookmarksButton.addEventListener("click", function () {
-            bookmarksTableBody.innerHTML = "";
-
-            fetch('/bookmarks/getAll', {
-                method: 'GET'
-            }).then(response => {
-                console.log(response)
+            fetch('/bookmarks/getAll')
+                .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data)
-                    data.forEach(bookmark => {
-                        addToBookmarksTable(bookmark);
-                    });
-
+                    addToBookmarksTableByType(data);
                     bookmarksModal.style.display = "block";
                 })
                 .catch(error => {
@@ -554,28 +657,52 @@
                 });
         });
 
-        function addToBookmarksTable(item) {
+        function addToBookmarksTableByType(items) {
             const tableBody = document.querySelector("#bookmarksTable tbody");
-            const newRow = tableBody.insertRow();
 
-            const fields = ['id', 'name', 'weight', 'size', 'tier', 'type'];
+            tableBody.innerHTML = "";
 
-            fields.forEach(field => {
-                const cell = newRow.insertCell();
-                cell.textContent = item.hasOwnProperty(field) ? item[field] : '';
+            const rowsByType = {};
+
+            items.forEach(item => {
+                if (!rowsByType[item.type]) {
+                    rowsByType[item.type] = [];
+                }
+                rowsByType[item.type].push(item);
             });
 
-            const deleteCell = newRow.insertCell();
-            const deleteButton = document.createElement("button");
-            deleteButton.textContent = "Delete";
-            deleteButton.classList.add("btn", "btn-danger");
-            deleteButton.addEventListener("click", function () {
-                deleteBookmark(item.id);
-            });
-            deleteCell.appendChild(deleteButton);
+            for (const type in rowsByType) {
+                if (rowsByType.hasOwnProperty(type)) {
+                    const typeRow = tableBody.insertRow();
+                    const typeCell = typeRow.insertCell();
+                    typeCell.colSpan = Object.keys(items[0]).length + 1;
+                    typeCell.textContent = "---------------------------------------------------------------------------------- Type: " + type + " ----------------------------------------------------------------------------------";
+                    typeCell.classList.add("type-header");
+
+                    rowsByType[type].forEach(item => {
+                        const newRow = tableBody.insertRow();
+                        for (const field in item) {
+                            if (item.hasOwnProperty(field)) {
+                                const cell = newRow.insertCell();
+                                cell.textContent = item[field];
+                            }
+                        }
+                        const deleteCell = newRow.insertCell();
+                        const deleteButton = document.createElement("button");
+                        deleteButton.textContent = "Delete";
+                        deleteButton.classList.add("btn", "btn-danger");
+                        deleteButton.addEventListener("click", function () {
+                            deleteBookmark(item.id, item.type);
+                        });
+                        deleteCell.appendChild(deleteButton);
+                    });
+                }
+            }
         }
-        function deleteBookmark(bookmarkId) {
-            fetch(`/bookmarks/delete/${bookmarkId}`, {
+
+
+        function deleteBookmark(bookmarkId, bookmarkType) {
+            fetch(`/bookmarks/delete/${bookmarkId}-${bookmarkType}`, {
                 method: 'DELETE',
             })
                 .then(response => {
@@ -606,9 +733,7 @@
                     return response.json();
                 })
                 .then(data => {
-                    data.forEach(bookmark => {
-                        addToBookmarksTable(bookmark);
-                    });
+                    addToBookmarksTableByType(data);
                 })
                 .catch(error => {
                     console.error('Ошибка при обновлении данных и таблицы:', error);
@@ -707,6 +832,8 @@
             formData.append("tier", modalTier.textContent);
             formData.append("id", modalId.textContent);
             formData.append("type", modalType.textContent);
+            formData.append("caliber", modalCaliber.textContent);
+            formData.append("damage", modalDamage.textContent);
 
             fetch('/bookmarks/add', {
                 method: 'POST',
@@ -726,10 +853,14 @@
         var weaponTypeButtons = document.querySelectorAll(".weapon-type-button");
         var rangedTypeButtons = document.querySelectorAll(".ranged-type-button");
         var ppTypeButtons = document.querySelectorAll(".pp-type-button");
+        var rifelsTypeButtons = document.querySelectorAll(".rifle-type-button");
+        var shotgunsTypeButtons = document.querySelectorAll(".shotgun-type-button");
 
         var steelArmsData = [[${steelArms}]];
         var pistolsData = [[${pistols}]];
         var submachineGunsData = [[${submachineGuns}]];
+        var shotgunsData = [[${shotguns}]];
+        var riflesData = [[${rifles}]];
 
         var modal = document.getElementById("modal");
         var modalName = document.getElementById("modalName");
@@ -738,6 +869,8 @@
         var modalTier = document.getElementById("modalTier");
         var modalType = document.getElementById("modalType");
         var modalId = document.getElementById("modalId");
+        var modalCaliber = document.getElementById("modalCaliber");
+        var modalDamage = document.getElementById("modalDamage");
         var closeModalBtn = document.getElementById("closeModalBtn");
 
         function showModal(data) {
@@ -747,6 +880,8 @@
             modalId.textContent = data.id;
             modalTier.textContent = data.tier;
             modalType.textContent = data.type;
+            modalCaliber.textContent = data.caliber;
+            modalDamage.textContent = data.damage;
             modal.style.display = "block";
         }
 
@@ -761,6 +896,8 @@
         addClickEvent(weaponTypeButtons, steelArmsData);
         addClickEvent(rangedTypeButtons, pistolsData);
         addClickEvent(ppTypeButtons, submachineGunsData);
+        addClickEvent(rifelsTypeButtons, riflesData);
+        addClickEvent(shotgunsTypeButtons, shotgunsData);
 
         closeModalBtn.addEventListener("click", function () {
             modal.style.display = "none";
@@ -1022,8 +1159,6 @@
             field.classList.remove('error-input');
         });
     }
-
-
 </script>
 <script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/weapons.js"></script>
 <!--<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>-->

@@ -30,6 +30,8 @@ public class EquipmentController {
         model.addAttribute("steelArms", weaponService.getAllWeaponsByType("steel arms"));
         model.addAttribute("pistols", weaponService.getAllWeaponsByType("pistol"));
         model.addAttribute("submachineGuns", weaponService.getAllWeaponsByType("submachine guns"));
+        model.addAttribute("rifles", weaponService.getAllWeaponsByType("rifle"));
+        model.addAttribute("shotguns", weaponService.getAllWeaponsByType("shotgun"));
         return "weapons";
     }
     @GetMapping("/equipment")

@@ -24,6 +24,10 @@ public class Weapon implements Item {
 
     private String type;
 
+    private String caliber;
+
+    private int damage;
+
     @Override
     public String toString() {
         return "Weapon{" +
@@ -33,6 +37,8 @@ public class Weapon implements Item {
                 ", size='" + size + '\'' +
                 ", tier='" + tier + '\'' +
                 ", type='" + type + '\'' +
+                ", caliber='" + caliber + '\'' +
+                ", damage=" + damage +
                 '}';
     }
 
@@ -40,25 +46,12 @@ public class Weapon implements Item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Weapon weapon = (Weapon) o;
-
-        if (!Objects.equals(id, weapon.id)) return false;
-        if (!Objects.equals(name, weapon.name)) return false;
-        if (!Objects.equals(weight, weapon.weight)) return false;
-        if (!Objects.equals(size, weapon.size)) return false;
-        if (!Objects.equals(tier, weapon.tier)) return false;
-        return Objects.equals(type, weapon.type);
+        return damage == weapon.damage && Objects.equals(id, weapon.id) && Objects.equals(name, weapon.name) && Objects.equals(weight, weapon.weight) && Objects.equals(size, weapon.size) && Objects.equals(tier, weapon.tier) && Objects.equals(type, weapon.type) && Objects.equals(caliber, weapon.caliber);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (weight != null ? weight.hashCode() : 0);
-        result = 31 * result + (size != null ? size.hashCode() : 0);
-        result = 31 * result + (tier != null ? tier.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        return result;
+        return Objects.hash(id, name, weight, size, tier, type, caliber, damage);
     }
 }
