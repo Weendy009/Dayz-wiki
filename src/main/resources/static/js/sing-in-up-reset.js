@@ -1,4 +1,5 @@
 let username = sessionStorage.getItem("username");
+
 const handleAuthorizedUser = () => {
     const customLoginButton = document.getElementById('customLoginButton');
     const btnIconImg = customLoginButton.querySelector('.btn-icon-img');
@@ -21,12 +22,24 @@ const handleAuthorizedUser = () => {
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
             </div>
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" id="logoutButton" style="border-radius: 15px">Выйти</button>
           </div>
         </div>
       </div>
     `;
         $('body').append(welcomeModal);
         $('#welcomeModal').modal('show');
+
+        const logoutButton = document.getElementById('logoutButton');
+        if (logoutButton) {
+            logoutButton.addEventListener('click', function () {
+                let isAuthenticated = false;
+                let serializedObject = JSON.stringify(isAuthenticated);
+                sessionStorage.removeItem("isAuthenticated");
+                sessionStorage.setItem("isAuthenticated", serializedObject);
+                handleAuthorizedUser();
+            });
+        }
     });
 };
 
@@ -89,49 +102,16 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
 
 });
 
-
 document.querySelector(".register-button-containerTwo button").addEventListener("click", function () {
     closeModal('#registerModal');
     closeModal('#resetPasswordModal')
     $('#loginModal').modal('show');
 });
 
-const resetPasswordLoginButton = document.querySelector('#resetPasswordModal .register-button-containerTwo button');
-
-resetPasswordLoginButton.addEventListener('click', function () {
-    closeModal('#resetPasswordModal');
-    $('#loginModal').modal('show');
-});
-
-
-document.querySelector(".forgot-password-button-container button").addEventListener("click", function () {
-    closeModal('#loginModal');
-    $('#resetPasswordModal').modal('show');
-});
-
 function closeModal(modalSelector) {
     $(modalSelector).modal('hide');
 }
 
-function showNotification(message, type, duration) {
-    const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-times-circle';
-    const notification = $(`
-<div class="alert alert-${type} d-flex align-items-center">
-    <i class="fas ${iconClass} mr-2"></i>
-    <span>${message}</span>
-    <div class="progress-bar"></div>
-</div>`
-    );
-
-    $('.notifications').append(notification);
-
-    const progressBar = notification.find('.progress-bar');
-    progressBar.animate({width: '100%'}, duration, function () {
-        notification.fadeOut(300, function () {
-            $(this).remove();
-        });
-    });
-}
 
 document.querySelector(".register-button-container button").addEventListener("click", function () {
     $('#loginModal').modal('hide');
@@ -161,7 +141,6 @@ document.getElementById("registerForm").addEventListener("submit", function (eve
         data: JSON.stringify(formData),
         contentType: 'application/json',
         success: function (response) {
-            console.log(response);
             if (response === "success") {
                 showNotification("Registration successful!", "success", 3000);
                 setTimeout(function () {
@@ -235,3 +214,13 @@ function clearFieldErrors(fields) {
         field.classList.remove('error-input');
     });
 }
+
+const resetPasswordLoginButton = document.querySelector('#resetPasswordModal .register-button-containerTwo button');
+resetPasswordLoginButton.addEventListener('click', function () {
+    closeModal('#resetPasswordModal');
+    $('#loginModal').modal('show');
+});
+document.querySelector(".forgot-password-button-container button").addEventListener("click", function () {
+    closeModal('#loginModal');
+    $('#resetPasswordModal').modal('show');
+});

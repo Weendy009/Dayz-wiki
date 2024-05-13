@@ -17,7 +17,7 @@ public class IllnessesController {
     }
 
     @GetMapping("/illnesses")
-    public String showView(Model model) {
+    public String showIllnesses(Model model) {
         model.addAttribute("illnesses", illnessesService.getAllIllnesses());
         return "illnesses";
     }

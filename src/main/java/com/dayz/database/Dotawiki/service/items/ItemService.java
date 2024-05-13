@@ -15,29 +15,21 @@ import java.util.Objects;
 public class ItemService {
 
     private final ItemRepository itemRepository;
-    private final ArmorRepository armorRepository;
-    private final MedicineRepository medicineRepository;
-    private final IllnessesRepository illnessesRepository;
-    private final CarRepository carRepository;
 
     @Autowired
-    public ItemService(@Qualifier("weaponRepository") ItemRepository itemRepository, ArmorRepository armorRepository,
-                       MedicineRepository medicineRepository, IllnessesRepository illnessesRepository, CarRepository carRepository) {
+    public ItemService(@Qualifier("weaponRepository") ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
-        this.armorRepository = armorRepository;
-        this.medicineRepository = medicineRepository;
-        this.illnessesRepository = illnessesRepository;
-        this.carRepository = carRepository;
     }
 
     public List<Item> getItemsByIdAndType(List<Bookmark> bookmarks) {
         List<Item> resultItems = new ArrayList<>();
         for (Bookmark bookmark : bookmarks) {
-            resultItems.add(itemRepository.getItemByIdAndType(bookmark.getItemId(), bookmark.getItemType()));
-            resultItems.add(armorRepository.getItemByIdAndType(bookmark.getItemId(), bookmark.getItemType()));
-            resultItems.add(medicineRepository.getItemByIdAndType(bookmark.getItemId(), bookmark.getItemType()));
-            resultItems.add(illnessesRepository.getItemByIdAndType(bookmark.getItemId(), bookmark.getItemType()));
-            resultItems.add(carRepository.getItemByIdAndType(bookmark.getItemId(), bookmark.getItemType()));
+            resultItems.add(itemRepository.getIllnessesByIdAndType(bookmark.getItemId(), bookmark.getItemType()));
+            resultItems.add(itemRepository.getArmorByIdAndType(bookmark.getItemId(), bookmark.getItemType()));
+            resultItems.add(itemRepository.getCarByIdAndType(bookmark.getItemId(), bookmark.getItemType()));
+            resultItems.add(itemRepository.getWeaponByIdAndType(bookmark.getItemId(), bookmark.getItemType()));
+            resultItems.add(itemRepository.getMedicineByIdAndType(bookmark.getItemId(), bookmark.getItemType()));
+            resultItems.add(itemRepository.getFoodByIdAndType(bookmark.getItemId(), bookmark.getItemType()));
         }
         resultItems.removeIf(Objects::isNull);
         return resultItems;

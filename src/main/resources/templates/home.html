@@ -130,6 +130,104 @@
             padding: 0 15px;
         }
 
+        .modali {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 50%;
+            height: 50%;
+            overflow: auto;
+        }
+
+        .modal-content-menu {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            color: black;
+            font-size: 22px;
+            box-shadow: none;
+            border-radius: 22px;
+            background-color: rgba(255, 255, 255, 0.6);
+            background-color: #fefefe;
+            margin: 5% 0 0 5%;
+            padding: 20px;
+            opacity: 70%;
+            border: 1px solid #888;
+            width: 90%;
+            height: 90%;
+        }
+
+        /* Закрыть кнопку */
+        .close1 {
+            color: #000000;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .close1:hover,
+        .close1:focus {
+            color: #555555;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .table {
+            display: flex;
+            justify-content: center;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .cell {
+            flex: 1 1 200px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #333;
+            margin: 10px 0;
+        }
+
+        @media screen and (max-width: 600px) {
+            .modal-content-menu {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+
+            .cell {
+                flex: 1 1 100%;
+            }
+        }
+
     </style>
 
 </head>
@@ -146,7 +244,7 @@
         </div>
     </form>
     <hr id="hr_1">
-    <button id="toggleButton" class="menu-button">
+    <button id="toggleButton" class="menu-button" onclick="document.getElementById('myModal').style.display='block'" >
         <div class="icon" id="icon">&#8801;</div>
     </button>
     <button id="bookmarksButton" class="menu-button">
@@ -207,35 +305,42 @@
     </div>
 </div>
 
-<div id="myModal" class="modal">
-    <div class="modal-content-two">
+<div id="myModal" class="modali">
+    <div class="modal-content-menu">
         <div class="header">
             <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/website-logo.png"
                  alt="Логотип DAYZ">
-            <p>Онлайн справочник по Dayz
-            <p>
+            &nbsp;&nbsp;&nbsp;
+            <p>Онлайн справочник по Dayz</p>
         </div>
+        <button type="button" class="close1" aria-label="Close" onclick="document.getElementById('myModal').style.display='none'">
+            <span aria-hidden="true">&times;</span>
+        </button>
         <div class="table">
             <div class="row">
-                <div class="cell"><p>Медицина</p>
-                    <hr id="hr1">
+                <div class="cell">
+                    <p>Медицина</p>
+                    <hr>
                     <p><a href="/medicaments">Медикаменты</a></p>
                     <p><a href="/illnesses">Заболевания</a></p>
                     <p>Советы</p>
                 </div>
-                <div class="cell"><p>Снаряжение</p>
-                    <hr id="hr2">
+                <div class="cell">
+                    <p>Снаряжение</p>
+                    <hr>
                     <p><a href="/equipment">Броня-Одежда</a></p>
                     <p><a href="/weapons">Оружия</a></p>
                     <p><a href="/advice_equipment">Советы</a></p>
                 </div>
-                <div class="cell"><p>Разное</p>
-                    <hr id="hr4">
+                <div class="cell">
+                    <p>Разное</p>
+                    <hr>
                     <p><a href="/cars">Машины</a></p>
                     <p>Предметы</p>
                 </div>
-                <div class="cell"><p>Мир игры</p>
-                    <hr id="hr3">
+                <div class="cell">
+                    <p>Мир игры</p>
+                    <hr>
                     <p>История создания</p>
                     <p>Локации</p>
                 </div>
@@ -243,6 +348,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
      aria-hidden="true">
@@ -371,8 +477,6 @@
         </div>
     </div>
 </div>
-<!--<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>-->
-<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>
 <script>
     function setModalHeight() {
         const modalContent = document.querySelector(".modal-content-bookmark");
@@ -422,245 +526,6 @@
             });
     });
 
-
-    const row = document.querySelector('.row');
-    const bookmarksButton = document.getElementById("bookmarksButton");
-    const bookmarksModal = document.getElementById("bookmarksModal");
-
-    bookmarksButton.addEventListener("click", function () {
-        fetch('/bookmarks/getAll')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                addToBookmarksTableByType(data);
-                bookmarksModal.style.display = "block";
-            })
-            .catch(error => {
-                console.error('Ошибка при получении данных с сервера:', error);
-            });
-    });
-
-    function addToBookmarksTableByType(items) {
-        const tableBody = document.querySelector("#bookmarksTable tbody");
-
-        tableBody.innerHTML = "";
-
-        const rowsByType = {};
-
-        items.forEach(item => {
-            if (!rowsByType[item.type]) {
-                rowsByType[item.type] = [];
-            }
-            rowsByType[item.type].push(item);
-        });
-
-        for (const type in rowsByType) {
-            if (rowsByType.hasOwnProperty(type)) {
-                const typeRow = tableBody.insertRow();
-                const typeCell = typeRow.insertCell();
-                typeCell.colSpan = Object.keys(items[0]).length + 1;
-                typeCell.textContent = "---------------------------------------------------------------------------------- Type: " + type + " ----------------------------------------------------------------------------------";
-                typeCell.classList.add("type-header");
-
-                rowsByType[type].forEach(item => {
-                    const newRow = tableBody.insertRow();
-                    for (const field in item) {
-                        if (item.hasOwnProperty(field)) {
-                            const cell = newRow.insertCell();
-                            cell.textContent = item[field];
-                        }
-                    }
-                    const deleteCell = newRow.insertCell();
-                    const deleteButton = document.createElement("button");
-                    deleteButton.textContent = "Delete";
-                    deleteButton.classList.add("btn", "btn-danger");
-                    deleteButton.addEventListener("click", function () {
-                        deleteBookmark(item.id, item.type);
-                    });
-                    deleteCell.appendChild(deleteButton);
-                });
-            }
-        }
-    }
-
-
-    function deleteBookmark(bookmarkId, bookmarkType) {
-        fetch(`/bookmarks/delete/${bookmarkId}-${bookmarkType}`, {
-            method: 'DELETE',
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.status === 'success') {
-                    refreshBookmarksTable();
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка при удалении закладки:', error);
-            });
-    }
-
-    function refreshBookmarksTable() {
-        const tableBody = document.querySelector("#bookmarksTable tbody");
-        tableBody.innerHTML = "";
-
-        fetch('/bookmarks/getAll')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                addToBookmarksTableByType(data);
-            })
-            .catch(error => {
-                console.error('Ошибка при обновлении данных и таблицы:', error);
-            });
-    }
-
-    window.addEventListener("click", function (event) {
-        if (event.target === bookmarksModal) {
-            bookmarksModal.style.display = "none";
-        }
-    });
-
-    let username = sessionStorage.getItem("username");
-
-    const handleAuthorizedUser = () => {
-        const customLoginButton = document.getElementById('customLoginButton');
-        const btnIconImg = customLoginButton.querySelector('.btn-icon-img');
-        btnIconImg.src = 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png';
-
-        customLoginButton.addEventListener('click', function () {
-            const welcomeModal = `
-      <div class="modal" id="welcomeModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Добрый день, ${username}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Ваш контент здесь...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-            </div>
-            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" id="logoutButton" style="border-radius: 15px">Выйти</button>
-          </div>
-        </div>
-      </div>
-    `;
-            $('body').append(welcomeModal);
-            $('#welcomeModal').modal('show');
-
-            const logoutButton = document.getElementById('logoutButton');
-            if (logoutButton) {
-                logoutButton.addEventListener('click', function () {
-                    let isAuthenticated = false;
-                    let serializedObject = JSON.stringify(isAuthenticated);
-                    sessionStorage.removeItem("isAuthenticated");
-                    sessionStorage.setItem("isAuthenticated", serializedObject);
-                    handleAuthorizedUser();
-                });
-            }
-        });
-    };
-
-    window.onload = () => {
-        let deserializedObject = JSON.parse(sessionStorage.getItem("isAuthenticated"));
-        console.log(deserializedObject)
-        if (deserializedObject) {
-            handleAuthorizedUser();
-        }
-    };
-
-    document.getElementById("loginForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const formData = {
-            name: document.querySelector('input[name=name]').value,
-            password: document.querySelector('input[name=password]').value
-        };
-
-        let nameUser = document.querySelector('input[name=name]').value;
-        sessionStorage.removeItem("username")
-        sessionStorage.setItem("username", nameUser)
-
-        $.ajax({
-            url: '/authenticate',
-            type: 'POST',
-            data: JSON.stringify(formData),
-            contentType: 'application/json',
-            success: function (response) {
-                if (response === "success") {
-                    let isAuthenticated = true;
-                    let serializedObject = JSON.stringify(isAuthenticated);
-                    sessionStorage.removeItem("isAuthenticated")
-                    sessionStorage.setItem("isAuthenticated", serializedObject);
-
-                    showNotification("You are successfully logged!", "success", 3000);
-
-                    setTimeout(function () {
-                        $('#loginModal').modal('hide');
-                    }, 500);
-                    handleAuthorizedUser();
-                } else {
-                    let isAuthenticated = false;
-                    let serializedObject = JSON.stringify(isAuthenticated);
-                    sessionStorage.removeItem("isAuthenticated")
-                    sessionStorage.setItem("isAuthenticated", serializedObject);
-
-                    showNotification("Invalid username or password", "danger", 3000);
-
-                    setTimeout(function () {
-                        $('#loginModal').modal('hide');
-                    }, 500);
-                }
-            },
-            error: function (error) {
-                console.error('Request error:', error);
-            }
-        });
-
-    });
-
-
-    document.querySelector(".register-button-containerTwo button").addEventListener("click", function () {
-        closeModal('#registerModal');
-        closeModal('#resetPasswordModal')
-        $('#loginModal').modal('show');
-    });
-
-    const resetPasswordLoginButton = document.querySelector('#resetPasswordModal .register-button-containerTwo button');
-
-    resetPasswordLoginButton.addEventListener('click', function () {
-        closeModal('#resetPasswordModal');
-        $('#loginModal').modal('show');
-    });
-
-
-    document.querySelector(".forgot-password-button-container button").addEventListener("click", function () {
-        closeModal('#loginModal');
-        $('#resetPasswordModal').modal('show');
-    });
-
-    function closeModal(modalSelector) {
-        $(modalSelector).modal('hide');
-    }
-
     function showNotification(message, type, duration) {
         const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-times-circle';
         const notification = $(`
@@ -681,107 +546,7 @@
         });
     }
 
-    document.querySelector(".register-button-container button").addEventListener("click", function () {
-        $('#loginModal').modal('hide');
-        $('#registerModal').modal('show');
-    });
-    document.getElementById("registerForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const nameField = document.querySelector('input[name=nameRegister]');
-        const emailField = document.querySelector('input[name=email]');
-        const passwordField = document.querySelector('input[name=passwordRegister]');
-        const confirmPasswordField = document.querySelector('input[name=confirmPassword]');
-
-        clearFieldErrors([nameField, emailField, passwordField, confirmPasswordField]);
-
-        const formData = {
-            name: nameField.value,
-            email: emailField.value,
-            password: passwordField.value,
-            confirmPassword: confirmPasswordField.value
-        };
-
-        $.ajax({
-            url: '/register',
-            type: 'POST',
-            data: JSON.stringify(formData),
-            contentType: 'application/json',
-            success: function (response) {
-                if (response === "success") {
-                    showNotification("Registration successful!", "success", 3000);
-                    setTimeout(function () {
-                        $('#registerModal').modal('hide');
-                    }, 500);
-                } else if (response === "This email is already in use on another account") {
-                    showError(emailField, response);
-                } else if (response === "This username is already taken") {
-                    showError(nameField, response);
-                } else if (response === "Password mismatch") {
-                    showError(passwordField, response);
-                    showError(confirmPasswordField, response);
-                } else if (response === "Password at least 6 characters") {
-                    showError(passwordField, response);
-                    showError(confirmPasswordField, response);
-                }
-            },
-            error: function (error) {
-                console.error('Request error:', error);
-            }
-        });
-    });
-
-    document.getElementById("resetForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const emailField = document.querySelector('input[name=emailReset]');
-        const formData = {
-            email: emailField.value
-        };
-
-        console.log(JSON.stringify(formData));
-
-        $.ajax({
-            url: '/reset',
-            type: 'POST',
-            data: JSON.stringify(formData),
-            contentType: 'application/json',
-            success: function (response) {
-                console.log(response);
-                if (response === "success") {
-                    showNotification("Reset successful check your email!", "success", 3000);
-                    setTimeout(function () {
-                        $('#registerModal').modal('hide');
-                    }, 500);
-                } else if (response === "please enter a valid email address") {
-                    showError(emailField, response);
-                }
-            },
-            error: function (error) {
-                console.error('Request error:', error);
-            }
-        });
-    });
-
-    function showError(field, message) {
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message';
-        errorDiv.innerText = message;
-        field.parentNode.appendChild(errorDiv);
-        field.classList.add('error-input');
-    }
-
-    function clearFieldErrors(fields) {
-        fields.forEach(function (field) {
-            const errorDiv = field.parentNode.querySelector('.error-message');
-            if (errorDiv) {
-                errorDiv.remove();
-            }
-            field.classList.remove('error-input');
-        });
-    }
+    
 </script>
 </body>
 </html>

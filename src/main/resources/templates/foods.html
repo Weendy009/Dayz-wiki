@@ -24,27 +24,14 @@
           href="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@b4d464595009848d0fe0963c4ed930c4c0d56271/src/main/resources/static/css/button-menu.css">
 
     <style>
-        .modal-content-bookmark {
-            position: fixed;
-            top: 50%;
-            left: 37%;
-            transform: translate(-50%, -50%);
-            max-width: 90%;
-            max-height: 90%;
-            overflow: auto;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid white;
-            color: #FFFFFF;
-            background-color: rgba(50, 50, 50, 0.6);
-        }
-        #bookmarksTable tbody tr {
-            padding: 15px 0;
+        .menu-button:hover {
+            transform: scale(1.05);
         }
 
-        #bookmarksTable tbody tr td {
-            padding: 0 15px;
+        .menu-button:active {
+            transform: scale(0.95);
         }
+
         .row {
             display: flex;
             flex-wrap: wrap;
@@ -57,12 +44,7 @@
             text-align: center;
         }
 
-        .ranged-type-button {
-            width: 90%;
-            height: 50px;
-            text-align: center;
-        }
-        .pp-type-button {
+        .weapon-type-button {
             width: 90%;
             height: 50px;
             text-align: center;
@@ -157,7 +139,13 @@
             color: white;
         }
 
-        .pp-type-button  {
+        .one-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .one-type-button {
             background-color: rgba(255, 255, 255, 0.60);
             user-select: none;
             -webkit-user-select: none;
@@ -173,15 +161,21 @@
             transition: background-color 0.3s ease;
         }
 
-        .pp-type-button:hover {
+        .one-type-button:hover {
             transform: scale(1.05);
         }
 
-        .pp-type-button:active {
+        .one-type-button:active {
             transform: scale(0.95);
         }
 
-        .ranged-type-button  {
+        .two-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .two-type-button {
             background-color: rgba(255, 255, 255, 0.60);
             user-select: none;
             -webkit-user-select: none;
@@ -197,73 +191,51 @@
             transition: background-color 0.3s ease;
         }
 
-        .ranged-type-button:hover {
+        .two-type-button:hover {
             transform: scale(1.05);
         }
 
-        .ranged-type-button:active {
+        .two-type-button:active {
             transform: scale(0.95);
         }
 
-        .menu-button-items {
-            background-color: transparent;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
-            width: 5%;
-            display: block;
-            margin: 0 auto;
+        .three-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
         }
 
-        .menu-button:hover {
+        .three-type-button {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .three-type-button:hover {
             transform: scale(1.05);
         }
 
-        .menu-button:active {
+        .three-type-button:active {
             transform: scale(0.95);
         }
 
-        .menu-button-items:hover {
-            transform: scale(1.1);
+        .four-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
         }
 
-        .menu-button-items:active {
-            transform: scale(0.90);
-        }
-
-        .rifle-type-button:hover {
-            transform: scale(1.1);
-        }
-
-        .rifle-type-button:active {
-            transform: scale(0.90);
-        }
-
-        .shotgun-type-button:hover {
-            transform: scale(1.1);
-        }
-
-        .shotgun-type-button:active {
-            transform: scale(0.90);
-        }
-
-        .shotgun-type-button {
-            background-color: rgba(255, 255, 255, 0.60);
-            user-select: none;
-            -webkit-user-select: none;
-            font-size: 12px;
-            text-align: left;
-            border-radius: 5px;
-            width: 150px;
-            height: 60px;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .rifle-type-button {
+        .four-type-button {
             background-color: rgba(255, 255, 255, 0.60);
             user-select: none;
             -webkit-user-select: none;
@@ -279,6 +251,186 @@
             transition: background-color 0.3s ease;
         }
 
+        .four-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .four-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .five-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .five-type-button {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .five-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .five-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .six-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .six-type-button {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .six-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .six-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .seven-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .seven-type-button {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .seven-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .seven-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .eight-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .eight-type-button {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .eight-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .eight-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .nine-type-button {
+            width: 90%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .nine-type-button {
+            background-color: rgba(255, 255, 255, 0.60);
+            user-select: none;
+            -webkit-user-select: none;
+            font-size: 12px;
+            text-align: left;
+            border-radius: 5px;
+            width: 150px;
+            height: 60px;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .nine-type-button:hover {
+            transform: scale(1.05);
+        }
+
+        .nine-type-button:active {
+            transform: scale(0.95);
+        }
+
+        .modal-content-bookmark {
+            position: fixed;
+            top: 50%;
+            left: 37%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid white;
+            color: #FFFFFF;
+            background-color: rgba(50, 50, 50, 0.6);
+        }
+
+        #bookmarksTable tbody tr {
+            padding: 15px 0;
+        }
+
+        #bookmarksTable tbody tr td {
+            padding: 0 15px;
+        }
     </style>
 
 </head>
@@ -311,15 +463,13 @@
             <div id="modalData">
                 <p>ID: <span id="modalId"></span></p>
                 <p>Name: <span id="modalName"></span></p>
+                <p>Calories: <span id="modalCalories"></span></p>
+                <p>Thirst: <span id="modalThirst"></span></p>
                 <p>Type: <span id="modalType"></span></p>
-                <p>Size: <span id="modalSize"></span></p>
-                <p>Weight: <span id="modalWeight"></span></p>
-                <p>Tier: <span id="modalTier"></span></p>
-                <p>Caliber: <span id="modalCaliber"></span></p>
-                <p>Damage: <span id="modalDamage"></span></p>
             </div>
             <button id="bookmarkContainer" class="menu-button-items">
-                <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png" alt="Bookmarks" typeof="submit">
+                <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@2ac656c/src/main/resources/img/bookmark.png"
+                     alt="Bookmarks" typeof="submit">
             </button>
         </div>
     </div>
@@ -337,69 +487,112 @@
         </div>
     </div>
 
-
-    <h1 id="weapon-name">Холодное оружие</h1>
+    <h1 id="armor-name"></h1>
     <div class="weapon-info">
-
-        <div id="melee-buttons" style="display: none;">
+        <div id="Water_and_drinks" style="display: none;">
             <div class="row">
-                <div th:each="steelArm : ${steelArms}" class="column">
-                    <button class="weapon-type-button" data-name="${steelArm.name}" data-size="${steelArm.size}" data-weight="${steelArm.weight}"
-                            data-type="${steelArm.type}" data-id="${steelArm.id}" data-damge="${steelArm.damage}" data-caliber="${steelArm.caliber}">
-                        <div class="link-items" th:text="${steelArm.name}"></div>
-                        <div class="link-items" th:text="${steelArm.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + steelArm.weight + ' kg.'}"></div>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="ranged-buttons" style="display: none;">
-            <div class="row">
-                <div th:each="pistol : ${pistols}" class="column">
-                    <button class="ranged-type-button" data-name="${pistol.name}" data-size="${pistol.size}"
-                            data-weight="${pistol.weight}" data-type="${pistol.type}" data-id="${pistol.id}" data-damge="${pistol.damage}" data-caliber="${pistol.caliber}">
-                        <div class="link-items" th:text="${pistol.name}"></div>
+                <div th:each="shoe : ${Water_and_drinks}" class="column">
+                    <button class="one-type-button" data-name="${shoe.name}" data-thirst="${shoe.thirst}"
+                            data-calories="${shoe.calories}" data-type="${shoe.type}" data-id="${shoe.id}">
+                        <div class="link-items" th:text="${shoe.name}"></div>
                         <div class="link-items"
-                             th:text="${pistol.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + pistol.weight + ' kg.'}"></div>
-                        <div class="link-items" th:text="${pistol.caliber}"></div>
+                             th:text="${shoe.thirst + '&nbsp;&nbsp;&nbsp;&nbsp;' + shoe.calories + ' kcal.'}"></div>
                     </button>
                 </div>
             </div>
         </div>
-        <div id="pp-buttons" style="display: none;">
+        <div id="sweets" style="display: none;">
             <div class="row">
-                <div th:each="submachineGun : ${submachineGuns}" class="column">
-                    <button class="pp-type-button" data-name="${submachineGun.name}" data-size="${submachineGun.size}"
-                            data-weight="${submachineGun.weight}" data-type="${submachineGun.type}" data-id="${submachineGun.id}" data-damge="${submachineGun.damage}" data-caliber="${submachineGun.caliber}">
-                        <div class="link-items" th:text="${submachineGun.name}"></div>
+                <div th:each="mask : ${sweets}" class="column">
+                    <button class="two-type-button" data-name="${mask.name}" data-thirst="${mask.thirst}"
+                            data-calories="${mask.calories}" data-type="${mask.type}" data-id="${mask.id}">
+                        <div class="link-items" th:text="${mask.name}"></div>
                         <div class="link-items"
-                             th:text="${submachineGun.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + submachineGun.weight + ' kg.'}"></div>
-                        <div class="link-items" th:text="${submachineGun.caliber}"></div>
+                             th:text="${mask.thirst + '&nbsp;&nbsp;&nbsp;&nbsp;' + mask.calories + ' kcal.'}"></div>
                     </button>
                 </div>
             </div>
         </div>
-        <div id="rifle-buttons" style="display: none;">
+        <div id="canneds" style="display: none;">
             <div class="row">
-                <div th:each="rifle : ${rifles}" class="column">
-                    <button class="rifle-type-button" data-name="${rifle.name}" data-size="${rifle.size}" data-weight="${rifle.weight}" data-type="${rifle.type}"
-                            data-id="${rifle.id}" data-caliber="${rifle.caliber}" data-damge="${shotgun.damage}">
-                        <div class="link-items" th:text="${rifle.name}"></div>
-                        <div class="link-items" th:text="${rifle.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + rifle.weight + ' kg.'}"></div>
-                        <div class="link-items" th:text="${rifle.caliber}"></div>
-
+                <div th:each="hat : ${canneds}" class="column">
+                    <button class="three-type-button" data-name="${hat.name}" data-thirst="${hat.thirst}"
+                            data-calories="${hat.calories}" data-type="${hat.type}" data-id="${hat.id}">
+                        <div class="link-items" th:text="${hat.name}"></div>
+                        <div class="link-items"
+                             th:text="${hat.thirst + '&nbsp;&nbsp;&nbsp;&nbsp;' + hat.calories + ' kcal.'}"></div>
                     </button>
                 </div>
             </div>
         </div>
-        <div id="shotgun-buttons" style="display: none;">
+        <div id="vegetables" style="display: none;">
             <div class="row">
-                <div th:each="shotgun : ${shotguns}" class="column">
-                    <button class="shotgun-type-button" data-name="${shotgun.name}" data-size="${shotgun.size}" data-weight="${shotgun.weight}"
-                            data-type="${shotgun.type}" data-id="${shotgun.id}" data-caliber="${shotgun.caliber}" data-damge="${shotgun.damage}">
-                        <div class="link-items" th:text="${shotgun.name}"></div>
-                        <div class="link-items" th:text="${shotgun.size + ' s.' + '&nbsp;&nbsp;&nbsp;&nbsp;' + shotgun.weight + ' kg.'}"></div>
-                        <div class="link-items" th:text="${shotgun.caliber}"></div>
-
+                <div th:each="glass : ${vegetables}" class="column">
+                    <button class="four-type-button" data-name="${glass.name}" data-thirst="${glass.thirst}"
+                            data-calories="${glass.calories}" data-type="${glass.type}" data-id="${glass.id}">
+                        <div class="link-items" th:text="${glass.name}"></div>
+                        <div class="link-items"
+                             th:text="${glass.thirst + '&nbsp;&nbsp;&nbsp;&nbsp;' + glass.calories + ' kcal.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="fruits" style="display: none;">
+            <div class="row">
+                <div th:each="glov : ${fruits}" class="column">
+                    <button class="five-type-button" data-name="${glov.name}" data-thirst="${glov.thirst}"
+                            data-calories="${glov.calories}" data-type="${glov.type}" data-id="${glov.id}">
+                        <div class="link-items" th:text="${glov.name}"></div>
+                        <div class="link-items"
+                             th:text="${glov.thirst + '&nbsp;&nbsp;&nbsp;&nbsp;' + glov.calories + ' kcal.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mushrooms" style="display: none;">
+            <div class="row">
+                <div th:each="vest : ${mushrooms}" class="column">
+                    <button class="six-type-button" data-name="${vest.name}" data-thirst="${vest.thirst}"
+                            data-calories="${vest.calories}" data-type="${vest.type}" data-id="${vest.id}">
+                        <div class="link-items" th:text="${vest.name}"></div>
+                        <div class="link-items"
+                             th:text="${vest.thirst + '&nbsp;&nbsp;&nbsp;&nbsp;' + vest.calories + ' kcal.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="meats" style="display: none;">
+            <div class="row">
+                <div th:each="backpack : ${meats}" class="column">
+                    <button class="seven-type-button" data-name="${backpack.name}" data-thirst="${backpack.thirst}"
+                            data-calories="${backpack.calories}" data-type="${backpack.type}" data-id="${backpack.id}">
+                        <div class="link-items" th:text="${backpack.name}"></div>
+                        <div class="link-items"
+                             th:text="${backpack.thirst + '&nbsp;&nbsp;&nbsp;&nbsp;' + backpack.calories + ' kcal.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="fishes" style="display: none;">
+            <div class="row">
+                <div th:each="clot : ${fishes}" class="column">
+                    <button class="eight-type-button" data-name="${clot.name}" data-thirst="${clot.thirst}"
+                            data-calories="${clot.calories}" data-type="${clot.type}" data-id="${clot.id}">
+                        <div class="link-items" th:text="${clot.name}"></div>
+                        <div class="link-items"
+                             th:text="${clot.thirst + '&nbsp;&nbsp;&nbsp;&nbsp;' + clot.calories + ' kcal.'}"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="others" style="display: none;">
+            <div class="row">
+                <div th:each="belt : ${others}" class="column">
+                    <button class="nine-type-button" data-name="${belt.name}" data-thirst="${belt.thirst}"
+                            data-calories="${belt.calories}" data-type="${belt.type}" data-id="${belt.id}">
+                        <div class="link-items" th:text="${belt.name}"></div>
+                        <div class="link-items"
+                             th:text="${belt.thirst + '&nbsp;&nbsp;&nbsp;&nbsp;' + belt.calories + ' kcal.'}"></div>
                     </button>
                 </div>
             </div>
@@ -448,7 +641,6 @@
              class="btn-icon-img" alt="Вход">
     </button>
 </div>
-
 <div id="myModal" class="modali">
     <div class="modal-content-menu">
         <div class="header">
@@ -492,7 +684,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -633,6 +824,7 @@
             modalContent.style.height = "auto";
         }
     }
+
     window.addEventListener("DOMContentLoaded", setModalHeight);
     window.addEventListener("resize", setModalHeight);
 
@@ -640,7 +832,6 @@
         const buttonSort = document.getElementById('sorting-button');
         const menu = document.getElementById('sorting-menu');
         const closeButton = document.getElementById('close-button');
-        const row = document.querySelector('.row');
         const bookmarksButton = document.getElementById("bookmarksButton");
         const bookmarksModal = document.getElementById("bookmarksModal");
 
@@ -750,58 +941,95 @@
             }
         });
 
-        function updateFilters() {
-            const selectedFilters = [];
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    selectedFilters.push(checkbox.parentNode.textContent);
-                }
-            });
-            sendFiltersToServer(selectedFilters);
-        }
+        document.getElementById("bookmarkContainer").addEventListener("click", function () {
+            addBookmark();
+        });
 
-        function sendFiltersToServer(selectedFilters) {
-            const filterRequest = {
-                selectedFilters: selectedFilters,
-                itemCategory: currentModeIndex
-            };
+        function addBookmark() {
+            const formData = new FormData();
+            formData.append("id", modalId.textContent);
+            formData.append("name", modalName.textContent);
+            formData.append("calories", modalCalories.textContent);
+            formData.append("thirst", modalThirst.textContent);
+            formData.append("type", modalType.textContent);
 
-            fetch('/api/weapons/filter', {
+            fetch('/bookmarks/add', {
                 method: 'POST',
-                body: JSON.stringify(filterRequest),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }).then((response) => response.json())
-                .then((data) => {
-                    console.log(data)
-                    row.innerHTML = ''
-                    data.forEach((steelArm) => {
-                        const column = document.createElement('div');
-                        column.className = 'column';
-
-                        const button = document.createElement('button');
-                        button.className = 'weapon-type-button';
-
-                        const linkItems1 = document.createElement('div');
-                        linkItems1.className = 'link-items';
-                        linkItems1.textContent = steelArm.name;
-
-                        const linkItems2 = document.createElement('div');
-                        linkItems2.className = 'link-items';
-                        linkItems2.innerHTML = `${steelArm.size} s. &nbsp;&nbsp;&nbsp;&nbsp; ${steelArm.weight} kg.`;
-
-                        button.appendChild(linkItems1);
-                        button.appendChild(linkItems2);
-                        column.appendChild(button);
-                        row.appendChild(column);
-                    })
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
                 })
-                .catch((error) => {
-                    console.error('Ошибка при запросе данных с сервера:', error);
+                .catch(error => {
+                    console.error('Ошибка при отправке данных на сервер:', error);
                 });
         }
+
+        var oneTypeButtons = document.querySelectorAll(".one-type-button");
+        var twoTypeButtons = document.querySelectorAll(".two-type-button");
+        var threeTypeButtons = document.querySelectorAll(".three-type-button");
+        var fourTypeButtons = document.querySelectorAll(".four-type-button");
+        var fiveTypeButtons = document.querySelectorAll(".five-type-button");
+        var sixTypeButtons = document.querySelectorAll(".six-type-button");
+        var sevenTypeButtons = document.querySelectorAll(".seven-type-button");
+        var eightTypeButtons = document.querySelectorAll(".eight-type-button");
+        var nineTypeButtons = document.querySelectorAll(".nine-type-button");
+
+        var shoesData = [[${Water_and_drinks}]];
+        var masksData = [[${sweets}]];
+        var hatsData = [[${canneds}]];
+        var glassesData = [[${vegetables}]];
+        var glovesData = [[${fruits}]];
+        var vestsData = [[${mushrooms}]];
+        var backpacksData = [[${meats}]];
+        var clothData = [[${fishes}]];
+        var beltsData = [[${others}]];
+
+        var modal = document.getElementById("modal");
+        var modalId = document.getElementById("modalId");
+        var modalName = document.getElementById("modalName");
+        var modalThirst = document.getElementById("modalThirst");
+        var modalCalories = document.getElementById("modalCalories");
+        var modalType = document.getElementById("modalType");
+        var closeModalBtn = document.getElementById("closeModalBtn");
+
+        function showModal(data) {
+            modalId.textContent = data.id;
+            modalName.textContent = data.name;
+            modalThirst.textContent = data.thirst;
+            modalCalories.textContent = data.calories + " kcal.";
+            modalType.textContent = data.type;
+            modal.style.display = "block";
+        }
+
+        function addClickEvent(buttons, data) {
+            buttons.forEach(function (button, index) {
+                button.addEventListener("click", function () {
+                    showModal(data[index]);
+                });
+            });
+        }
+
+        addClickEvent(oneTypeButtons, shoesData);
+        addClickEvent(twoTypeButtons, masksData);
+        addClickEvent(threeTypeButtons, hatsData);
+        addClickEvent(fourTypeButtons, glassesData);
+        addClickEvent(fiveTypeButtons, glovesData);
+        addClickEvent(sixTypeButtons, vestsData);
+        addClickEvent(sevenTypeButtons, backpacksData);
+        addClickEvent(eightTypeButtons, clothData);
+        addClickEvent(nineTypeButtons, beltsData);
+
+        closeModalBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
 
         buttonSort.onclick = function () {
             showSortingMenu();
@@ -819,416 +1047,151 @@
             menu.style.display = 'block';
         }
 
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', updateFilters);
-        });
+        const armorName = document.getElementById('armor-name');
+        const shoesButtons = document.getElementById('Water_and_drinks');
+        const masksButtons = document.getElementById('sweets');
+        const hatsButtons = document.getElementById('canneds');
+        const glassesButtons = document.getElementById('vegetables');
+        const glovesButtons = document.getElementById('fruits');
+        const vestsButtons = document.getElementById('mushrooms');
+        const backpacksButtons = document.getElementById('meats');
+        const clothButtons = document.getElementById('fishes');
+        const beltsButtons = document.getElementById('others');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
 
-        document.getElementById("bookmarkContainer").addEventListener("click", function() {
-            addBookmark();
-        });
+        const armorsModes = [
+            "Water and drinks",
+            "sweet",
+            "canned",
+            "vegetable",
+            "fruit",
+            "mushrooms",
+            "meat",
+            "fish",
+            "other"
+        ];
 
-        function addBookmark() {
-            const formData = new FormData();
-            formData.append("name", modalName.textContent);
-            formData.append("size", modalSize.textContent);
-            formData.append("weight", modalWeight.textContent);
-            formData.append("tier", modalTier.textContent);
-            formData.append("id", modalId.textContent);
-            formData.append("type", modalType.textContent);
-            formData.append("caliber", modalCaliber.textContent);
-            formData.append("damage", modalDamage.textContent);
+        let currentModeIndex = 0;
 
-            fetch('/bookmarks/add', {
-                method: 'POST',
-                body: formData,
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error('Ошибка при отправке данных на сервер:', error);
-                });
+        function updateWeaponMode() {
+            armorName.textContent = armorsModes[currentModeIndex];
+            switch (currentModeIndex) {
+                case 0:
+                    shoesButtons.style.display = 'block';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 1:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'block';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 2:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'block';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 3:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'block';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 4:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'block';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 5:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'block';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 6:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'block';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 7:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'block';
+                    beltsButtons.style.display = 'none';
+                    break;
+                case 8:
+                    shoesButtons.style.display = 'none';
+                    masksButtons.style.display = 'none';
+                    hatsButtons.style.display = 'none';
+                    glassesButtons.style.display = 'none';
+                    glovesButtons.style.display = 'none';
+                    vestsButtons.style.display = 'none';
+                    backpacksButtons.style.display = 'none';
+                    clothButtons.style.display = 'none';
+                    beltsButtons.style.display = 'block';
+                    break;
+            }
         }
 
-
-
-        var weaponTypeButtons = document.querySelectorAll(".weapon-type-button");
-        var rangedTypeButtons = document.querySelectorAll(".ranged-type-button");
-        var ppTypeButtons = document.querySelectorAll(".pp-type-button");
-        var rifelsTypeButtons = document.querySelectorAll(".rifle-type-button");
-        var shotgunsTypeButtons = document.querySelectorAll(".shotgun-type-button");
-
-        var steelArmsData = [[${steelArms}]];
-        var pistolsData = [[${pistols}]];
-        var submachineGunsData = [[${submachineGuns}]];
-        var shotgunsData = [[${shotguns}]];
-        var riflesData = [[${rifles}]];
-
-        var modal = document.getElementById("modal");
-        var modalName = document.getElementById("modalName");
-        var modalSize = document.getElementById("modalSize");
-        var modalWeight = document.getElementById("modalWeight");
-        var modalTier = document.getElementById("modalTier");
-        var modalType = document.getElementById("modalType");
-        var modalId = document.getElementById("modalId");
-        var modalCaliber = document.getElementById("modalCaliber");
-        var modalDamage = document.getElementById("modalDamage");
-        var closeModalBtn = document.getElementById("closeModalBtn");
-
-        function showModal(data) {
-            modalName.textContent = data.name;
-            modalSize.textContent = data.size + " slots";
-            modalWeight.textContent = data.weight + " kg";
-            modalId.textContent = data.id;
-            modalTier.textContent = data.tier;
-            modalType.textContent = data.type;
-            modalCaliber.textContent = data.caliber;
-            modalDamage.textContent = data.damage;
-            modal.style.display = "block";
-        }
-
-        function addClickEvent(buttons, data) {
-            buttons.forEach(function (button, index) {
-                button.addEventListener("click", function () {
-                    showModal(data[index]);
-                });
-            });
-        }
-
-        addClickEvent(weaponTypeButtons, steelArmsData);
-        addClickEvent(rangedTypeButtons, pistolsData);
-        addClickEvent(ppTypeButtons, submachineGunsData);
-        addClickEvent(rifelsTypeButtons, riflesData);
-        addClickEvent(shotgunsTypeButtons, shotgunsData);
-
-        closeModalBtn.addEventListener("click", function () {
-            modal.style.display = "none";
+        prevButton.addEventListener('click', () => {
+            currentModeIndex = (currentModeIndex - 1 + armorsModes.length) % armorsModes.length;
+            updateWeaponMode();
         });
 
-        window.addEventListener("click", function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        });
-    });
-    const customLoginButton = document.getElementById('customLoginButton');
-    const handleAuthorizedUser = () => {
-        const customLoginButton = document.getElementById('customLoginButton');
-        const btnIconImg = customLoginButton.querySelector('.btn-icon-img');
-        btnIconImg.src = 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png';
-
-        customLoginButton.addEventListener('click', function () {
-            const welcomeModal = `
-      <div class="modal" id="welcomeModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Добрый день, ${username}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Ваш контент здесь...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-            </div>
-            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" id="logoutButton" style="border-radius: 15px">Выйти</button>
-          </div>
-        </div>
-      </div>
-    `;
-            $('body').append(welcomeModal);
-            $('#welcomeModal').modal('show');
-
-            const logoutButton = document.getElementById('logoutButton');
-            if (logoutButton) {
-                logoutButton.addEventListener('click', function () {
-                    let isAuthenticated = false;
-                    let serializedObject = JSON.stringify(isAuthenticated);
-                    sessionStorage.removeItem("isAuthenticated");
-                    sessionStorage.setItem("isAuthenticated", serializedObject);
-                    handleAuthorizedUser();
-                });
-            }
-        });
-    };
-
-    window.onload = () => {
-        let deserializedObject = JSON.parse(sessionStorage.getItem("isAuthenticated"));
-        console.log(deserializedObject)
-        if (deserializedObject) {
-            handleAuthorizedUser();
-        }
-    };
-
-    document.getElementById("loginForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const formData = {
-            name: document.querySelector('input[name=name]').value,
-            password: document.querySelector('input[name=password]').value
-        };
-
-        let nameUser = document.querySelector('input[name=name]').value;
-        sessionStorage.removeItem("username")
-        sessionStorage.setItem("username", nameUser)
-
-        $.ajax({
-            url: '/authenticate',
-            type: 'POST',
-            data: JSON.stringify(formData),
-            contentType: 'application/json',
-            success: function (response) {
-                if (response === "success") {
-                    let isAuthenticated = true;
-                    let serializedObject = JSON.stringify(isAuthenticated);
-                    sessionStorage.removeItem("isAuthenticated")
-                    sessionStorage.setItem("isAuthenticated", serializedObject);
-                    handleAuthorizedUser();
-                    showNotification("You are successfully logged!", "success", 3000);
-
-                    setTimeout(function () {
-                        $('#loginModal').modal('hide');
-                    }, 500);
-                } else {
-                    let isAuthenticated = false;
-                    let serializedObject = JSON.stringify(isAuthenticated);
-                    sessionStorage.removeItem("isAuthenticated")
-                    sessionStorage.setItem("isAuthenticated", serializedObject);
-
-                    showNotification("Invalid username or password", "danger", 3000);
-
-                    setTimeout(function () {
-                        $('#loginModal').modal('hide');
-                    }, 500);
-                }
-            },
-            error: function (error) {
-                console.error('Request error:', error);
-            }
+        nextButton.addEventListener('click', () => {
+            currentModeIndex = (currentModeIndex + 1) % armorsModes.length;
+            updateWeaponMode();
         });
 
-    });
-
-    let username = sessionStorage.getItem("username");
-
-    document.querySelector(".register-button-containerTwo button").addEventListener("click", function () {
-        closeModal('#registerModal');
-        closeModal('#resetPasswordModal')
-        $('#loginModal').modal('show');
-    });
-
-    const resetPasswordLoginButton = document.querySelector('#resetPasswordModal .register-button-containerTwo button');
-
-    resetPasswordLoginButton.addEventListener('click', function () {
-        closeModal('#resetPasswordModal');
-        $('#loginModal').modal('show');
-    });
-
-
-    document.querySelector(".forgot-password-button-container button").addEventListener("click", function () {
-        closeModal('#loginModal');
-        $('#resetPasswordModal').modal('show');
-    });
-
-    function closeModal(modalSelector) {
-        $(modalSelector).modal('hide');
-    }
-
-    function showNotification(message, type, duration) {
-        const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-times-circle';
-        const notification = $(`
-<div class="alert alert-${type} d-flex align-items-center">
-    <i class="fas ${iconClass} mr-2"></i>
-    <span>${message}</span>
-    <div class="progress-bar"></div>
-</div>`
-        );
-
-        $('.notifications').append(notification);
-
-        const progressBar = notification.find('.progress-bar');
-        progressBar.animate({width: '100%'}, duration, function () {
-            notification.fadeOut(300, function () {
-                $(this).remove();
-            });
-        });
-    }
-
-    document.querySelector(".register-button-container button").addEventListener("click", function () {
-        $('#loginModal').modal('hide');
-        $('#registerModal').modal('show');
-    });
-    document.getElementById("registerForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const nameField = document.querySelector('input[name=nameRegister]');
-        const emailField = document.querySelector('input[name=email]');
-        const passwordField = document.querySelector('input[name=passwordRegister]');
-        const confirmPasswordField = document.querySelector('input[name=confirmPassword]');
-
-        clearFieldErrors([nameField, emailField, passwordField, confirmPasswordField]);
-
-        const formData = {
-            name: nameField.value,
-            email: emailField.value,
-            password: passwordField.value,
-            confirmPassword: confirmPasswordField.value
-        };
-
-        $.ajax({
-            url: '/register',
-            type: 'POST',
-            data: JSON.stringify(formData),
-            contentType: 'application/json',
-            success: function (response) {
-                console.log(response);
-                if (response === "success") {
-                    showNotification("Registration successful!", "success", 3000);
-                    setTimeout(function () {
-                        $('#registerModal').modal('hide');
-                    }, 500);
-                } else if (response === "This email is already in use on another account") {
-                    showError(emailField, response);
-                } else if (response === "This username is already taken") {
-                    showError(nameField, response);
-                } else if (response === "Password mismatch") {
-                    showError(passwordField, response);
-                    showError(confirmPasswordField, response);
-                } else if (response === "Password at least 6 characters") {
-                    showError(passwordField, response);
-                    showError(confirmPasswordField, response);
-                }
-            },
-            error: function (error) {
-                console.error('Request error:', error);
-            }
-        });
-    });
-
-    document.getElementById("resetForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const emailField = document.querySelector('input[name=emailReset]');
-        const formData = {
-            email: emailField.value
-        };
-
-        console.log(JSON.stringify(formData));
-
-        $.ajax({
-            url: '/reset',
-            type: 'POST',
-            data: JSON.stringify(formData),
-            contentType: 'application/json',
-            success: function (response) {
-                console.log(response);
-                if (response === "success") {
-                    showNotification("Reset successful check your email!", "success", 3000);
-                    setTimeout(function () {
-                        $('#registerModal').modal('hide');
-                    }, 500);
-                } else if (response === "please enter a valid email address") {
-                    showError(emailField, response);
-                }
-            },
-            error: function (error) {
-                console.error('Request error:', error);
-            }
-        });
-    });
-
-    function showError(field, message) {
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message';
-        errorDiv.innerText = message;
-        field.parentNode.appendChild(errorDiv);
-        field.classList.add('error-input');
-    }
-
-    function clearFieldErrors(fields) {
-        fields.forEach(function (field) {
-            const errorDiv = field.parentNode.querySelector('.error-message');
-            if (errorDiv) {
-                errorDiv.remove();
-            }
-            field.classList.remove('error-input');
-        });
-    }
-
-    const weaponName = document.getElementById('weapon-name');
-    const meleeButtons = document.getElementById('melee-buttons');
-    const ppButton = document.getElementById('pp-buttons');
-    const rangedButtons = document.getElementById('ranged-buttons');
-    const riflesButtons = document.getElementById('rifle-buttons');
-    const shotgunsButtons = document.getElementById('shotgun-buttons');
-    const prevButton = document.getElementById('prev-button');
-    const nextButton = document.getElementById('next-button');
-
-    const weaponModes = [
-        'Холодное оружие',
-        'Пистолеты',
-        'Пистолеты-пулемёты',
-        'Винтовки',
-        'Дробовики'
-    ];
-
-    let currentModeIndex = 0;
-
-    function updateWeaponMode() {
-        weaponName.textContent = weaponModes[currentModeIndex];
-        if (currentModeIndex === 0) {
-            meleeButtons.style.display = 'block';
-            rangedButtons.style.display = 'none';
-            ppButton.style.display = 'none';
-            riflesButtons.style.display = 'none';
-            shotgunsButtons.style.display = 'none';
-        } else if (currentModeIndex === 1) {
-            meleeButtons.style.display = 'none';
-            rangedButtons.style.display = 'block';
-            ppButton.style.display = 'none';
-            riflesButtons.style.display = 'none';
-            shotgunsButtons.style.display = 'none';
-        } else if (currentModeIndex === 2) {
-            meleeButtons.style.display = 'none';
-            rangedButtons.style.display = 'none';
-            ppButton.style.display = 'block';
-            riflesButtons.style.display = 'none';
-            shotgunsButtons.style.display = 'none';
-        } else if (currentModeIndex === 3) {
-            meleeButtons.style.display = 'none';
-            rangedButtons.style.display = 'none';
-            ppButton.style.display = 'none';
-            riflesButtons.style.display = 'block';
-            shotgunsButtons.style.display = 'none';
-        } else if (currentModeIndex === 4) {
-            meleeButtons.style.display = 'none';
-            rangedButtons.style.display = 'none';
-            ppButton.style.display = 'none';
-            riflesButtons.style.display = 'none';
-            shotgunsButtons.style.display = 'block';
-        }
-    }
-
-    prevButton.addEventListener('click', () => {
-        currentModeIndex = (currentModeIndex - 1 + weaponModes.length) % weaponModes.length;
         updateWeaponMode();
+
     });
-
-    nextButton.addEventListener('click', () => {
-        currentModeIndex = (currentModeIndex + 1) % weaponModes.length;
-        updateWeaponMode();
-    });
-
-    updateWeaponMode();
-
 
 </script>
 </body>

@@ -291,35 +291,42 @@
              class="btn-icon-img" alt="Вход">
     </button>
 </div>
-<div id="myModal" class="modal">
-    <div class="modal-content-two">
+<div id="myModal" class="modali">
+    <div class="modal-content-menu">
         <div class="header">
             <img src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base/src/main/resources/img/website-logo.png"
                  alt="Логотип DAYZ">
-            <p>Онлайн справочник по Dayz
-            <p>
+            &nbsp;&nbsp;&nbsp;
+            <p>Онлайн справочник по Dayz</p>
         </div>
+        <button type="button" class="close1" aria-label="Close" onclick="document.getElementById('myModal').style.display='none'">
+            <span aria-hidden="true">&times;</span>
+        </button>
         <div class="table">
             <div class="row">
-                <div class="cell"><p>Медицина</p>
-                    <hr id="hr1">
-                    <p>Медикаменты</p>
+                <div class="cell">
+                    <p>Медицина</p>
+                    <hr>
+                    <p><a href="/medicaments">Медикаменты</a></p>
                     <p><a href="/illnesses">Заболевания</a></p>
                     <p>Советы</p>
                 </div>
-                <div class="cell"><p>Снаряжение</p>
-                    <hr id="hr2">
+                <div class="cell">
+                    <p>Снаряжение</p>
+                    <hr>
                     <p><a href="/equipment">Броня-Одежда</a></p>
                     <p><a href="/weapons">Оружия</a></p>
                     <p><a href="/advice_equipment">Советы</a></p>
                 </div>
-                <div class="cell"><p>Разное</p>
-                    <hr id="hr4">
+                <div class="cell">
+                    <p>Разное</p>
+                    <hr>
                     <p><a href="/cars">Машины</a></p>
                     <p>Предметы</p>
                 </div>
-                <div class="cell"><p>Мир игры</p>
-                    <hr id="hr3">
+                <div class="cell">
+                    <p>Мир игры</p>
+                    <hr>
                     <p>История создания</p>
                     <p>Локации</p>
                 </div>
@@ -970,7 +977,5 @@
 
     updateWeaponMode();
 </script>
-<!--<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dayz-wiki@3a1d4f21599a53e8000ec158c57ae742811ca062/src/main/resources/static/js/sing-in-up.js"></script>-->
-<script src="https://cdn.jsdelivr.net/gh/Weendy009/Dota-Base@6646b09dbc88e99e31d045ebdca32c474039c603/src/main/resources/static/js/button-menu.js"></script>
 
 </html>
